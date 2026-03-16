@@ -1,4 +1,4 @@
-module github.com/theQRL/go-qrl-beacon-client
+module github.com/rgeraldes24/go-qrl-beacon-client
 
 go 1.25
 

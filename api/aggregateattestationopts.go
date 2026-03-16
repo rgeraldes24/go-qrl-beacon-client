@@ -13,7 +13,7 @@
 
 package api
 
-import "github.com/theQRL/go-qrl-beacon-client/spec/zond"
+import "github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 
 // AggregateAttestationOpts are the options for obtaining aggregate attestations.
 type AggregateAttestationOpts struct {

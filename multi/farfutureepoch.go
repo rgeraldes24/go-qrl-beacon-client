@@ -17,8 +17,8 @@ import (
 	"context"
 
 	"github.com/pkg/errors"
-	consensusclient "github.com/theQRL/go-qrl-beacon-client"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
+	consensusclient "github.com/rgeraldes24/go-qrl-beacon-client"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 )
 
 // FarFutureEpoch provides the far future epoch of the chain.

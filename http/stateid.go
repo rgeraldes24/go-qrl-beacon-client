@@ -20,8 +20,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 )
 
 // SlotFromStateID parses the state ID and returns the relevant slot.

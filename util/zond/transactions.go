@@ -13,7 +13,7 @@
 
 package zond
 
-import "github.com/theQRL/go-qrl-beacon-client/spec/zond"
+import "github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 
 // ExecutionPayloadTransactions provides information about transactions.
 type ExecutionPayloadTransactions struct {

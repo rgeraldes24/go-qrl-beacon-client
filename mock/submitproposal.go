@@ -16,7 +16,7 @@ package mock
 import (
 	"context"
 
-	"github.com/theQRL/go-qrl-beacon-client/api"
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
 )
 
 // SubmitProposal submits a proposal.

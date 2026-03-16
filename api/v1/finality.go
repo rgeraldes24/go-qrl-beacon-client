@@ -18,7 +18,7 @@ import (
 	"fmt"
 
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 )
 
 // Finality is the data regarding finality checkpoints at a given state.

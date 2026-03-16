@@ -13,7 +13,7 @@
 
 package zond
 
-import "github.com/theQRL/go-qrl-beacon-client/spec/zond"
+import "github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 
 // ExecutionPayloadWithdrawals provides information about withdrawals.
 type ExecutionPayloadWithdrawals struct {

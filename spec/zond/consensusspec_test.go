@@ -24,8 +24,8 @@ import (
 	"github.com/goccy/go-yaml"
 	"github.com/golang/snappy"
 	clone "github.com/huandu/go-clone/generic"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 	require "github.com/stretchr/testify/require"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // TestConsensusSpec tests the types against the QRL consensus spec tests.

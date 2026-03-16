@@ -19,9 +19,9 @@ import (
 	"testing"
 
 	"github.com/goccy/go-yaml"
+	api "github.com/rgeraldes24/go-qrl-beacon-client/api/v1"
 	"github.com/stretchr/testify/assert"
 	require "github.com/stretchr/testify/require"
-	api "github.com/theQRL/go-qrl-beacon-client/api/v1"
 )
 
 func TestValidatorRegistrationJSON(t *testing.T) {

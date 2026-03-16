@@ -17,10 +17,10 @@ import (
 	"context"
 	"time"
 
-	"github.com/theQRL/go-qrl-beacon-client/api"
-	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
-	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
+	apiv1 "github.com/rgeraldes24/go-qrl-beacon-client/api/v1"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 )
 
 // Service is the service providing a connection to a QRL consensus client.

@@ -16,9 +16,9 @@ package multi
 import (
 	"context"
 
-	consensusclient "github.com/theQRL/go-qrl-beacon-client"
-	"github.com/theQRL/go-qrl-beacon-client/api"
-	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
+	consensusclient "github.com/rgeraldes24/go-qrl-beacon-client"
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
+	apiv1 "github.com/rgeraldes24/go-qrl-beacon-client/api/v1"
 )
 
 // BlockRewards provides rewards for proposing a block.

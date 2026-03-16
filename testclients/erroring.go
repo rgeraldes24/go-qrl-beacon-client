@@ -20,11 +20,11 @@ import (
 	"math/rand"
 	"time"
 
-	consensusclient "github.com/theQRL/go-qrl-beacon-client"
-	"github.com/theQRL/go-qrl-beacon-client/api"
-	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
-	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
+	consensusclient "github.com/rgeraldes24/go-qrl-beacon-client"
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
+	apiv1 "github.com/rgeraldes24/go-qrl-beacon-client/api/v1"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 )
 
 // Erroring is a QRL beacon client that errors at a given rate.

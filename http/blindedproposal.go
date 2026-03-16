@@ -19,10 +19,10 @@ import (
 	"errors"
 	"fmt"
 
-	client "github.com/theQRL/go-qrl-beacon-client"
-	"github.com/theQRL/go-qrl-beacon-client/api"
-	apiv1zond "github.com/theQRL/go-qrl-beacon-client/api/v1/zond"
-	"github.com/theQRL/go-qrl-beacon-client/spec"
+	client "github.com/rgeraldes24/go-qrl-beacon-client"
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
+	apiv1zond "github.com/rgeraldes24/go-qrl-beacon-client/api/v1/zond"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec"
 	"go.opentelemetry.io/otel"
 )
 

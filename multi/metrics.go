@@ -18,7 +18,7 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus"
-	"github.com/theQRL/go-qrl-beacon-client/metrics"
+	"github.com/rgeraldes24/go-qrl-beacon-client/metrics"
 )
 
 var (

@@ -7,10 +7,10 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	consensusclient "github.com/rgeraldes24/go-qrl-beacon-client"
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
+	"github.com/rgeraldes24/go-qrl-beacon-client/http"
 	"github.com/stretchr/testify/require"
-	consensusclient "github.com/theQRL/go-qrl-beacon-client"
-	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/http"
 )
 
 func TestError(t *testing.T) {

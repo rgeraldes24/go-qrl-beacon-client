@@ -18,7 +18,7 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-	consensusclient "github.com/theQRL/go-qrl-beacon-client"
+	consensusclient "github.com/rgeraldes24/go-qrl-beacon-client"
 )
 
 // GenesisTime provides the genesis time of the chain.

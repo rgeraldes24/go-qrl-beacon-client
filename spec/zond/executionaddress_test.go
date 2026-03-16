@@ -16,8 +16,8 @@ package zond_test
 import (
 	"testing"
 
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 	"github.com/stretchr/testify/require"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 func TestZeroExecutionAddress(t *testing.T) {

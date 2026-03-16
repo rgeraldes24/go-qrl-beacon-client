@@ -18,8 +18,8 @@ import (
 	"context"
 	"errors"
 
-	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 )
 
 // Domain provides a domain for a given domain type at a given epoch.

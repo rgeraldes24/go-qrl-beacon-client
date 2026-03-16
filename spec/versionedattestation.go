@@ -17,8 +17,8 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 	bitfield "github.com/theQRL/go-bitfield"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // VersionedAttestation contains a versioned attestation.

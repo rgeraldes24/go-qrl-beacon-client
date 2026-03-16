@@ -19,10 +19,10 @@ import (
 	"strings"
 	"testing"
 
+	api "github.com/rgeraldes24/go-qrl-beacon-client/api/v1"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	api "github.com/theQRL/go-qrl-beacon-client/api/v1"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 func gweiPtr(input zond.Gwei) *zond.Gwei {

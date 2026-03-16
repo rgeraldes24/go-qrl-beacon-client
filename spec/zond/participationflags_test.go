@@ -17,8 +17,8 @@ package zond_test
 import (
 	"testing"
 
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 	require "github.com/stretchr/testify/require"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 func TestParticipationFlagsUnmarshalJSON(t *testing.T) {

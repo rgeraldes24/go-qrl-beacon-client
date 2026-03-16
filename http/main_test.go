@@ -20,8 +20,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 	"github.com/rs/zerolog"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // timeout for tests.

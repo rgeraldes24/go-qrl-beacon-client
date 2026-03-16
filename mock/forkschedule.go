@@ -16,8 +16,8 @@ package mock
 import (
 	"context"
 
-	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 )
 
 // ForkSchedule provides details of past and future changes in the chain's fork version.

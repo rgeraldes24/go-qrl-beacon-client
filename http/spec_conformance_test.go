@@ -23,9 +23,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/rgeraldes24/go-qrl-beacon-client/http"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/theQRL/go-qrl-beacon-client/http"
 )
 
 func TestSpecConformance(t *testing.T) {

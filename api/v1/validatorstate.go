@@ -17,7 +17,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 )
 
 // ValidatorState defines the state of the validator.

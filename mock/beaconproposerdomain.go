@@ -16,7 +16,7 @@ package mock
 import (
 	"context"
 
-	spec "github.com/theQRL/go-qrl-beacon-client/spec/zond"
+	spec "github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 )
 
 // BeaconProposerDomain provides the beacon proposer domain.

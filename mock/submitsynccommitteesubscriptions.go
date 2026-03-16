@@ -16,7 +16,7 @@ package mock
 import (
 	"context"
 
-	api "github.com/theQRL/go-qrl-beacon-client/api/v1"
+	api "github.com/rgeraldes24/go-qrl-beacon-client/api/v1"
 )
 
 // SubmitSyncCommitteeSubscriptions subscribes to sync committees.

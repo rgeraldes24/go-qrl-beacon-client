@@ -17,7 +17,7 @@ import (
 	"context"
 
 	"github.com/pkg/errors"
-	consensusclient "github.com/theQRL/go-qrl-beacon-client"
+	consensusclient "github.com/rgeraldes24/go-qrl-beacon-client"
 )
 
 // TargetAggregatorsPerCommittee provides the target number of aggregators for each attestation committee.

@@ -17,7 +17,7 @@ This library is under development; expect APIs and data structures to change unt
 `go-qrl-beacon-client` is a standard Go module which can be installed with:
 
 ```sh
-go get github.com/theQRL/go-qrl-beacon-client
+go get github.com/rgeraldes24/go-qrl-beacon-client
 ```
 
 ## Support
@@ -28,7 +28,7 @@ go get github.com/theQRL/go-qrl-beacon-client
 
 ## Usage
 
-Please read the [Go documentation for this library](https://godoc.org/github.com/theQRL/go-qrl-beacon-client) for interface information.
+Please read the [Go documentation for this library](https://godoc.org/github.com/rgeraldes24/go-qrl-beacon-client) for interface information.
 
 ## Example
 
@@ -41,9 +41,9 @@ import (
     "context"
     "fmt"
     
-    consensusclient "github.com/theQRL/go-qrl-beacon-client"
-    "github.com/theQRL/go-qrl-beacon-client/api"
-    "github.com/theQRL/go-qrl-beacon-client/http"
+    consensusclient "github.com/rgeraldes24/go-qrl-beacon-client"
+    "github.com/rgeraldes24/go-qrl-beacon-client/api"
+    "github.com/rgeraldes24/go-qrl-beacon-client/http"
     "github.com/rs/zerolog"
 )
 
@@ -100,7 +100,7 @@ func main() {
 
 ## Contribute
 
-Contributions welcome. Please check out [the issues](https://github.com/theQRL/go-qrl-beacon-client/issues).
+Contributions welcome. Please check out [the issues](https://github.com/rgeraldes24/go-qrl-beacon-client/issues).
 
 ## License
 

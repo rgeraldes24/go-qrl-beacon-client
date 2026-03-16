@@ -17,9 +17,9 @@ import (
 	"context"
 	"testing"
 
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
+	"github.com/rgeraldes24/go-qrl-beacon-client/mock"
 	"github.com/stretchr/testify/require"
-	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/mock"
 )
 
 func TestMockFunc(t *testing.T) {

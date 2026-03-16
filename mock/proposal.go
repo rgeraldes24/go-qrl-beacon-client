@@ -16,10 +16,10 @@ package mock
 import (
 	"context"
 
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 	bitfield "github.com/theQRL/go-bitfield"
-	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // Proposal fetches a proposal for signing.

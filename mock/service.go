@@ -18,12 +18,12 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
+	apiv1 "github.com/rgeraldes24/go-qrl-beacon-client/api/v1"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 	"github.com/rs/zerolog"
 	zerologger "github.com/rs/zerolog/log"
-	"github.com/theQRL/go-qrl-beacon-client/api"
-	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
-	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // Service is a mock QRL beacon client service, providing data locally.

@@ -17,12 +17,12 @@ import (
 	"context"
 	"testing"
 
+	client "github.com/rgeraldes24/go-qrl-beacon-client"
+	"github.com/rgeraldes24/go-qrl-beacon-client/mock"
+	"github.com/rgeraldes24/go-qrl-beacon-client/multi"
 	"github.com/rs/zerolog"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	client "github.com/theQRL/go-qrl-beacon-client"
-	"github.com/theQRL/go-qrl-beacon-client/mock"
-	"github.com/theQRL/go-qrl-beacon-client/multi"
 )
 
 func TestService(t *testing.T) {

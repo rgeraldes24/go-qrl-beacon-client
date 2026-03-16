@@ -20,11 +20,11 @@ import (
 	"strconv"
 	"testing"
 
+	client "github.com/rgeraldes24/go-qrl-beacon-client"
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
+	"github.com/rgeraldes24/go-qrl-beacon-client/http"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 	"github.com/stretchr/testify/require"
-	client "github.com/theQRL/go-qrl-beacon-client"
-	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/http"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 func TestSyncCommitteeRewards(t *testing.T) {

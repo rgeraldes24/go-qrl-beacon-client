@@ -17,8 +17,8 @@ import (
 	"errors"
 
 	ssz "github.com/ferranbt/fastssz"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
-	proofutil "github.com/theQRL/go-qrl-beacon-client/util/proof"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
+	proofutil "github.com/rgeraldes24/go-qrl-beacon-client/util/proof"
 )
 
 // VersionedBeaconState contains a versioned beacon state.

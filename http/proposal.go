@@ -22,11 +22,11 @@ import (
 	"strings"
 
 	dynssz "github.com/pk910/dynamic-ssz"
-	client "github.com/theQRL/go-qrl-beacon-client"
-	"github.com/theQRL/go-qrl-beacon-client/api"
-	apiv1zond "github.com/theQRL/go-qrl-beacon-client/api/v1/zond"
-	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
+	client "github.com/rgeraldes24/go-qrl-beacon-client"
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
+	apiv1zond "github.com/rgeraldes24/go-qrl-beacon-client/api/v1/zond"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 	"go.opentelemetry.io/otel"
 )
 

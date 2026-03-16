@@ -13,7 +13,7 @@
 
 package spec
 
-import "github.com/theQRL/go-qrl-beacon-client/spec/zond"
+import "github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 
 // VersionedBeaconBlockBody contains a versioned beacon block body.
 type VersionedBeaconBlockBody struct {

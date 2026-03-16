@@ -13,7 +13,7 @@
 
 package api
 
-import apiv2 "github.com/theQRL/go-qrl-beacon-client/api/v2"
+import apiv2 "github.com/rgeraldes24/go-qrl-beacon-client/api/v2"
 
 // SubmitProposalOpts are the options for submitting proposals.
 type SubmitProposalOpts struct {

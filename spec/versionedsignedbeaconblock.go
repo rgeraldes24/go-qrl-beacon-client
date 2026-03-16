@@ -16,7 +16,7 @@ package spec
 import (
 	"errors"
 
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 )
 
 // VersionedSignedBeaconBlock contains a versioned signed beacon block.

@@ -19,10 +19,10 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
+	consensusclient "github.com/rgeraldes24/go-qrl-beacon-client"
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
+	"github.com/rgeraldes24/go-qrl-beacon-client/http"
 	"github.com/rs/zerolog"
-	consensusclient "github.com/theQRL/go-qrl-beacon-client"
-	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/http"
 )
 
 // monitor monitors active and inactive clients, and moves them between

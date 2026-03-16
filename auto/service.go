@@ -17,10 +17,10 @@ import (
 	"context"
 
 	"github.com/pkg/errors"
+	consensusclient "github.com/rgeraldes24/go-qrl-beacon-client"
+	"github.com/rgeraldes24/go-qrl-beacon-client/http"
 	"github.com/rs/zerolog"
 	zerologger "github.com/rs/zerolog/log"
-	consensusclient "github.com/theQRL/go-qrl-beacon-client"
-	"github.com/theQRL/go-qrl-beacon-client/http"
 )
 
 // log is a service-wide logger.

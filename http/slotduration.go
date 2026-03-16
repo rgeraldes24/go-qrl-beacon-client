@@ -17,7 +17,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/theQRL/go-qrl-beacon-client/api"
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
 )
 
 // SlotDuration provides the duration of a slot for the chain.

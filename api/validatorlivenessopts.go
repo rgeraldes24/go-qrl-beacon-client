@@ -13,7 +13,7 @@
 
 package api
 
-import "github.com/theQRL/go-qrl-beacon-client/spec/zond"
+import "github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 
 // ValidatorLivenessOpts are the options for obtaining validator liveness information.
 type ValidatorLivenessOpts struct {

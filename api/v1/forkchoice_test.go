@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"testing"
 
+	api "github.com/rgeraldes24/go-qrl-beacon-client/api/v1"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	api "github.com/theQRL/go-qrl-beacon-client/api/v1"
 )
 
 func TestForkChoiceJSON(t *testing.T) {

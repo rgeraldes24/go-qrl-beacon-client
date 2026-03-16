@@ -13,7 +13,7 @@
 
 package api
 
-import "github.com/theQRL/go-qrl-beacon-client/spec/zond"
+import "github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 
 // AttestationPoolOpts are the options for obtaining the attestation pool.
 type AttestationPoolOpts struct {

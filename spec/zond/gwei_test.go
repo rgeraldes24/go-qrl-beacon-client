@@ -17,7 +17,7 @@ package zond_test
 import (
 	"testing"
 
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 )
 
 func TestGweiUnmarshalJSON(t *testing.T) {

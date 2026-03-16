@@ -17,9 +17,9 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
+	consensusclient "github.com/rgeraldes24/go-qrl-beacon-client"
+	"github.com/rgeraldes24/go-qrl-beacon-client/metrics"
 	"github.com/rs/zerolog"
-	consensusclient "github.com/theQRL/go-qrl-beacon-client"
-	"github.com/theQRL/go-qrl-beacon-client/metrics"
 )
 
 type parameters struct {

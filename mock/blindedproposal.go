@@ -16,11 +16,11 @@ package mock
 import (
 	"context"
 
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
+	apiv1zond "github.com/rgeraldes24/go-qrl-beacon-client/api/v1/zond"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 	bitfield "github.com/theQRL/go-bitfield"
-	"github.com/theQRL/go-qrl-beacon-client/api"
-	apiv1zond "github.com/theQRL/go-qrl-beacon-client/api/v1/zond"
-	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // BlindedProposal fetches a blinded proposal for signing.

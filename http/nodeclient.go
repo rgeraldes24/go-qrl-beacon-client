@@ -17,7 +17,7 @@ import (
 	"context"
 	"strings"
 
-	"github.com/theQRL/go-qrl-beacon-client/api"
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
 )
 
 // NodeClient provides the client for the node.

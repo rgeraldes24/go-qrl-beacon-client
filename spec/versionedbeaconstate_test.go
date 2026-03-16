@@ -19,7 +19,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/theQRL/go-qrl-beacon-client/spec"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec"
 )
 
 func readFile(fileName string) ([]byte, error) {

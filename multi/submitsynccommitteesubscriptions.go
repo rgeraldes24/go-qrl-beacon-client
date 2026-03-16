@@ -16,8 +16,8 @@ package multi
 import (
 	"context"
 
-	consensusclient "github.com/theQRL/go-qrl-beacon-client"
-	api "github.com/theQRL/go-qrl-beacon-client/api/v1"
+	consensusclient "github.com/rgeraldes24/go-qrl-beacon-client"
+	api "github.com/rgeraldes24/go-qrl-beacon-client/api/v1"
 )
 
 // SubmitSyncCommitteeSubscriptions subscribes to sync committees.

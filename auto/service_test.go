@@ -19,11 +19,11 @@ import (
 	"testing"
 	"time"
 
+	beaconclient "github.com/rgeraldes24/go-qrl-beacon-client"
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
+	"github.com/rgeraldes24/go-qrl-beacon-client/auto"
 	"github.com/rs/zerolog"
 	"github.com/stretchr/testify/require"
-	beaconclient "github.com/theQRL/go-qrl-beacon-client"
-	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/auto"
 )
 
 func TestService(t *testing.T) {

@@ -17,7 +17,7 @@ import (
 	"context"
 
 	"github.com/pkg/errors"
-	consensusclient "github.com/theQRL/go-qrl-beacon-client"
+	consensusclient "github.com/rgeraldes24/go-qrl-beacon-client"
 )
 
 // SlotsPerEpoch provides the slots per epoch of the chain.

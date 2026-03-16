@@ -22,9 +22,9 @@ import (
 
 	"github.com/theQRL/go-bitfield"
 	"github.com/stretchr/testify/assert"
-	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
-	"github.com/theQRL/go-qrl-beacon-client/spec/electra"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/electra"
 )
 
 func TestVersionedAttestation_CommitteeIndex(t *testing.T) {

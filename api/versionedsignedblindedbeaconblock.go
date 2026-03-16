@@ -14,9 +14,9 @@
 package api
 
 import (
-	apiv1zond "github.com/theQRL/go-qrl-beacon-client/api/v1/zond"
-	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
+	apiv1zond "github.com/rgeraldes24/go-qrl-beacon-client/api/v1/zond"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 )
 
 // VersionedSignedBlindedBeaconBlock contains a versioned signed blinded beacon block.

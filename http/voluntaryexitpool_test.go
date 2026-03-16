@@ -18,10 +18,10 @@ import (
 	"os"
 	"testing"
 
+	client "github.com/rgeraldes24/go-qrl-beacon-client"
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
+	"github.com/rgeraldes24/go-qrl-beacon-client/http"
 	"github.com/stretchr/testify/require"
-	client "github.com/theQRL/go-qrl-beacon-client"
-	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/http"
 )
 
 func TestVoluntaryExitPool(t *testing.T) {

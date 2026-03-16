@@ -16,7 +16,7 @@ package mock
 import (
 	"context"
 
-	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
+	apiv1 "github.com/rgeraldes24/go-qrl-beacon-client/api/v1"
 )
 
 // SubmitProposalPreparations provides the beacon node with information required if a proposal for the given validators

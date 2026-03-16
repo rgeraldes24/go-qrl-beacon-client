@@ -21,10 +21,10 @@ import (
 	"time"
 
 	"github.com/r3labs/sse/v2"
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
+	apiv1 "github.com/rgeraldes24/go-qrl-beacon-client/api/v1"
 	"github.com/rs/zerolog"
 	"github.com/stretchr/testify/require"
-	"github.com/theQRL/go-qrl-beacon-client/api"
-	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
 )
 
 // timeout for tests.

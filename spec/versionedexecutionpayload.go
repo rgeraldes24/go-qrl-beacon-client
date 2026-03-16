@@ -17,7 +17,7 @@ import (
 	"errors"
 
 	"github.com/holiman/uint256"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 )
 
 // VersionedExecutionPayload contains a versioned execution payload.

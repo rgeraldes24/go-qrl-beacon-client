@@ -17,7 +17,7 @@ import (
 	"encoding/json"
 
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 )
 
 // attestationIdentificationJSON contains fields that allow us to identify the attestation variant.

@@ -17,8 +17,8 @@ import (
 	"bytes"
 	"context"
 
-	client "github.com/theQRL/go-qrl-beacon-client"
-	"github.com/theQRL/go-qrl-beacon-client/api"
+	client "github.com/rgeraldes24/go-qrl-beacon-client"
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
 )
 
 type nodeVersionJSON struct {

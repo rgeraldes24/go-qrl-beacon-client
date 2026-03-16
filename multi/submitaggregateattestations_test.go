@@ -17,15 +17,15 @@ import (
 	"context"
 	"testing"
 
-	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec"
+	"github.com/rgeraldes24/go-qrl-beacon-client/api"
+	"github.com/rgeraldes24/go-qrl-beacon-client/spec"
 
+	consensusclient "github.com/rgeraldes24/go-qrl-beacon-client"
+	"github.com/rgeraldes24/go-qrl-beacon-client/mock"
+	"github.com/rgeraldes24/go-qrl-beacon-client/multi"
+	"github.com/rgeraldes24/go-qrl-beacon-client/testclients"
 	"github.com/rs/zerolog"
 	"github.com/stretchr/testify/require"
-	consensusclient "github.com/theQRL/go-qrl-beacon-client"
-	"github.com/theQRL/go-qrl-beacon-client/mock"
-	"github.com/theQRL/go-qrl-beacon-client/multi"
-	"github.com/theQRL/go-qrl-beacon-client/testclients"
 )
 
 func TestSubmitAggregateAttestations(t *testing.T) {

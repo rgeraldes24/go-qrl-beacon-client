@@ -30,12 +30,12 @@ type AttestationRewards struct {
 
 // IdealAttestationRewards are the ideal attestation rewards for an attestation.
 type IdealAttestationRewards struct {
-	EffectiveBalance zond.Gwei
-	Head             zond.Gwei
-	Target           zond.Gwei
-	Source           zond.Gwei
-	InclusionDelay   *zond.Gwei
-	Inactivity       zond.Gwei
+	EffectiveBalance zond.Shor
+	Head             zond.Shor
+	Target           zond.Shor
+	Source           zond.Shor
+	InclusionDelay   *zond.Shor
+	Inactivity       zond.Shor
 }
 
 // idealAttestationRewardsJSON is the spec representation of the struct.
@@ -83,7 +83,7 @@ func (i *IdealAttestationRewards) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for effective balance")
 	}
 
-	i.EffectiveBalance = zond.Gwei(effectiveBalance)
+	i.EffectiveBalance = zond.Shor(effectiveBalance)
 
 	if data.Head == "" {
 		return errors.New("head missing")
@@ -94,7 +94,7 @@ func (i *IdealAttestationRewards) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for head")
 	}
 
-	i.Head = zond.Gwei(head)
+	i.Head = zond.Shor(head)
 
 	if data.Target == "" {
 		return errors.New("target missing")
@@ -105,7 +105,7 @@ func (i *IdealAttestationRewards) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for target")
 	}
 
-	i.Target = zond.Gwei(target)
+	i.Target = zond.Shor(target)
 
 	if data.Source == "" {
 		return errors.New("source missing")
@@ -116,7 +116,7 @@ func (i *IdealAttestationRewards) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for source")
 	}
 
-	i.Source = zond.Gwei(source)
+	i.Source = zond.Shor(source)
 
 	if data.InclusionDelay != "" {
 		inclusionDelay, err := strconv.ParseUint(data.InclusionDelay, 10, 64)
@@ -124,7 +124,7 @@ func (i *IdealAttestationRewards) UnmarshalJSON(input []byte) error {
 			return errors.Wrap(err, "invalid value for inclusion delay")
 		}
 
-		tmp := zond.Gwei(inclusionDelay)
+		tmp := zond.Shor(inclusionDelay)
 		i.InclusionDelay = &tmp
 	}
 
@@ -137,7 +137,7 @@ func (i *IdealAttestationRewards) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for inactivity")
 	}
 
-	i.Inactivity = zond.Gwei(inactivity)
+	i.Inactivity = zond.Shor(inactivity)
 
 	return nil
 }
@@ -155,13 +155,13 @@ func (i *IdealAttestationRewards) String() string {
 // ValidatorAttestationRewards are the ideal attestation rewards for a validator.
 type ValidatorAttestationRewards struct {
 	ValidatorIndex zond.ValidatorIndex
-	Head           zond.Gwei
-	// Target can be negative, so it is an int64 (but still a Gwei value).
+	Head           zond.Shor
+	// Target can be negative, so it is an int64 (but still a Shor value).
 	Target int64
-	// Source can be negative, so it is an int64 (but still a Gwei value).
+	// Source can be negative, so it is an int64 (but still a Shor value).
 	Source         int64
-	InclusionDelay *zond.Gwei
-	Inactivity     zond.Gwei
+	InclusionDelay *zond.Shor
+	Inactivity     zond.Shor
 }
 
 // validatorAttestationRewardsJSON is the spec representation of the struct.
@@ -220,7 +220,7 @@ func (v *ValidatorAttestationRewards) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for head")
 	}
 
-	v.Head = zond.Gwei(head)
+	v.Head = zond.Shor(head)
 
 	if data.Target == "" {
 		return errors.New("target missing")
@@ -246,7 +246,7 @@ func (v *ValidatorAttestationRewards) UnmarshalJSON(input []byte) error {
 			return errors.Wrap(err, "invalid value for inclusion delay")
 		}
 
-		tmp := zond.Gwei(inclusionDelay)
+		tmp := zond.Shor(inclusionDelay)
 		v.InclusionDelay = &tmp
 	}
 
@@ -259,7 +259,7 @@ func (v *ValidatorAttestationRewards) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for inactivity")
 	}
 
-	v.Inactivity = zond.Gwei(inactivity)
+	v.Inactivity = zond.Shor(inactivity)
 
 	return nil
 }

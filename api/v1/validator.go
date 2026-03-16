@@ -26,7 +26,7 @@ import (
 // Validator contains the spec validator plus additional fields.
 type Validator struct {
 	Index     zond.ValidatorIndex
-	Balance   zond.Gwei
+	Balance   zond.Shor
 	Status    ValidatorState
 	Validator *zond.Validator
 }
@@ -78,7 +78,7 @@ func (v *Validator) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for balance")
 	}
 
-	v.Balance = zond.Gwei(balance)
+	v.Balance = zond.Shor(balance)
 
 	v.Status = validatorJSON.Status
 	if validatorJSON.Validator == nil {

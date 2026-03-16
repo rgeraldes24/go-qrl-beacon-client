@@ -548,7 +548,7 @@ type ValidatorBalancesProvider interface {
 	ValidatorBalances(ctx context.Context,
 		opts *api.ValidatorBalancesOpts,
 	) (
-		*api.Response[map[zond.ValidatorIndex]zond.Gwei],
+		*api.Response[map[zond.ValidatorIndex]zond.Shor],
 		error,
 	)
 }

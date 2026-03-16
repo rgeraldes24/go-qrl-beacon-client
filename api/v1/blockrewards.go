@@ -25,11 +25,11 @@ import (
 // BlockRewards are the rewards for proposing a block.
 type BlockRewards struct {
 	ProposerIndex     zond.ValidatorIndex
-	Total             zond.Gwei
-	Attestations      zond.Gwei
-	SyncAggregate     zond.Gwei
-	ProposerSlashings zond.Gwei
-	AttesterSlashings zond.Gwei
+	Total             zond.Shor
+	Attestations      zond.Shor
+	SyncAggregate     zond.Shor
+	ProposerSlashings zond.Shor
+	AttesterSlashings zond.Shor
 }
 
 // blockRewardsJSON is the spec representation of the struct.
@@ -83,7 +83,7 @@ func (b *BlockRewards) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for total")
 	}
 
-	b.Total = zond.Gwei(total)
+	b.Total = zond.Shor(total)
 
 	if data.Attestations == "" {
 		return errors.New("attestations missing")
@@ -94,7 +94,7 @@ func (b *BlockRewards) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for attestations")
 	}
 
-	b.Attestations = zond.Gwei(attestations)
+	b.Attestations = zond.Shor(attestations)
 
 	if data.SyncAggregate == "" {
 		return errors.New("sync aggregate missing")
@@ -105,7 +105,7 @@ func (b *BlockRewards) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for sync aggregate")
 	}
 
-	b.SyncAggregate = zond.Gwei(syncAggregate)
+	b.SyncAggregate = zond.Shor(syncAggregate)
 
 	if data.ProposerSlashings == "" {
 		return errors.New("proposer slashings missing")
@@ -116,7 +116,7 @@ func (b *BlockRewards) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for proposer slashings")
 	}
 
-	b.ProposerSlashings = zond.Gwei(proposerSlashings)
+	b.ProposerSlashings = zond.Shor(proposerSlashings)
 
 	if data.AttesterSlashings == "" {
 		return errors.New("attester slashings missing")
@@ -127,7 +127,7 @@ func (b *BlockRewards) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for attester slashings")
 	}
 
-	b.AttesterSlashings = zond.Gwei(attesterSlashings)
+	b.AttesterSlashings = zond.Shor(attesterSlashings)
 
 	return nil
 }

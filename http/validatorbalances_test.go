@@ -35,7 +35,7 @@ func TestValidatorBalances(t *testing.T) {
 		opts             *api.ValidatorBalancesOpts
 		err              string
 		errCode          int
-		expected         map[zond.ValidatorIndex]zond.Gwei
+		expected         map[zond.ValidatorIndex]zond.Shor
 		expectedBalances int
 	}{
 		{
@@ -69,7 +69,7 @@ func TestValidatorBalances(t *testing.T) {
 				State:   "0",
 				Indices: []zond.ValidatorIndex{123},
 			},
-			expected: map[zond.ValidatorIndex]zond.Gwei{
+			expected: map[zond.ValidatorIndex]zond.Shor{
 				123: 32000000000,
 			},
 		},

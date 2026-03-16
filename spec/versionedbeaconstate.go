@@ -75,7 +75,7 @@ func (v *VersionedBeaconState) Validators() ([]*zond.Validator, error) {
 }
 
 // ValidatorBalances returns the validator balances of the state.
-func (v *VersionedBeaconState) ValidatorBalances() ([]zond.Gwei, error) {
+func (v *VersionedBeaconState) ValidatorBalances() ([]zond.Shor, error) {
 	switch v.Version {
 	case DataVersionZond:
 		if v.Zond == nil {
@@ -99,7 +99,7 @@ func (v *VersionedBeaconState) DepositRequestsStartIndex() (uint64, error) {
 }
 
 // DepositBalanceToConsume returns the deposit balance to consume of the state.
-func (v *VersionedBeaconState) DepositBalanceToConsume() (zond.Gwei, error) {
+func (v *VersionedBeaconState) DepositBalanceToConsume() (zond.Shor, error) {
 	switch v.Version {
 	case DataVersionZond:
 		return 0, errors.New("state does not provide deposit balance to consume")
@@ -109,7 +109,7 @@ func (v *VersionedBeaconState) DepositBalanceToConsume() (zond.Gwei, error) {
 }
 
 // ExitBalanceToConsume returns the deposit balance to consume of the state.
-func (v *VersionedBeaconState) ExitBalanceToConsume() (zond.Gwei, error) {
+func (v *VersionedBeaconState) ExitBalanceToConsume() (zond.Shor, error) {
 	switch v.Version {
 	case DataVersionZond:
 		return 0, errors.New("state does not provide exit balance to consume")
@@ -129,7 +129,7 @@ func (v *VersionedBeaconState) EarliestExitEpoch() (zond.Epoch, error) {
 }
 
 // ConsolidationBalanceToConsume returns the consolidation balance to consume of the state.
-func (v *VersionedBeaconState) ConsolidationBalanceToConsume() (zond.Gwei, error) {
+func (v *VersionedBeaconState) ConsolidationBalanceToConsume() (zond.Shor, error) {
 	switch v.Version {
 	case DataVersionZond:
 		return 0, errors.New("state does not provide consolidation balance to consume")
@@ -175,9 +175,9 @@ func (v *VersionedBeaconState) ValidatorAtIndex(index zond.ValidatorIndex) (*zon
 //   - index: The index of the validator whose balance to retrieve
 //
 // Returns:
-//   - zond.Gwei: The balance in Gwei
+//   - zond.Shor: The balance in Shor
 //   - error: If the index is invalid or there's an error accessing the balances
-func (v *VersionedBeaconState) ValidatorBalance(index zond.ValidatorIndex) (zond.Gwei, error) {
+func (v *VersionedBeaconState) ValidatorBalance(index zond.ValidatorIndex) (zond.Shor, error) {
 	balances, err := v.ValidatorBalances()
 	if err != nil {
 		return 0, err

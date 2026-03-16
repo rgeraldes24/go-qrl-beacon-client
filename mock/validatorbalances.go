@@ -27,15 +27,15 @@ import (
 func (s *Service) ValidatorBalances(ctx context.Context,
 	opts *api.ValidatorBalancesOpts,
 ) (
-	*api.Response[map[zond.ValidatorIndex]zond.Gwei],
+	*api.Response[map[zond.ValidatorIndex]zond.Shor],
 	error,
 ) {
 	if s.ValidatorBalancesFunc != nil {
 		return s.ValidatorBalancesFunc(ctx, opts)
 	}
 
-	return &api.Response[map[zond.ValidatorIndex]zond.Gwei]{
-		Data:     map[zond.ValidatorIndex]zond.Gwei{},
+	return &api.Response[map[zond.ValidatorIndex]zond.Shor]{
+		Data:     map[zond.ValidatorIndex]zond.Shor{},
 		Metadata: make(map[string]any),
 	}, nil
 }

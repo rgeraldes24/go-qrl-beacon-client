@@ -25,7 +25,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func gweiPtr(input zond.Gwei) *zond.Gwei {
+func shorPtr(input zond.Shor) *zond.Shor {
 	return &input
 }
 
@@ -148,7 +148,7 @@ func TestValidatorToState(t *testing.T) {
 	tests := []struct {
 		name      string
 		validator *zond.Validator
-		balance   *zond.Gwei
+		balance   *zond.Shor
 		state     api.ValidatorState
 	}{
 		{
@@ -331,7 +331,7 @@ func TestValidatorToState(t *testing.T) {
 				WithdrawableEpoch:          currentEpoch - 20,
 				EffectiveBalance:           1,
 			},
-			balance: gweiPtr(5),
+			balance: shorPtr(5),
 			state:   api.ValidatorStateWithdrawalPossible,
 		},
 		{
@@ -343,7 +343,7 @@ func TestValidatorToState(t *testing.T) {
 				WithdrawableEpoch:          currentEpoch - 20,
 				EffectiveBalance:           0,
 			},
-			balance: gweiPtr(0),
+			balance: shorPtr(0),
 			state:   api.ValidatorStateWithdrawalDone,
 		},
 		{

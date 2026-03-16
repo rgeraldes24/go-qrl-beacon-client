@@ -13,32 +13,32 @@
 
 package zond_test
 
-// Create a test to verify gwei.unmarshalJSON
+// Create a test to verify shor.unmarshalJSON
 import (
 	"testing"
 
 	"github.com/rgeraldes24/go-qrl-beacon-client/spec/zond"
 )
 
-func TestGweiUnmarshalJSON(t *testing.T) {
+func TestShorUnmarshalJSON(t *testing.T) {
 	// Test cases
 	tests := []struct {
 		name     string
 		input    []byte
-		expected zond.Gwei
+		expected zond.Shor
 		wantErr  bool
 	}{
 		{
 			name:     "Valid input 1000000000",
 			input:    []byte("\"1000000000\""),
-			expected: zond.Gwei(1000000000),
+			expected: zond.Shor(1000000000),
 			wantErr:  false,
 		},
 
 		{
 			name:     "Valid input",
 			input:    []byte("\"1\""),
-			expected: zond.Gwei(1),
+			expected: zond.Shor(1),
 			wantErr:  false,
 		},
 
@@ -59,7 +59,7 @@ func TestGweiUnmarshalJSON(t *testing.T) {
 	// Run tests
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			var g zond.Gwei
+			var g zond.Shor
 			err := g.UnmarshalJSON(tt.input)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("UnmarshalJSON() error = %v, wantErr %v", err, tt.wantErr)

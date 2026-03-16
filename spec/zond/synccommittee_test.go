@@ -21,7 +21,7 @@ import (
 	"github.com/goccy/go-yaml"
 	"github.com/stretchr/testify/assert"
 	require "github.com/stretchr/testify/require"
-	"github.com/theQRL/qrysm/v4/proto/zond/v2"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 func TestSyncCommitteeJSON(t *testing.T) {

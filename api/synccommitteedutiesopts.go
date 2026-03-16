@@ -13,6 +13,8 @@
 
 package api
 
+import "github.com/theQRL/go-qrl-beacon-client/spec/zond"
+
 // SyncCommitteeDutiesOpts are the options for obtaining sync committee duties.
 type SyncCommitteeDutiesOpts struct {
 	Common CommonOpts

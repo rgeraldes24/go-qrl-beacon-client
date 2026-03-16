@@ -17,8 +17,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/pkg/errors"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // Finality is the data regarding finality checkpoints at a given state.

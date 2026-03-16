@@ -16,7 +16,7 @@ package spec
 import (
 	"errors"
 
-	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // VersionedAttesterSlashing contains a versioned attestation.

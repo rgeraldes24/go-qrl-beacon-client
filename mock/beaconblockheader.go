@@ -16,9 +16,9 @@ package mock
 import (
 	"context"
 
-	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // BeaconBlockHeader provides the block header of a given block ID.

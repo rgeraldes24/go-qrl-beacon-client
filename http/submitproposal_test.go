@@ -24,6 +24,7 @@ import (
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/http"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 func TestSubmitProposal(t *testing.T) {

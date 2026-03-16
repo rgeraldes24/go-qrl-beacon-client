@@ -17,6 +17,7 @@ import (
 	"errors"
 	"math/big"
 
+	apiv1zond "github.com/theQRL/go-qrl-beacon-client/api/v1/zond"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
 	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )

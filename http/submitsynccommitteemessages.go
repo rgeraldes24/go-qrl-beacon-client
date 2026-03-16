@@ -20,7 +20,7 @@ import (
 	"errors"
 
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/qrysm/v4/proto/zond/v2"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // SubmitSyncCommitteeMessages submits sync committee messages.

@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"strings"
 
-	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // AttestationPool obtains the attestation pool for the given options.

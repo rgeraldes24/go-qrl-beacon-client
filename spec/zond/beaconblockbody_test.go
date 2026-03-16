@@ -21,7 +21,7 @@ import (
 	"github.com/goccy/go-yaml"
 	"github.com/stretchr/testify/assert"
 	require "github.com/stretchr/testify/require"
-	zond "github.com/theQRL/qrysm/v4/proto/prysm/v1alpha1"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 func TestBeaconBlockBodyJSON(t *testing.T) {

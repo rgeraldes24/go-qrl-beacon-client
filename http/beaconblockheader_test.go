@@ -19,12 +19,12 @@ import (
 	"os"
 	"testing"
 
-	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/stretchr/testify/require"
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
 	"github.com/theQRL/go-qrl-beacon-client/http"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 func TestBeaconBlockHeader(t *testing.T) {

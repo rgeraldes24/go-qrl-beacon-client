@@ -23,7 +23,7 @@ import (
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/qrysm/v4/proto/zond/v2"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // BeaconState fetches a beacon state.

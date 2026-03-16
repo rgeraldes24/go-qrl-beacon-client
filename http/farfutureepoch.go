@@ -15,6 +15,8 @@ package http
 
 import (
 	"context"
+
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // FarFutureEpoch provides the values for FAR_FUTURE_EPOCH of the chain.

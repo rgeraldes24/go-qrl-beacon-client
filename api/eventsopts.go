@@ -16,9 +16,9 @@ package api
 import (
 	"context"
 
-	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // EventsOpts are the options for obtaining events.

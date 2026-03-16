@@ -19,7 +19,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	require "github.com/stretchr/testify/require"
-	"github.com/theQRL/qrysm/v4/proto/zond/v2"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 func TestHistoricalSummaryJSON(t *testing.T) {

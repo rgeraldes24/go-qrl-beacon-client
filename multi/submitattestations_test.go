@@ -17,9 +17,9 @@ import (
 	"context"
 	"testing"
 
-	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 
 	"github.com/rs/zerolog"
 	"github.com/stretchr/testify/require"

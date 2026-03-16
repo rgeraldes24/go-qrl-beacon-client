@@ -18,6 +18,7 @@ import (
 
 	bitfield "github.com/theQRL/go-bitfield"
 	"github.com/theQRL/go-qrl-beacon-client/api"
+	apiv1zond "github.com/theQRL/go-qrl-beacon-client/api/v1/zond"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
 	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )

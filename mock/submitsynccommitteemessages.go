@@ -16,7 +16,7 @@ package mock
 import (
 	"context"
 
-	"github.com/theQRL/qrysm/v4/proto/zond/v2"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // SubmitSyncCommitteeMessages submits sync committee messages.

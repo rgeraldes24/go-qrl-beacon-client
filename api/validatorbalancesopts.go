@@ -13,6 +13,8 @@
 
 package api
 
+import "github.com/theQRL/go-qrl-beacon-client/spec/zond"
+
 // ValidatorBalancesOpts are the options for obtaining validator balances.
 type ValidatorBalancesOpts struct {
 	Common CommonOpts

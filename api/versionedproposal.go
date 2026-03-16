@@ -16,7 +16,9 @@ package api
 import (
 	"math/big"
 
+	apiv1zond "github.com/theQRL/go-qrl-beacon-client/api/v1/zond"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // VersionedProposal contains a versioned proposal.

@@ -16,8 +16,8 @@ package mock
 import (
 	"context"
 
-	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/theQRL/go-qrl-beacon-client/api"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // AttestationData fetches the attestation data for the given slot and committee index.

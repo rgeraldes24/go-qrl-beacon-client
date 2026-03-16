@@ -22,8 +22,8 @@ import (
 	consensusclient "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/mock"
 	"github.com/theQRL/go-qrl-beacon-client/multi"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 	"github.com/theQRL/go-qrl-beacon-client/testclients"
-	"github.com/theQRL/qrysm/v4/proto/zond/v2"
 )
 
 func TestSubmitSyncCommitteeMessages(t *testing.T) {

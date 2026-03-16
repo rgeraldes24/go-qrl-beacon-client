@@ -16,9 +16,9 @@ package mock
 import (
 	"context"
 
-	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // AggregateAttestation fetches the aggregate attestation for the given options.

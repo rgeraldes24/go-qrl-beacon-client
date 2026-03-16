@@ -16,8 +16,8 @@ package spec
 import (
 	"encoding/json"
 
-	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/pkg/errors"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // attestationIdentificationJSON contains fields that allow us to identify the attestation variant.

@@ -15,6 +15,7 @@ package api
 
 import (
 	"github.com/theQRL/go-qrl-beacon-client/spec"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // VersionedBlockRequest contains a versioned signed beacon block request.

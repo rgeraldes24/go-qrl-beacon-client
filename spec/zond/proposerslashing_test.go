@@ -18,10 +18,10 @@ import (
 	"encoding/json"
 	"testing"
 
-	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/goccy/go-yaml"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 func TestProposerSlashingJSON(t *testing.T) {

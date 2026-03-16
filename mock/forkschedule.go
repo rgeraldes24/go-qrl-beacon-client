@@ -16,8 +16,8 @@ package mock
 import (
 	"context"
 
-	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/theQRL/go-qrl-beacon-client/api"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // ForkSchedule provides details of past and future changes in the chain's fork version.

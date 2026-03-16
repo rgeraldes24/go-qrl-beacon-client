@@ -21,6 +21,7 @@ import (
 	"github.com/stretchr/testify/require"
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/http"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 func TestSubmitProposalSlashing(t *testing.T) {

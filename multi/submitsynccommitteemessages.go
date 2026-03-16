@@ -17,7 +17,7 @@ import (
 	"context"
 
 	consensusclient "github.com/theQRL/go-qrl-beacon-client"
-	"github.com/theQRL/qrysm/v4/proto/zond/v2"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // SubmitSyncCommitteeMessages submits sync committee messages.

@@ -19,12 +19,12 @@ import (
 	"math/rand"
 	"time"
 
-	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/rs/zerolog"
 	consensusclient "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // Events feeds requested events with the given topics to the supplied handler.

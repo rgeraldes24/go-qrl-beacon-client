@@ -24,6 +24,7 @@ import (
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
 	"github.com/theQRL/go-qrl-beacon-client/http"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 func TestValidators(t *testing.T) {

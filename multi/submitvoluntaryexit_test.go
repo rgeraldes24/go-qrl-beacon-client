@@ -17,12 +17,12 @@ import (
 	"context"
 	"testing"
 
-	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/rs/zerolog"
 	"github.com/stretchr/testify/require"
 	consensusclient "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/mock"
 	"github.com/theQRL/go-qrl-beacon-client/multi"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 	"github.com/theQRL/go-qrl-beacon-client/testclients"
 )
 

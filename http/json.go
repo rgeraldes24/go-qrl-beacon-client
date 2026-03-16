@@ -20,6 +20,7 @@ import (
 	"io"
 
 	"github.com/huandu/go-clone"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 func decodeJSONResponse[T any](body io.Reader, res T) (T, map[string]any, error) {

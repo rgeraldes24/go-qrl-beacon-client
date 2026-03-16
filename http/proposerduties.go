@@ -22,6 +22,7 @@ import (
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // ProposerDuties obtains proposer duties for the given options.

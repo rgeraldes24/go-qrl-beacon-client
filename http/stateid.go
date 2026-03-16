@@ -21,6 +21,7 @@ import (
 	"strings"
 
 	"github.com/theQRL/go-qrl-beacon-client/api"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // SlotFromStateID parses the state ID and returns the relevant slot.

@@ -24,8 +24,9 @@ import (
 	dynssz "github.com/pk910/dynamic-ssz"
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
+	apiv1zond "github.com/theQRL/go-qrl-beacon-client/api/v1/zond"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	zond "github.com/theQRL/qrysm/v4/proto/prysm/v1alpha1"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 	"go.opentelemetry.io/otel"
 )
 

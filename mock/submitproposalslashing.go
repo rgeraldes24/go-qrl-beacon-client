@@ -16,7 +16,7 @@ package mock
 import (
 	"context"
 
-	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // SubmitProposalSlashing submits a proposal slashing.

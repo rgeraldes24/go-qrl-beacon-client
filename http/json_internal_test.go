@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"testing"
 
-	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/stretchr/testify/require"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 func TestDecodeJSONStruct(t *testing.T) {

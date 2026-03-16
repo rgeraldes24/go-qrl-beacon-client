@@ -4,16 +4,16 @@ import (
 	"bytes"
 	"testing"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/stretchr/testify/require"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 func TestDecodeJSONStruct(t *testing.T) {
 	input := []byte(`{"execution_optimistic":false,"finalized":true,"data":{"previous_version":"0x00000001","current_version":"0x00000002","epoch":"3"}}`)
-	resType := capella.Fork{}
-	expectedData := capella.Fork{
-		PreviousVersion: capella.Version{0x00, 0x00, 0x00, 0x01},
-		CurrentVersion:  capella.Version{0x00, 0x00, 0x00, 0x02},
+	resType := zond.Fork{}
+	expectedData := zond.Fork{
+		PreviousVersion: zond.Version{0x00, 0x00, 0x00, 0x01},
+		CurrentVersion:  zond.Version{0x00, 0x00, 0x00, 0x02},
 		Epoch:           3,
 	}
 	expectedMetadata := map[string]any{
@@ -29,16 +29,16 @@ func TestDecodeJSONStruct(t *testing.T) {
 
 func TestDecodeJSONArray(t *testing.T) {
 	input := []byte(`{"execution_optimistic":false,"finalized":true,"data":[{"previous_version":"0x00000001","current_version":"0x00000002","epoch":"3"},{"previous_version":"0x00000002","current_version":"0x00000003","epoch":"4"}]}`)
-	resType := []capella.Fork{}
-	expectedData := []capella.Fork{
+	resType := []zond.Fork{}
+	expectedData := []zond.Fork{
 		{
-			PreviousVersion: capella.Version{0x00, 0x00, 0x00, 0x01},
-			CurrentVersion:  capella.Version{0x00, 0x00, 0x00, 0x02},
+			PreviousVersion: zond.Version{0x00, 0x00, 0x00, 0x01},
+			CurrentVersion:  zond.Version{0x00, 0x00, 0x00, 0x02},
 			Epoch:           3,
 		},
 		{
-			PreviousVersion: capella.Version{0x00, 0x00, 0x00, 0x02},
-			CurrentVersion:  capella.Version{0x00, 0x00, 0x00, 0x03},
+			PreviousVersion: zond.Version{0x00, 0x00, 0x00, 0x02},
+			CurrentVersion:  zond.Version{0x00, 0x00, 0x00, 0x03},
 			Epoch:           4,
 		},
 	}

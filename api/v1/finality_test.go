@@ -45,7 +45,7 @@ func TestFinalityJSON(t *testing.T) {
 		{
 			name:  "FinalizedWrongType",
 			input: []byte(`{"finalized":true,"current_justified":{"epoch":"15705","root":"0x66ba71dfb29bada27c3f99e9823dac4272ff1a057814d0672353358571cb0142"},"previous_justified":{"epoch":"15705","root":"0x66ba71dfb29bada27c3f99e9823dac4272ff1a057814d0672353358571cb0142"}}`),
-			err:   "invalid JSON: invalid JSON: json: cannot unmarshal bool into Go value of type capella.checkpointJSON",
+			err:   "invalid JSON: invalid JSON: json: cannot unmarshal bool into Go value of type zond.checkpointJSON",
 		},
 		{
 			name:  "FinalizedInvalid",
@@ -60,7 +60,7 @@ func TestFinalityJSON(t *testing.T) {
 		{
 			name:  "CurrentJustifiedWrongType",
 			input: []byte(`{"finalized":{"epoch":"15614","root":"0xb3806428b52a802fb9c4355b6e93a6afde02ecbd27a9f4723eb427c27cadb440"},"current_justified":true,"previous_justified":{"epoch":"15705","root":"0x66ba71dfb29bada27c3f99e9823dac4272ff1a057814d0672353358571cb0142"}}`),
-			err:   "invalid JSON: invalid JSON: json: cannot unmarshal bool into Go value of type capella.checkpointJSON",
+			err:   "invalid JSON: invalid JSON: json: cannot unmarshal bool into Go value of type zond.checkpointJSON",
 		},
 		{
 			name:  "CurrentJustifiedInvalid",
@@ -75,7 +75,7 @@ func TestFinalityJSON(t *testing.T) {
 		{
 			name:  "PreviousJustifiedWrongType",
 			input: []byte(`{"finalized":{"epoch":"15614","root":"0xb3806428b52a802fb9c4355b6e93a6afde02ecbd27a9f4723eb427c27cadb440"},"current_justified":{"epoch":"15705","root":"0x66ba71dfb29bada27c3f99e9823dac4272ff1a057814d0672353358571cb0142"},"previous_justified":true}`),
-			err:   "invalid JSON: invalid JSON: json: cannot unmarshal bool into Go value of type capella.checkpointJSON",
+			err:   "invalid JSON: invalid JSON: json: cannot unmarshal bool into Go value of type zond.checkpointJSON",
 		},
 		{
 			name:  "PreviousJustifiedInvalid",

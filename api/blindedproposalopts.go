@@ -13,16 +13,16 @@
 
 package api
 
-import "github.com/theQRL/go-qrl-beacon-client/spec/capella"
+import "github.com/theQRL/go-qrl-beacon-client/spec/zond"
 
 // BlindedProposalOpts are the options for obtaining blinded proposals.
 type BlindedProposalOpts struct {
 	Common CommonOpts
 
 	// Slot is the slot for which the proposal should be fetched.
-	Slot capella.Slot
+	Slot zond.Slot
 	// RandaoReveal is the RANDAO reveal for the proposal.
-	RandaoReveal capella.MLDSA87Signature
+	RandaoReveal zond.MLDSA87Signature
 	// Graffiti is the graffiti to be included in the beacon block body.
 	Graffiti [32]byte
 	// SkipRandaoVerification is true if we do not want the server to verify our RANDAO reveal.

@@ -24,7 +24,6 @@ import (
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/http"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 func TestAttestationData(t *testing.T) {
@@ -64,7 +63,7 @@ func TestAttestationData(t *testing.T) {
 		{
 			name: "Good",
 			opts: &api.AttestationDataOpts{
-				Slot: capella.Slot(uint64(time.Since(genesisResponse.Data.GenesisTime).Seconds()) / uint64(slotDuration.Seconds())),
+				Slot: zond.Slot(uint64(time.Since(genesisResponse.Data.GenesisTime).Seconds()) / uint64(slotDuration.Seconds())),
 			},
 		},
 	}

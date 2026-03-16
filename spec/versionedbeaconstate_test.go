@@ -160,13 +160,13 @@ func TestInvalidValidatorIndex(t *testing.T) {
 	if err != nil {
 		t.Skip("holesky_beaconstate_2649079.ssz not available")
 	}
-	validatorIndex := capella.ValidatorIndex(176565800)
+	validatorIndex := zond.ValidatorIndex(176565800)
 	validator, err := state.ValidatorAtIndex(validatorIndex)
 	require.Error(t, err, "validator index out of bounds")
 	require.Nil(t, validator)
 
 	balance, err := state.ValidatorBalance(validatorIndex)
 	require.Error(t, err, "validator index out of bounds")
-	require.Equal(t, capella.Gwei(0), balance)
+	require.Equal(t, zond.Gwei(0), balance)
 }
 */

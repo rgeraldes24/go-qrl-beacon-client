@@ -17,12 +17,12 @@ import (
 	"context"
 	"testing"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/rs/zerolog"
 	"github.com/stretchr/testify/require"
 	consensusclient "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/mock"
 	"github.com/theQRL/go-qrl-beacon-client/multi"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 	"github.com/theQRL/go-qrl-beacon-client/testclients"
 )
 
@@ -51,7 +51,7 @@ func TestSubmitVoluntaryExit(t *testing.T) {
 	require.NoError(t, err)
 
 	for i := 0; i < 128; i++ {
-		err := multiClient.(consensusclient.VoluntaryExitSubmitter).SubmitVoluntaryExit(ctx, &capella.SignedVoluntaryExit{})
+		err := multiClient.(consensusclient.VoluntaryExitSubmitter).SubmitVoluntaryExit(ctx, &zond.SignedVoluntaryExit{})
 		require.NoError(t, err)
 	}
 	// At this point we expect mock 3 to be in active (unless probability hates us).

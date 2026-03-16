@@ -19,12 +19,12 @@ import (
 	"encoding/json"
 	"errors"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // SubmitVoluntaryExit submits a voluntary exit.
-func (s *Service) SubmitVoluntaryExit(ctx context.Context, voluntaryExit *capella.SignedVoluntaryExit) error {
+func (s *Service) SubmitVoluntaryExit(ctx context.Context, voluntaryExit *zond.SignedVoluntaryExit) error {
 	if err := s.assertIsSynced(ctx); err != nil {
 		return err
 	}

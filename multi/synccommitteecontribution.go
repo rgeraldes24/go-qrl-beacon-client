@@ -18,14 +18,14 @@ import (
 
 	consensusclient "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/qrysm/v4/proto/zond/v2"
 )
 
 // SyncCommitteeContribution provides a sync committee contribution.
 func (s *Service) SyncCommitteeContribution(ctx context.Context,
 	opts *api.SyncCommitteeContributionOpts,
 ) (
-	*api.Response[*capella.SyncCommitteeContribution],
+	*api.Response[*zond.SyncCommitteeContribution],
 	error,
 ) {
 	res, err := s.doCall(ctx, func(ctx context.Context, client consensusclient.Service) (any, error) {
@@ -40,7 +40,7 @@ func (s *Service) SyncCommitteeContribution(ctx context.Context,
 		return nil, err
 	}
 
-	response, isResponse := res.(*api.Response[*capella.SyncCommitteeContribution])
+	response, isResponse := res.(*api.Response[*zond.SyncCommitteeContribution])
 	if !isResponse {
 		return nil, ErrIncorrectType
 	}

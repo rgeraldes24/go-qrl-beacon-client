@@ -18,7 +18,6 @@ import (
 
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // VersionedValidatorRegistration contains a versioned ValidatorRegistrationV1.
@@ -33,16 +32,16 @@ func (v *VersionedValidatorRegistration) IsEmpty() bool {
 }
 
 // FeeRecipient returns the fee recipient of the validator registration.
-func (v *VersionedValidatorRegistration) FeeRecipient() (capella.ExecutionAddress, error) {
+func (v *VersionedValidatorRegistration) FeeRecipient() (zond.ExecutionAddress, error) {
 	switch v.Version {
 	case spec.BuilderVersionV1:
 		if v.V1 == nil {
-			return capella.ExecutionAddress{}, ErrDataMissing
+			return zond.ExecutionAddress{}, ErrDataMissing
 		}
 
 		return v.V1.FeeRecipient, nil
 	default:
-		return capella.ExecutionAddress{}, ErrUnsupportedVersion
+		return zond.ExecutionAddress{}, ErrUnsupportedVersion
 	}
 }
 
@@ -75,29 +74,29 @@ func (v *VersionedValidatorRegistration) Timestamp() (time.Time, error) {
 }
 
 // PubKey returns the public key of the validator registration.
-func (v *VersionedValidatorRegistration) PubKey() (capella.MLDSA87PubKey, error) {
+func (v *VersionedValidatorRegistration) PubKey() (zond.MLDSA87PubKey, error) {
 	switch v.Version {
 	case spec.BuilderVersionV1:
 		if v.V1 == nil {
-			return capella.MLDSA87PubKey{}, ErrDataMissing
+			return zond.MLDSA87PubKey{}, ErrDataMissing
 		}
 
 		return v.V1.Pubkey, nil
 	default:
-		return capella.MLDSA87PubKey{}, ErrUnsupportedVersion
+		return zond.MLDSA87PubKey{}, ErrUnsupportedVersion
 	}
 }
 
 // Root returns the root of the validator registration.
-func (v *VersionedValidatorRegistration) Root() (capella.Root, error) {
+func (v *VersionedValidatorRegistration) Root() (zond.Root, error) {
 	switch v.Version {
 	case spec.BuilderVersionV1:
 		if v.V1 == nil {
-			return capella.Root{}, ErrDataMissing
+			return zond.Root{}, ErrDataMissing
 		}
 
 		return v.V1.HashTreeRoot()
 	default:
-		return capella.Root{}, ErrUnsupportedVersion
+		return zond.Root{}, ErrUnsupportedVersion
 	}
 }

@@ -18,44 +18,44 @@ import (
 	"fmt"
 
 	bitfield "github.com/theQRL/go-bitfield"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // VersionedAttestation contains a versioned attestation.
 type VersionedAttestation struct {
 	Version        DataVersion
-	ValidatorIndex *capella.ValidatorIndex
-	Capella        *capella.Attestation
+	ValidatorIndex *zond.ValidatorIndex
+	Zond           *zond.Attestation
 }
 
 // IsEmpty returns true if there is no block.
 func (v *VersionedAttestation) IsEmpty() bool {
-	return v.Capella == nil
+	return v.Zond == nil
 }
 
 // AggregationBits returns the aggregation bits of the attestation.
 func (v *VersionedAttestation) AggregationBits() (bitfield.Bitlist, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return nil, errors.New("no Capella attestation")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return nil, errors.New("no Zond attestation")
 		}
 
-		return v.Capella.AggregationBits, nil
+		return v.Zond.AggregationBits, nil
 	default:
 		return nil, errors.New("unknown version")
 	}
 }
 
 // Data returns the data of the attestation.
-func (v *VersionedAttestation) Data() (*capella.AttestationData, error) {
+func (v *VersionedAttestation) Data() (*zond.AttestationData, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return nil, errors.New("no Capella attestation")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return nil, errors.New("no Zond attestation")
 		}
 
-		return v.Capella.Data, nil
+		return v.Zond.Data, nil
 	default:
 		return nil, fmt.Errorf("unknown version: %d", v.Version)
 	}
@@ -64,7 +64,7 @@ func (v *VersionedAttestation) Data() (*capella.AttestationData, error) {
 // CommitteeBits returns the committee bits of the attestation.
 func (v *VersionedAttestation) CommitteeBits() (bitfield.Bitvector64, error) {
 	switch v.Version {
-	case DataVersionCapella:
+	case DataVersionZond:
 		return nil, errors.New("attestation does not provide committee bits")
 	default:
 		return nil, errors.New("unknown version")
@@ -72,14 +72,14 @@ func (v *VersionedAttestation) CommitteeBits() (bitfield.Bitvector64, error) {
 }
 
 // CommitteeIndex returns the index if only one bit is set, otherwise error.
-func (v *VersionedAttestation) CommitteeIndex() (capella.CommitteeIndex, error) {
+func (v *VersionedAttestation) CommitteeIndex() (zond.CommitteeIndex, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return 0, errors.New("no Capella attestation")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return 0, errors.New("no Zond attestation")
 		}
 
-		return v.Capella.Data.Index, nil
+		return v.Zond.Data.Index, nil
 	default:
 		return 0, errors.New("unknown version")
 	}
@@ -87,26 +87,26 @@ func (v *VersionedAttestation) CommitteeIndex() (capella.CommitteeIndex, error) 
 
 func (v *VersionedAttestation) HashTreeRoot() ([32]byte, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return [32]byte{}, errors.New("no Capella attestation")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return [32]byte{}, errors.New("no Zond attestation")
 		}
 
-		return v.Capella.HashTreeRoot()
+		return v.Zond.HashTreeRoot()
 	default:
 		return [32]byte{}, errors.New("unknown version")
 	}
 }
 
 // Signatures returns the signatures of the attestation.
-func (v *VersionedAttestation) Signatures() ([]capella.MLDSA87Signature, error) {
+func (v *VersionedAttestation) Signatures() ([]zond.MLDSA87Signature, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return nil, errors.New("no Capella attestation")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return nil, errors.New("no Zond attestation")
 		}
 
-		return v.Capella.Signatures, nil
+		return v.Zond.Signatures, nil
 	default:
 		return nil, errors.New("unknown version")
 	}
@@ -115,12 +115,12 @@ func (v *VersionedAttestation) Signatures() ([]capella.MLDSA87Signature, error) 
 // String returns a string version of the structure.
 func (v *VersionedAttestation) String() string {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
+	case DataVersionZond:
+		if v.Zond == nil {
 			return ""
 		}
 
-		return v.Capella.String()
+		return v.Zond.String()
 	default:
 		return "unknown version"
 	}

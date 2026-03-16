@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"strings"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // AttestationPool obtains the attestation pool for the given options.
@@ -90,8 +90,8 @@ func (*Service) attestationPoolFromJSON(_ context.Context,
 func verifyAttestationPool(opts *api.AttestationPoolOpts, data []*spec.VersionedAttestation) error {
 	for _, datum := range data {
 		switch datum.Version {
-		case spec.DataVersionCapella:
-			if err := verifyPhase0Attestation(opts, datum.Capella); err != nil {
+		case spec.DataVersionZond:
+			if err := verifyPhase0Attestation(opts, datum.Zond); err != nil {
 				return err
 			}
 		default:
@@ -102,7 +102,7 @@ func verifyAttestationPool(opts *api.AttestationPoolOpts, data []*spec.Versioned
 	return nil
 }
 
-func verifyPhase0Attestation(opts *api.AttestationPoolOpts, data *capella.Attestation) error {
+func verifyPhase0Attestation(opts *api.AttestationPoolOpts, data *zond.Attestation) error {
 	if opts.Slot != nil && data.Data.Slot != *opts.Slot {
 		return errors.New("attestation data not for requested slot")
 	}

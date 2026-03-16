@@ -16,7 +16,7 @@ package mock
 import (
 	"context"
 
-	spec "github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	spec "github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // DepositDomain provides the deposit domain.

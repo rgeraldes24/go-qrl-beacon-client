@@ -20,7 +20,6 @@ import (
 	"io"
 
 	"github.com/huandu/go-clone"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 func decodeJSONResponse[T any](body io.Reader, res T) (T, map[string]any, error) {
@@ -49,7 +48,7 @@ func decodeJSONResponse[T any](body io.Reader, res T) (T, map[string]any, error)
 				return res, nil, errors.Join(errors.New("failed to unmarshal data"), err)
 			}
 		case "dependent_root":
-			var val capella.Root
+			var val zond.Root
 
 			err := json.Unmarshal(v, &val)
 			if err != nil {

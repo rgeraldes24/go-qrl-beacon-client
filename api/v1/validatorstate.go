@@ -17,7 +17,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // ValidatorState defines the state of the validator.
@@ -164,10 +164,10 @@ func (v ValidatorState) valid() bool {
 }
 
 // ValidatorToState is a helper that calculates the validator status given a validator struct.
-func ValidatorToState(validator *capella.Validator,
-	balance *capella.Gwei,
-	currentEpoch capella.Epoch,
-	farFutureEpoch capella.Epoch,
+func ValidatorToState(validator *zond.Validator,
+	balance *zond.Gwei,
+	currentEpoch zond.Epoch,
+	farFutureEpoch zond.Epoch,
 ) ValidatorState {
 	if validator == nil {
 		return ValidatorStateUnknown

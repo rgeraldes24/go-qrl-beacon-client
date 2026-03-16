@@ -21,18 +21,18 @@ import (
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // ChainReorgEvent is the data for the head event.
 type ChainReorgEvent struct {
-	Slot         capella.Slot
+	Slot         zond.Slot
 	Depth        uint64
-	OldHeadBlock capella.Root
-	NewHeadBlock capella.Root
-	OldHeadState capella.Root
-	NewHeadState capella.Root
-	Epoch        capella.Epoch
+	OldHeadBlock zond.Root
+	NewHeadBlock zond.Root
+	OldHeadState zond.Root
+	NewHeadState zond.Root
+	Epoch        zond.Epoch
 }
 
 // chainReorgEventJSON is the spec representation of the struct.
@@ -77,7 +77,7 @@ func (e *ChainReorgEvent) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for slot")
 	}
 
-	e.Slot = capella.Slot(slot)
+	e.Slot = zond.Slot(slot)
 
 	if chainReorgEventJSON.Depth == "" {
 		return errors.New("depth missing")
@@ -156,7 +156,7 @@ func (e *ChainReorgEvent) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for epoch")
 	}
 
-	e.Epoch = capella.Epoch(epoch)
+	e.Epoch = zond.Epoch(epoch)
 
 	return nil
 }

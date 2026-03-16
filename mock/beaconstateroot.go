@@ -17,23 +17,23 @@ import (
 	"context"
 
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // BeaconStateRoot fetches a beacon state's root given a state ID.
 func (s *Service) BeaconStateRoot(ctx context.Context,
 	opts *api.BeaconStateRootOpts,
 ) (
-	*api.Response[*capella.Root],
+	*api.Response[*zond.Root],
 	error,
 ) {
 	if s.BeaconStateRootFunc != nil {
 		return s.BeaconStateRootFunc(ctx, opts)
 	}
 
-	data := capella.Root{}
+	data := zond.Root{}
 
-	return &api.Response[*capella.Root]{
+	return &api.Response[*zond.Root]{
 		Data:     &data,
 		Metadata: make(map[string]any),
 	}, nil

@@ -19,17 +19,17 @@ import (
 	"strconv"
 
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // BeaconCommitteeSubscription is the data required for a beacon committee subscription.
 type BeaconCommitteeSubscription struct {
 	// ValidatorIndex is the index of the validator making the subscription request.
-	ValidatorIndex capella.ValidatorIndex
+	ValidatorIndex zond.ValidatorIndex
 	// Slot is the slot for which the validator is attesting.
-	Slot capella.Slot
+	Slot zond.Slot
 	// CommitteeIndex is the index of the committee of which the validator is a member at the given slot.
-	CommitteeIndex capella.CommitteeIndex
+	CommitteeIndex zond.CommitteeIndex
 	// CommitteesAtSlot is the number of committees at the given slot.
 	CommitteesAtSlot uint64
 	// IsAggregator is true if the validator that wishes to subscribe is required to aggregate attestations.
@@ -74,7 +74,7 @@ func (b *BeaconCommitteeSubscription) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for validator index")
 	}
 
-	b.ValidatorIndex = capella.ValidatorIndex(validatorIndex)
+	b.ValidatorIndex = zond.ValidatorIndex(validatorIndex)
 
 	if beaconCommitteeSubscriptionJSON.Slot == "" {
 		return errors.New("slot missing")
@@ -85,7 +85,7 @@ func (b *BeaconCommitteeSubscription) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for slot")
 	}
 
-	b.Slot = capella.Slot(slot)
+	b.Slot = zond.Slot(slot)
 
 	if beaconCommitteeSubscriptionJSON.CommitteeIndex == "" {
 		return errors.New("committee index missing")
@@ -96,7 +96,7 @@ func (b *BeaconCommitteeSubscription) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for committee index")
 	}
 
-	b.CommitteeIndex = capella.CommitteeIndex(committeeIndex)
+	b.CommitteeIndex = zond.CommitteeIndex(committeeIndex)
 
 	if beaconCommitteeSubscriptionJSON.CommitteesAtSlot == "" {
 		return errors.New("committees at slot missing")

@@ -19,13 +19,13 @@ import (
 	"strconv"
 
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // ValidatorBalance contains the balance of a validator.
 type ValidatorBalance struct {
-	Index   capella.ValidatorIndex
-	Balance capella.Gwei
+	Index   zond.ValidatorIndex
+	Balance zond.Gwei
 }
 
 // validatorBalanceJSON is the spec representation of the struct.
@@ -60,7 +60,7 @@ func (v *ValidatorBalance) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for index")
 	}
 
-	v.Index = capella.ValidatorIndex(index)
+	v.Index = zond.ValidatorIndex(index)
 
 	if validatorBalanceJSON.Balance == "" {
 		return errors.New("balance missing")
@@ -71,7 +71,7 @@ func (v *ValidatorBalance) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for balance")
 	}
 
-	v.Balance = capella.Gwei(balance)
+	v.Balance = zond.Gwei(balance)
 
 	return nil
 }

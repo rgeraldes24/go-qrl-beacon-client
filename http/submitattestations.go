@@ -91,8 +91,8 @@ func (s *Service) createUnversionedAttestations(attestations []*spec.VersionedAt
 
 		// Append to unversionedAttestations.
 		switch attestations[i].Version {
-		case spec.DataVersionCapella:
-			unversionedAttestations = append(unversionedAttestations, attestations[i].Capella)
+		case spec.DataVersionZond:
+			unversionedAttestations = append(unversionedAttestations, attestations[i].Zond)
 		default:
 			return nil, errors.Join(errors.New("unknown attestation version"), client.ErrInvalidOptions)
 		}

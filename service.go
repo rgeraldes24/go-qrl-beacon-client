@@ -20,7 +20,7 @@ import (
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // Service is the service providing a connection to a QRL consensus client.
@@ -43,7 +43,7 @@ type EpochFromStateIDProvider interface {
 	// EpochFromStateID converts a state ID to its epoch.
 	//
 	// Deprecated: will be removed in a future release.
-	EpochFromStateID(ctx context.Context, stateID string) (capella.Epoch, error)
+	EpochFromStateID(ctx context.Context, stateID string) (zond.Epoch, error)
 }
 
 // SlotFromStateIDProvider is the interface for providing slots from state IDs.
@@ -51,7 +51,7 @@ type SlotFromStateIDProvider interface {
 	// SlotFromStateID converts a state ID to its slot.
 	//
 	// Deprecated: will be removed in a future release.
-	SlotFromStateID(ctx context.Context, stateID string) (capella.Slot, error)
+	SlotFromStateID(ctx context.Context, stateID string) (zond.Slot, error)
 }
 
 // SlotDurationProvider is the interface for providing the duration of each slot of a chain.
@@ -73,7 +73,7 @@ type SlotsPerEpochProvider interface {
 // FarFutureEpochProvider is the interface for providing the far future epoch of a chain.
 type FarFutureEpochProvider interface {
 	// FarFutureEpoch provides the far future epoch of the chain.
-	FarFutureEpoch(ctx context.Context) (capella.Epoch, error)
+	FarFutureEpoch(ctx context.Context) (zond.Epoch, error)
 }
 
 // TargetAggregatorsPerCommitteeProvider is the interface for providing the target number of
@@ -88,13 +88,13 @@ type TargetAggregatorsPerCommitteeProvider interface {
 // ValidatorIndexProvider is the interface for entities that can provide the index of a validator.
 type ValidatorIndexProvider interface {
 	// Index provides the index of the validator.
-	Index(ctx context.Context) (capella.ValidatorIndex, error)
+	Index(ctx context.Context) (zond.ValidatorIndex, error)
 }
 
 // ValidatorPubKeyProvider is the interface for entities that can provide the public key of a validator.
 type ValidatorPubKeyProvider interface {
 	// PubKey provides the public key of the validator.
-	PubKey(ctx context.Context) (capella.MLDSA87PubKey, error)
+	PubKey(ctx context.Context) (zond.MLDSA87PubKey, error)
 }
 
 // ValidatorIDProvider is the interface that provides the identifiers (pubkey, index) of a validator.
@@ -162,7 +162,7 @@ type AttestationDataProvider interface {
 	AttestationData(ctx context.Context,
 		opts *api.AttestationDataOpts,
 	) (
-		*api.Response[*capella.AttestationData],
+		*api.Response[*zond.AttestationData],
 		error,
 	)
 }
@@ -198,7 +198,7 @@ type AttestationsSubmitter interface {
 // AttesterSlashingSubmitter is the interface for submitting attester slashings.
 type AttesterSlashingSubmitter interface {
 	// SubmitAttesterSlashing submits an attester slashing
-	SubmitAttesterSlashing(ctx context.Context, slashing *capella.AttesterSlashing) error
+	SubmitAttesterSlashing(ctx context.Context, slashing *zond.AttesterSlashing) error
 }
 
 // AttesterDutiesProvider is the interface for providing attester duties.
@@ -249,7 +249,7 @@ type SyncCommitteeDutiesProvider interface {
 // SyncCommitteeMessagesSubmitter is the interface for submitting sync committee messages.
 type SyncCommitteeMessagesSubmitter interface {
 	// SubmitSyncCommitteeMessages submits sync committee messages.
-	SubmitSyncCommitteeMessages(ctx context.Context, messages []*capella.SyncCommitteeMessage) error
+	SubmitSyncCommitteeMessages(ctx context.Context, messages []*zond.SyncCommitteeMessage) error
 }
 
 // SyncCommitteeSubscriptionsSubmitter is the interface for submitting sync committee subnet subscription requests.
@@ -264,7 +264,7 @@ type SyncCommitteeContributionProvider interface {
 	SyncCommitteeContribution(ctx context.Context,
 		opts *api.SyncCommitteeContributionOpts,
 	) (
-		*api.Response[*capella.SyncCommitteeContribution],
+		*api.Response[*zond.SyncCommitteeContribution],
 		error,
 	)
 }
@@ -272,7 +272,7 @@ type SyncCommitteeContributionProvider interface {
 // SyncCommitteeContributionsSubmitter is the interface for submitting sync committee contributions.
 type SyncCommitteeContributionsSubmitter interface {
 	// SubmitSyncCommitteeContributions submits sync committee contributions.
-	SubmitSyncCommitteeContributions(ctx context.Context, contributionAndProofs []*capella.SignedContributionAndProof) error
+	SubmitSyncCommitteeContributions(ctx context.Context, contributionAndProofs []*zond.SignedContributionAndProof) error
 }
 
 // SyncCommitteeRewardsProvider is the interface for providing sync committee rewards.
@@ -310,7 +310,7 @@ type ProposalProvider interface {
 
 // ProposalSlashingSubmitter is the interface for submitting proposal slashings.
 type ProposalSlashingSubmitter interface {
-	SubmitProposalSlashing(ctx context.Context, slashing *capella.ProposerSlashing) error
+	SubmitProposalSlashing(ctx context.Context, slashing *zond.ProposerSlashing) error
 }
 
 // BeaconBlockRootProvider is the interface for providing beacon block roots.
@@ -319,7 +319,7 @@ type BeaconBlockRootProvider interface {
 	BeaconBlockRoot(ctx context.Context,
 		opts *api.BeaconBlockRootOpts,
 	) (
-		*api.Response[*capella.Root],
+		*api.Response[*zond.Root],
 		error,
 	)
 }
@@ -362,7 +362,7 @@ type BeaconStateRandaoProvider interface {
 	BeaconStateRandao(ctx context.Context,
 		opts *api.BeaconStateRandaoOpts,
 	) (
-		*api.Response[*capella.Root],
+		*api.Response[*zond.Root],
 		error,
 	)
 }
@@ -373,7 +373,7 @@ type BeaconStateRootProvider interface {
 	BeaconStateRoot(ctx context.Context,
 		opts *api.BeaconStateRootOpts,
 	) (
-		*api.Response[*capella.Root],
+		*api.Response[*zond.Root],
 		error,
 	)
 }
@@ -434,7 +434,7 @@ type ForkProvider interface {
 	Fork(ctx context.Context,
 		opts *api.ForkOpts,
 	) (
-		*api.Response[*capella.Fork],
+		*api.Response[*zond.Fork],
 		error,
 	)
 }
@@ -445,7 +445,7 @@ type ForkScheduleProvider interface {
 	ForkSchedule(ctx context.Context,
 		opts *api.ForkScheduleOpts,
 	) (
-		*api.Response[[]*capella.Fork],
+		*api.Response[[]*zond.Fork],
 		error,
 	)
 }
@@ -548,7 +548,7 @@ type ValidatorBalancesProvider interface {
 	ValidatorBalances(ctx context.Context,
 		opts *api.ValidatorBalancesOpts,
 	) (
-		*api.Response[map[capella.ValidatorIndex]capella.Gwei],
+		*api.Response[map[zond.ValidatorIndex]zond.Gwei],
 		error,
 	)
 }
@@ -559,7 +559,7 @@ type ValidatorsProvider interface {
 	Validators(ctx context.Context,
 		opts *api.ValidatorsOpts,
 	) (
-		*api.Response[map[capella.ValidatorIndex]*apiv1.Validator],
+		*api.Response[map[zond.ValidatorIndex]*apiv1.Validator],
 		error,
 	)
 }
@@ -567,7 +567,7 @@ type ValidatorsProvider interface {
 // VoluntaryExitSubmitter is the interface for submitting voluntary exits.
 type VoluntaryExitSubmitter interface {
 	// SubmitVoluntaryExit submits a voluntary exit.
-	SubmitVoluntaryExit(ctx context.Context, voluntaryExit *capella.SignedVoluntaryExit) error
+	SubmitVoluntaryExit(ctx context.Context, voluntaryExit *zond.SignedVoluntaryExit) error
 }
 
 // VoluntaryExitPoolProvider is the interface for providing voluntary exit pools.
@@ -576,7 +576,7 @@ type VoluntaryExitPoolProvider interface {
 	VoluntaryExitPool(ctx context.Context,
 		opts *api.VoluntaryExitPoolOpts,
 	) (
-		*api.Response[[]*capella.SignedVoluntaryExit],
+		*api.Response[[]*zond.SignedVoluntaryExit],
 		error,
 	)
 }
@@ -588,13 +588,13 @@ type VoluntaryExitPoolProvider interface {
 // DomainProvider provides a domain for a given domain type at an epoch.
 type DomainProvider interface {
 	// Domain provides a domain for a given domain type at a given epoch.
-	Domain(ctx context.Context, domainType capella.DomainType, epoch capella.Epoch) (capella.Domain, error)
+	Domain(ctx context.Context, domainType zond.DomainType, epoch zond.Epoch) (zond.Domain, error)
 
 	// GenesisDomain returns the domain for the given domain type at genesis.
 	// N.B. this is not always the same as the domain at epoch 0.  It is possible
 	// for a chain's fork schedule to have multiple forks at genesis.  In this situation,
 	// GenesisDomain() will return the first, and Domain() will return the last.
-	GenesisDomain(ctx context.Context, domainType capella.DomainType) (capella.Domain, error)
+	GenesisDomain(ctx context.Context, domainType zond.DomainType) (zond.Domain, error)
 }
 
 // GenesisTimeProvider is the interface for providing the genesis time of a chain.

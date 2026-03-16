@@ -25,12 +25,12 @@ import (
 	"sync"
 	"time"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/rs/zerolog"
 	zerologger "github.com/rs/zerolog/log"
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 	"golang.org/x/sync/semaphore"
 )
 
@@ -52,7 +52,7 @@ type Service struct {
 	specMutex            sync.RWMutex
 	depositContract      *apiv1.DepositContract
 	depositContractMutex sync.RWMutex
-	forkSchedule         []*capella.Fork
+	forkSchedule         []*zond.Fork
 	forkScheduleMutex    sync.RWMutex
 	nodeVersion          string
 	nodeVersionMutex     sync.RWMutex

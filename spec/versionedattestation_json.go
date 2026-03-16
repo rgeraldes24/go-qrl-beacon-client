@@ -16,8 +16,8 @@ package spec
 import (
 	"encoding/json"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // attestationIdentificationJSON contains fields that allow us to identify the attestation variant.
@@ -34,9 +34,9 @@ func (v *VersionedAttestation) UnmarshalJSON(input []byte) error {
 
 	switch {
 	default:
-		v.Version = DataVersionCapella
-		v.Capella = &capella.Attestation{}
+		v.Version = DataVersionZond
+		v.Zond = &zond.Attestation{}
 
-		return v.Capella.UnmarshalJSON(input)
+		return v.Zond.UnmarshalJSON(input)
 	}
 }

@@ -23,14 +23,13 @@ import (
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // ValidatorBalances provides the validator balances for the given options.
 func (s *Service) ValidatorBalances(ctx context.Context,
 	opts *api.ValidatorBalancesOpts,
 ) (
-	*api.Response[map[capella.ValidatorIndex]capella.Gwei],
+	*api.Response[map[zond.ValidatorIndex]zond.Gwei],
 	error,
 ) {
 	if err := s.assertIsActive(ctx); err != nil {
@@ -78,7 +77,7 @@ func (s *Service) ValidatorBalances(ctx context.Context,
 func (*Service) validatorBalancesFromJSON(_ context.Context,
 	httpResponse *httpResponse,
 ) (
-	*api.Response[map[capella.ValidatorIndex]capella.Gwei],
+	*api.Response[map[zond.ValidatorIndex]zond.Gwei],
 	error,
 ) {
 	data, metadata, err := decodeJSONResponse(bytes.NewReader(httpResponse.body), []*apiv1.ValidatorBalance{})
@@ -86,8 +85,8 @@ func (*Service) validatorBalancesFromJSON(_ context.Context,
 		return nil, err
 	}
 
-	response := &api.Response[map[capella.ValidatorIndex]capella.Gwei]{
-		Data:     make(map[capella.ValidatorIndex]capella.Gwei),
+	response := &api.Response[map[zond.ValidatorIndex]zond.Gwei]{
+		Data:     make(map[zond.ValidatorIndex]zond.Gwei),
 		Metadata: metadata,
 	}
 

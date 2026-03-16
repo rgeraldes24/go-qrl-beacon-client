@@ -21,14 +21,14 @@ import (
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // FinalizedCheckpointEvent is the data for the finalized checkpoint event.
 type FinalizedCheckpointEvent struct {
-	Block capella.Root
-	State capella.Root
-	Epoch capella.Epoch
+	Block zond.Root
+	State zond.Root
+	Epoch zond.Epoch
 }
 
 // finalizedCheckpointEventJSON is the spec representation of the struct.
@@ -95,7 +95,7 @@ func (e *FinalizedCheckpointEvent) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for epoch")
 	}
 
-	e.Epoch = capella.Epoch(epoch)
+	e.Epoch = zond.Epoch(epoch)
 
 	return nil
 }

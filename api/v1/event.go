@@ -17,9 +17,9 @@ import (
 	"encoding/json"
 	"fmt"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/pkg/errors"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // Event is the container for events sent from the API.
@@ -95,7 +95,7 @@ func (e *Event) UnmarshalJSON(input []byte) error {
 	case "attestation":
 		e.Data = &spec.VersionedAttestation{}
 	case "attester_slashing":
-		e.Data = &capella.AttesterSlashing{}
+		e.Data = &zond.AttesterSlashing{}
 	case "block":
 		e.Data = &BlockEvent{}
 	case "block_gossip":
@@ -103,7 +103,7 @@ func (e *Event) UnmarshalJSON(input []byte) error {
 	case "chain_reorg":
 		e.Data = &ChainReorgEvent{}
 	case "contribution_and_proof":
-		e.Data = &capella.SignedContributionAndProof{}
+		e.Data = &zond.SignedContributionAndProof{}
 	case "finalized_checkpoint":
 		e.Data = &FinalizedCheckpointEvent{}
 	case "head":
@@ -111,9 +111,9 @@ func (e *Event) UnmarshalJSON(input []byte) error {
 	case "payload_attributes":
 		e.Data = &PayloadAttributesEvent{}
 	case "proposer_slashing":
-		e.Data = &capella.ProposerSlashing{}
+		e.Data = &zond.ProposerSlashing{}
 	case "voluntary_exit":
-		e.Data = &capella.SignedVoluntaryExit{}
+		e.Data = &zond.SignedVoluntaryExit{}
 	default:
 		return fmt.Errorf("unsupported event topic %s", eventJSON.Topic)
 	}

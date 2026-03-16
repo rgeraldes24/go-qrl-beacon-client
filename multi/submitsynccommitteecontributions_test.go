@@ -22,8 +22,8 @@ import (
 	consensusclient "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/mock"
 	"github.com/theQRL/go-qrl-beacon-client/multi"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 	"github.com/theQRL/go-qrl-beacon-client/testclients"
+	"github.com/theQRL/qrysm/v4/proto/zond/v2"
 )
 
 func TestSubmitSyncCommitteeContributions(t *testing.T) {
@@ -51,7 +51,7 @@ func TestSubmitSyncCommitteeContributions(t *testing.T) {
 	require.NoError(t, err)
 
 	for i := 0; i < 128; i++ {
-		err := multiClient.(consensusclient.SyncCommitteeContributionsSubmitter).SubmitSyncCommitteeContributions(ctx, []*capella.SignedContributionAndProof{})
+		err := multiClient.(consensusclient.SyncCommitteeContributionsSubmitter).SubmitSyncCommitteeContributions(ctx, []*zond.SignedContributionAndProof{})
 		require.NoError(t, err)
 	}
 	// At this point we expect mock 3 to be in active (unless probability hates us).

@@ -19,15 +19,15 @@ import (
 	"strconv"
 
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // SyncState is the data regarding the node's synchronization state to the chain.
 type SyncState struct {
 	// HeadSlot is the head slot of the chain as understood by the node.
-	HeadSlot capella.Slot
+	HeadSlot zond.Slot
 	// SyncDistance is the distance between the node's highest synced slot and the head slot.
-	SyncDistance capella.Slot
+	SyncDistance zond.Slot
 	// IsOptimistic is true if the node is optimistic.
 	IsOptimistic bool
 	// IsSyncing is true if the node is syncing.
@@ -70,7 +70,7 @@ func (s *SyncState) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for head slot")
 	}
 
-	s.HeadSlot = capella.Slot(headSlot)
+	s.HeadSlot = zond.Slot(headSlot)
 
 	if syncStateJSON.SyncDistance == "" {
 		return errors.New("sync distance missing")
@@ -81,7 +81,7 @@ func (s *SyncState) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for sync distance")
 	}
 
-	s.SyncDistance = capella.Slot(syncDistance)
+	s.SyncDistance = zond.Slot(syncDistance)
 	s.IsOptimistic = syncStateJSON.IsOptimistic
 	s.IsSyncing = syncStateJSON.IsSyncing
 

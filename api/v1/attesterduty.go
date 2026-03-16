@@ -21,19 +21,19 @@ import (
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // AttesterDuty is the data regarding which validators have the duty to attest in a slot.
 type AttesterDuty struct {
 	// PubKey is the public key of the validator that should attest.
-	PubKey capella.MLDSA87PubKey
+	PubKey zond.MLDSA87PubKey
 	// Slot is the slot in which the validator should attest.
-	Slot capella.Slot
+	Slot zond.Slot
 	// ValidatorIndex is the index of the validator that should attest.
-	ValidatorIndex capella.ValidatorIndex
+	ValidatorIndex zond.ValidatorIndex
 	// CommitteeIndex is the index of the committee in which the attesting validator has been placed.
-	CommitteeIndex capella.CommitteeIndex
+	CommitteeIndex zond.CommitteeIndex
 	// CommitteeLength is the length of the committee in which the attesting validator has been placed.
 	CommitteeLength uint64
 	// CommitteesAtSlot is the number of committees in the slot.
@@ -99,7 +99,7 @@ func (a *AttesterDuty) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for slot")
 	}
 
-	a.Slot = capella.Slot(slot)
+	a.Slot = zond.Slot(slot)
 
 	if attesterDutyJSON.ValidatorIndex == "" {
 		return errors.New("validator index missing")
@@ -110,7 +110,7 @@ func (a *AttesterDuty) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for validator index")
 	}
 
-	a.ValidatorIndex = capella.ValidatorIndex(validatorIndex)
+	a.ValidatorIndex = zond.ValidatorIndex(validatorIndex)
 
 	if attesterDutyJSON.CommitteeIndex == "" {
 		return errors.New("committee index missing")
@@ -121,7 +121,7 @@ func (a *AttesterDuty) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for committee index")
 	}
 
-	a.CommitteeIndex = capella.CommitteeIndex(committeeIndex)
+	a.CommitteeIndex = zond.CommitteeIndex(committeeIndex)
 
 	if attesterDutyJSON.CommitteeLength == "" {
 		return errors.New("committee length missing")

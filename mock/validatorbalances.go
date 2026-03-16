@@ -17,7 +17,7 @@ import (
 	"context"
 
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // ValidatorBalances provides the validator balances for a given state.
@@ -27,15 +27,15 @@ import (
 func (s *Service) ValidatorBalances(ctx context.Context,
 	opts *api.ValidatorBalancesOpts,
 ) (
-	*api.Response[map[capella.ValidatorIndex]capella.Gwei],
+	*api.Response[map[zond.ValidatorIndex]zond.Gwei],
 	error,
 ) {
 	if s.ValidatorBalancesFunc != nil {
 		return s.ValidatorBalancesFunc(ctx, opts)
 	}
 
-	return &api.Response[map[capella.ValidatorIndex]capella.Gwei]{
-		Data:     map[capella.ValidatorIndex]capella.Gwei{},
+	return &api.Response[map[zond.ValidatorIndex]zond.Gwei]{
+		Data:     map[zond.ValidatorIndex]zond.Gwei{},
 		Metadata: make(map[string]any),
 	}, nil
 }

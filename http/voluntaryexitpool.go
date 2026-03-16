@@ -19,20 +19,20 @@ import (
 	"encoding/json"
 	"errors"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 type voluntaryExitPoolJSON struct {
-	Data []*capella.SignedVoluntaryExit `json:"data"`
+	Data []*zond.SignedVoluntaryExit `json:"data"`
 }
 
 // VoluntaryExitPool obtains the voluntary exit pool.
 func (s *Service) VoluntaryExitPool(ctx context.Context,
 	opts *api.VoluntaryExitPoolOpts,
 ) (
-	*api.Response[[]*capella.SignedVoluntaryExit],
+	*api.Response[[]*zond.SignedVoluntaryExit],
 	error,
 ) {
 	if err := s.assertIsActive(ctx); err != nil {
@@ -60,7 +60,7 @@ func (s *Service) VoluntaryExitPool(ctx context.Context,
 		return nil, errors.New("voluntary exit pool not returned")
 	}
 
-	return &api.Response[[]*capella.SignedVoluntaryExit]{
+	return &api.Response[[]*zond.SignedVoluntaryExit]{
 		Data:     voluntaryExitPoolJSON.Data,
 		Metadata: make(map[string]any),
 	}, nil

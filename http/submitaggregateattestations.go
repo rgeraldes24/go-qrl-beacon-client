@@ -91,8 +91,8 @@ func createUnversionedAggregates(aggregateAndProofs []*spec.VersionedSignedAggre
 
 		// Append to unversionedAggregates.
 		switch aggregateAndProofs[i].Version {
-		case spec.DataVersionCapella:
-			unversionedAggregates = append(unversionedAggregates, aggregateAndProofs[i].Capella)
+		case spec.DataVersionZond:
+			unversionedAggregates = append(unversionedAggregates, aggregateAndProofs[i].Zond)
 		default:
 			return nil, errors.Join(errors.New("unknown aggregate and proof version"), client.ErrInvalidOptions)
 		}

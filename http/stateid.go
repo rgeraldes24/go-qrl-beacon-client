@@ -21,12 +21,11 @@ import (
 	"strings"
 
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // SlotFromStateID parses the state ID and returns the relevant slot.
-func (*Service) SlotFromStateID(_ context.Context, stateID string) (capella.Slot, error) {
-	var slot capella.Slot
+func (*Service) SlotFromStateID(_ context.Context, stateID string) (zond.Slot, error) {
+	var slot zond.Slot
 
 	switch {
 	case stateID == "genesis":
@@ -46,15 +45,15 @@ func (*Service) SlotFromStateID(_ context.Context, stateID string) (capella.Slot
 			return 0, errors.Join(fmt.Errorf("failed to parse state %s as a slot", stateID), err)
 		}
 
-		slot = capella.Slot(tmp)
+		slot = zond.Slot(tmp)
 	}
 
 	return slot, nil
 }
 
 // EpochFromStateID parses the state ID and returns the relevant epoch.
-func (s *Service) EpochFromStateID(ctx context.Context, stateID string) (capella.Epoch, error) {
-	var epoch capella.Epoch
+func (s *Service) EpochFromStateID(ctx context.Context, stateID string) (zond.Epoch, error) {
+	var epoch zond.Epoch
 
 	switch {
 	case stateID == "genesis":
@@ -89,7 +88,7 @@ func (s *Service) EpochFromStateID(ctx context.Context, stateID string) (capella
 			return 0, errors.Join(errors.New("failed to obtain slots per epoch"), err)
 		}
 
-		epoch = capella.Epoch(tmp / slotsPerEpoch)
+		epoch = zond.Epoch(tmp / slotsPerEpoch)
 	}
 
 	return epoch, nil

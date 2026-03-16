@@ -17,25 +17,25 @@ import (
 	"encoding/json"
 	"fmt"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // Finality is the data regarding finality checkpoints at a given state.
 type Finality struct {
 	// Finalized is the finalized checkpoint.
-	Finalized *capella.Checkpoint
+	Finalized *zond.Checkpoint
 	// Justified is the justified checkpoint.
-	Justified *capella.Checkpoint
+	Justified *zond.Checkpoint
 	// PreviousJustified is the previous justified checkpoint.
-	PreviousJustified *capella.Checkpoint
+	PreviousJustified *zond.Checkpoint
 }
 
 // finalityJSON is the spec representation of the struct.
 type finalityJSON struct {
-	Finalized         *capella.Checkpoint `json:"finalized"`
-	Justified         *capella.Checkpoint `json:"current_justified"`
-	PreviousJustified *capella.Checkpoint `json:"previous_justified"`
+	Finalized         *zond.Checkpoint `json:"finalized"`
+	Justified         *zond.Checkpoint `json:"current_justified"`
+	PreviousJustified *zond.Checkpoint `json:"previous_justified"`
 }
 
 // MarshalJSON implements json.Marshaler.

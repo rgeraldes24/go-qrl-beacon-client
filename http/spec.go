@@ -23,7 +23,6 @@ import (
 
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // Spec provides the spec information of the chain.
@@ -82,11 +81,11 @@ func (s *Service) Spec(ctx context.Context,
 
 	// The application mask domain type is not provided by all nodes, so add it here if not present.
 	if _, exists := config["DOMAIN_APPLICATION_MASK"]; !exists {
-		config["DOMAIN_APPLICATION_MASK"] = capella.DomainType{0x00, 0x00, 0x00, 0x01}
+		config["DOMAIN_APPLICATION_MASK"] = zond.DomainType{0x00, 0x00, 0x00, 0x01}
 	}
 	// The builder application domain type is not officially part of the spec, so add it here if not present.
 	if _, exists := config["DOMAIN_APPLICATION_BUILDER"]; !exists {
-		config["DOMAIN_APPLICATION_BUILDER"] = capella.DomainType{0x00, 0x00, 0x00, 0x01}
+		config["DOMAIN_APPLICATION_BUILDER"] = zond.DomainType{0x00, 0x00, 0x00, 0x01}
 	}
 
 	s.spec = config
@@ -139,7 +138,7 @@ func parseSpecString(k, v string) any {
 	if strings.HasPrefix(k, "DOMAIN_") {
 		byteVal, err := hex.DecodeString(strings.TrimPrefix(v, "0x"))
 		if err == nil {
-			var domainType capella.DomainType
+			var domainType zond.DomainType
 			copy(domainType[:], byteVal)
 
 			return domainType
@@ -150,7 +149,7 @@ func parseSpecString(k, v string) any {
 	if strings.HasSuffix(k, "_FORK_VERSION") {
 		byteVal, err := hex.DecodeString(strings.TrimPrefix(v, "0x"))
 		if err == nil {
-			var version capella.Version
+			var version zond.Version
 			copy(version[:], byteVal)
 
 			return version

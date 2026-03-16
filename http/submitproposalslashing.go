@@ -19,12 +19,12 @@ import (
 	"encoding/json"
 	"errors"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // SubmitProposalSlashing submits a proposal slashing.
-func (s *Service) SubmitProposalSlashing(ctx context.Context, slashing *capella.ProposerSlashing) error {
+func (s *Service) SubmitProposalSlashing(ctx context.Context, slashing *zond.ProposerSlashing) error {
 	if err := s.assertIsSynced(ctx); err != nil {
 		return err
 	}

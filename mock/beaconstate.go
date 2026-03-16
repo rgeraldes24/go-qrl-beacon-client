@@ -18,7 +18,7 @@ import (
 
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // BeaconState fetches a beacon state given a state ID.
@@ -33,13 +33,13 @@ func (s *Service) BeaconState(ctx context.Context,
 	}
 
 	data := &spec.VersionedBeaconState{
-		Version: spec.DataVersionCapella,
-		Capella: &capella.BeaconState{
-			LatestBlockHeader:           &capella.BeaconBlockHeader{},
-			ExecutionData:               &capella.ExecutionData{},
-			PreviousJustifiedCheckpoint: &capella.Checkpoint{},
-			CurrentJustifiedCheckpoint:  &capella.Checkpoint{},
-			FinalizedCheckpoint:         &capella.Checkpoint{},
+		Version: spec.DataVersionZond,
+		Zond: &zond.BeaconState{
+			LatestBlockHeader:           &zond.BeaconBlockHeader{},
+			ExecutionData:               &zond.ExecutionData{},
+			PreviousJustifiedCheckpoint: &zond.Checkpoint{},
+			CurrentJustifiedCheckpoint:  &zond.Checkpoint{},
+			FinalizedCheckpoint:         &zond.Checkpoint{},
 		},
 	}
 

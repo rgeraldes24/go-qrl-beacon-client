@@ -19,17 +19,17 @@ import (
 	"strconv"
 
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // BlockRewards are the rewards for proposing a block.
 type BlockRewards struct {
-	ProposerIndex     capella.ValidatorIndex
-	Total             capella.Gwei
-	Attestations      capella.Gwei
-	SyncAggregate     capella.Gwei
-	ProposerSlashings capella.Gwei
-	AttesterSlashings capella.Gwei
+	ProposerIndex     zond.ValidatorIndex
+	Total             zond.Gwei
+	Attestations      zond.Gwei
+	SyncAggregate     zond.Gwei
+	ProposerSlashings zond.Gwei
+	AttesterSlashings zond.Gwei
 }
 
 // blockRewardsJSON is the spec representation of the struct.
@@ -72,7 +72,7 @@ func (b *BlockRewards) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for proposer index")
 	}
 
-	b.ProposerIndex = capella.ValidatorIndex(proposerIndex)
+	b.ProposerIndex = zond.ValidatorIndex(proposerIndex)
 
 	if data.Total == "" {
 		return errors.New("total missing")
@@ -83,7 +83,7 @@ func (b *BlockRewards) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for total")
 	}
 
-	b.Total = capella.Gwei(total)
+	b.Total = zond.Gwei(total)
 
 	if data.Attestations == "" {
 		return errors.New("attestations missing")
@@ -94,7 +94,7 @@ func (b *BlockRewards) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for attestations")
 	}
 
-	b.Attestations = capella.Gwei(attestations)
+	b.Attestations = zond.Gwei(attestations)
 
 	if data.SyncAggregate == "" {
 		return errors.New("sync aggregate missing")
@@ -105,7 +105,7 @@ func (b *BlockRewards) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for sync aggregate")
 	}
 
-	b.SyncAggregate = capella.Gwei(syncAggregate)
+	b.SyncAggregate = zond.Gwei(syncAggregate)
 
 	if data.ProposerSlashings == "" {
 		return errors.New("proposer slashings missing")
@@ -116,7 +116,7 @@ func (b *BlockRewards) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for proposer slashings")
 	}
 
-	b.ProposerSlashings = capella.Gwei(proposerSlashings)
+	b.ProposerSlashings = zond.Gwei(proposerSlashings)
 
 	if data.AttesterSlashings == "" {
 		return errors.New("attester slashings missing")
@@ -127,7 +127,7 @@ func (b *BlockRewards) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for attester slashings")
 	}
 
-	b.AttesterSlashings = capella.Gwei(attesterSlashings)
+	b.AttesterSlashings = zond.Gwei(attesterSlashings)
 
 	return nil
 }

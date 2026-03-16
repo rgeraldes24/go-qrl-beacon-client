@@ -16,7 +16,7 @@ package mock
 import (
 	"context"
 
-	spec "github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	spec "github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // AggregateAndProofDomain provides the aggregate and proof domain.

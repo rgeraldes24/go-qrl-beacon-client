@@ -25,11 +25,11 @@ import (
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/http"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
-func slotptr(slot uint64) *capella.Slot {
-	res := capella.Slot(slot)
+func slotptr(slot uint64) *zond.Slot {
+	res := zond.Slot(slot)
 	return &res
 }
 

@@ -21,7 +21,6 @@ import (
 	"time"
 
 	"github.com/rs/zerolog"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // timeout for tests.
@@ -36,48 +35,48 @@ func TestMain(m *testing.M) {
 }
 
 // mustParseRoot is used for testing.
-func mustParseRoot(input string) *capella.Root {
+func mustParseRoot(input string) *zond.Root {
 	root, err := hex.DecodeString(strings.TrimPrefix(input, "0x"))
 	if err != nil {
 		panic("invalid root")
 	}
-	if len(root) != capella.RootLength {
+	if len(root) != zond.RootLength {
 		panic("invalid length root")
 	}
 
-	var res capella.Root
+	var res zond.Root
 	copy(res[:], root)
 
 	return &res
 }
 
 // mustParseSignature is used for testing.
-func mustParseSignature(input string) *capella.MLDSA87Signature {
+func mustParseSignature(input string) *zond.MLDSA87Signature {
 	sig, err := hex.DecodeString(strings.TrimPrefix(input, "0x"))
 	if err != nil {
 		panic("invalid signature")
 	}
-	if len(sig) != capella.SignatureLength {
+	if len(sig) != zond.SignatureLength {
 		panic("invalid length signature")
 	}
 
-	var res capella.MLDSA87Signature
+	var res zond.MLDSA87Signature
 	copy(res[:], sig)
 
 	return &res
 }
 
 // mustParsePubKey is used for testing.
-func mustParsePubKey(input string) *capella.MLDSA87PubKey {
+func mustParsePubKey(input string) *zond.MLDSA87PubKey {
 	pubKey, err := hex.DecodeString(strings.TrimPrefix(input, "0x"))
 	if err != nil {
 		panic("invalid public key")
 	}
-	if len(pubKey) != capella.PublicKeyLength {
+	if len(pubKey) != zond.PublicKeyLength {
 		panic("invalid length public key")
 	}
 
-	var res capella.MLDSA87PubKey
+	var res zond.MLDSA87PubKey
 	copy(res[:], pubKey)
 
 	return &res

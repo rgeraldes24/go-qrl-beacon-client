@@ -22,7 +22,6 @@ import (
 	"github.com/stretchr/testify/require"
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/http"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 func TestDomain(t *testing.T) {
@@ -31,8 +30,8 @@ func TestDomain(t *testing.T) {
 
 	tests := []struct {
 		name   string
-		epoch  capella.Epoch
-		domain capella.DomainType
+		epoch  zond.Epoch
+		domain zond.DomainType
 	}{
 		{
 			name:   "Good",

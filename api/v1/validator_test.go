@@ -85,7 +85,7 @@ func TestValidatorJSON(t *testing.T) {
 		{
 			name:  "ValidatorWrongType",
 			input: []byte(`{"index":"1","balance":"32000000000","status":"active_ongoing","validator":true}`),
-			err:   "invalid JSON: invalid JSON: json: cannot unmarshal bool into Go value of type capella.validatorJSON",
+			err:   "invalid JSON: invalid JSON: json: cannot unmarshal bool into Go value of type zond.validatorJSON",
 		},
 		{
 			name:  "ValidatorInvalid",

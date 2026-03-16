@@ -21,15 +21,15 @@ import (
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // ForkChoice is the data regarding the node's current fork choice context.
 type ForkChoice struct {
 	// JustifiedCheckpoint is the current justified checkpoint.
-	JustifiedCheckpoint capella.Checkpoint
+	JustifiedCheckpoint zond.Checkpoint
 	// FInalizedCheckpoint is the current finalized checkpoint.
-	FinalizedCheckpoint capella.Checkpoint
+	FinalizedCheckpoint zond.Checkpoint
 	// ForkChoiceNodes contains the fork choice nodes.
 	ForkChoiceNodes []*ForkChoiceNode
 }
@@ -91,9 +91,9 @@ func (f *ForkChoice) String() string {
 
 // forkChoiceJSON is the json representation of the struct.
 type forkChoiceJSON struct {
-	JustifiedCheckpoint *capella.Checkpoint `json:"justified_checkpoint"`
-	FinalizedCheckpoint *capella.Checkpoint `json:"finalized_checkpoint"`
-	ForkChoiceNodes     []*ForkChoiceNode   `json:"fork_choice_nodes"`
+	JustifiedCheckpoint *zond.Checkpoint  `json:"justified_checkpoint"`
+	FinalizedCheckpoint *zond.Checkpoint  `json:"finalized_checkpoint"`
+	ForkChoiceNodes     []*ForkChoiceNode `json:"fork_choice_nodes"`
 }
 
 // ForkChoiceNodeValidity represents the validity of a fork choice node.
@@ -161,21 +161,21 @@ func (d ForkChoiceNodeValidity) String() string {
 // ForkChoiceNode is a node in the fork choice tree.
 type ForkChoiceNode struct {
 	// Slot is the slot of the node.
-	Slot capella.Slot
+	Slot zond.Slot
 	// BlockRoot is the block root of the node.
-	BlockRoot capella.Root
+	BlockRoot zond.Root
 	// ParentRoot is the parent root of the node.
-	ParentRoot capella.Root
+	ParentRoot zond.Root
 	// JustifiedEpcoh is the justified epoch of the node.
-	JustifiedEpoch capella.Epoch
+	JustifiedEpoch zond.Epoch
 	// FinalizedEpoch is the finalized epoch of the node.
-	FinalizedEpoch capella.Epoch
+	FinalizedEpoch zond.Epoch
 	// Weight is the weight of the node.
 	Weight uint64
 	// Validity is the validity of the node.
 	Validity ForkChoiceNodeValidity
 	// ExecutionBlockHash is the execution block hash of the node.
-	ExecutionBlockHash capella.Root
+	ExecutionBlockHash zond.Root
 	// ExtraData is the extra data of the node.
 	ExtraData map[string]any
 }
@@ -222,7 +222,7 @@ func (f *ForkChoiceNode) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, fmt.Sprintf("invalid value for slot: %s", forkChoiceNodeJSON.Slot))
 	}
 
-	f.Slot = capella.Slot(slot)
+	f.Slot = zond.Slot(slot)
 
 	blockRoot, err := hex.DecodeString(strings.TrimPrefix(forkChoiceNodeJSON.BlockRoot, "0x"))
 	if err != nil {
@@ -247,14 +247,14 @@ func (f *ForkChoiceNode) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, fmt.Sprintf("invalid value for justified epoch: %s", forkChoiceNodeJSON.JustifiedEpoch))
 	}
 
-	f.JustifiedEpoch = capella.Epoch(justifiedEpoch)
+	f.JustifiedEpoch = zond.Epoch(justifiedEpoch)
 
 	finalizedEpoch, err := strconv.ParseUint(forkChoiceNodeJSON.FinalizedEpoch, 10, 64)
 	if err != nil {
 		return errors.Wrap(err, fmt.Sprintf("invalid value for finalized epoch: %s", forkChoiceNodeJSON.FinalizedEpoch))
 	}
 
-	f.FinalizedEpoch = capella.Epoch(finalizedEpoch)
+	f.FinalizedEpoch = zond.Epoch(finalizedEpoch)
 
 	weight, err := strconv.ParseUint(forkChoiceNodeJSON.Weight, 10, 64)
 	if err != nil {

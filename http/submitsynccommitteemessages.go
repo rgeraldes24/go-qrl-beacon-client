@@ -20,11 +20,11 @@ import (
 	"errors"
 
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/qrysm/v4/proto/zond/v2"
 )
 
 // SubmitSyncCommitteeMessages submits sync committee messages.
-func (s *Service) SubmitSyncCommitteeMessages(ctx context.Context, messages []*capella.SyncCommitteeMessage) error {
+func (s *Service) SubmitSyncCommitteeMessages(ctx context.Context, messages []*zond.SyncCommitteeMessage) error {
 	if err := s.assertIsSynced(ctx); err != nil {
 		return err
 	}

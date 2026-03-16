@@ -13,25 +13,23 @@
 
 package spec
 
-import (
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
-)
+import zond "github.com/theQRL/qrysm/v4/proto/prysm/v1alpha1"
 
 // VersionedBeaconBlockBody contains a versioned beacon block body.
 type VersionedBeaconBlockBody struct {
 	Version DataVersion
-	Capella *capella.BeaconBlockBody
+	Zond    *zond.BeaconBlockBody
 }
 
 // String returns a string version of the structure.
 func (v *VersionedBeaconBlockBody) String() string {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
+	case DataVersionZond:
+		if v.Zond == nil {
 			return ""
 		}
 
-		return v.Capella.String()
+		return v.Zond.String()
 	default:
 		return "unknown version"
 	}

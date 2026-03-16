@@ -21,15 +21,15 @@ import (
 
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 type beaconStateRandaoJSON struct {
-	Randao capella.Root `json:"randao"`
+	Randao zond.Root `json:"randao"`
 }
 
 // BeaconStateRandao fetches the beacon state RANDAO given a set of options.
-func (s *Service) BeaconStateRandao(ctx context.Context, opts *api.BeaconStateRandaoOpts) (*api.Response[*capella.Root], error) {
+func (s *Service) BeaconStateRandao(ctx context.Context, opts *api.BeaconStateRandaoOpts) (*api.Response[*zond.Root], error) {
 	if err := s.assertIsActive(ctx); err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ func (s *Service) BeaconStateRandao(ctx context.Context, opts *api.BeaconStateRa
 		return nil, err
 	}
 
-	return &api.Response[*capella.Root]{
+	return &api.Response[*zond.Root]{
 		Data:     &data.Randao,
 		Metadata: metadata,
 	}, nil

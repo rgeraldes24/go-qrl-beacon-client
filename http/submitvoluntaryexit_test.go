@@ -21,7 +21,6 @@ import (
 	"github.com/stretchr/testify/require"
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/http"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 func TestSubmitVoluntaryExit(t *testing.T) {
@@ -30,16 +29,16 @@ func TestSubmitVoluntaryExit(t *testing.T) {
 
 	tests := []struct {
 		name string
-		exit *capella.SignedVoluntaryExit
+		exit *zond.SignedVoluntaryExit
 	}{
 		{
 			name: "InvalidSignature",
-			exit: &capella.SignedVoluntaryExit{
-				Message: &capella.VoluntaryExit{
+			exit: &zond.SignedVoluntaryExit{
+				Message: &zond.VoluntaryExit{
 					ValidatorIndex: 12345,
 					Epoch:          2,
 				},
-				Signature: capella.MLDSA87Signature{},
+				Signature: zond.MLDSA87Signature{},
 			},
 		},
 	}

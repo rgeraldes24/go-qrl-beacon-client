@@ -15,62 +15,61 @@ package api
 
 import (
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // VersionedBlockRequest contains a versioned signed beacon block request.
 type VersionedBlockRequest struct {
 	Version spec.DataVersion
-	Capella *capella.SignedBeaconBlock
+	Zond    *zond.SignedBeaconBlock
 }
 
 // Slot returns the slot of the signed beacon block.
-func (v *VersionedBlockRequest) Slot() (capella.Slot, error) {
+func (v *VersionedBlockRequest) Slot() (zond.Slot, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil ||
-			v.Capella.Message == nil {
+	case spec.DataVersionZond:
+		if v.Zond == nil ||
+			v.Zond.Message == nil {
 			return 0, ErrDataMissing
 		}
 
-		return v.Capella.Message.Slot, nil
+		return v.Zond.Message.Slot, nil
 	default:
 		return 0, ErrUnsupportedVersion
 	}
 }
 
 // ExecutionBlockHash returns the block hash of the beacon block.
-func (v *VersionedBlockRequest) ExecutionBlockHash() (capella.Hash32, error) {
+func (v *VersionedBlockRequest) ExecutionBlockHash() (zond.Hash32, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil ||
-			v.Capella.Message == nil ||
-			v.Capella.Message.Body == nil ||
-			v.Capella.Message.Body.ExecutionPayload == nil {
-			return capella.Hash32{}, ErrDataMissing
+	case spec.DataVersionZond:
+		if v.Zond == nil ||
+			v.Zond.Message == nil ||
+			v.Zond.Message.Body == nil ||
+			v.Zond.Message.Body.ExecutionPayload == nil {
+			return zond.Hash32{}, ErrDataMissing
 		}
 
-		return v.Capella.Message.Body.ExecutionPayload.BlockHash, nil
+		return v.Zond.Message.Body.ExecutionPayload.BlockHash, nil
 	default:
-		return capella.Hash32{}, ErrUnsupportedVersion
+		return zond.Hash32{}, ErrUnsupportedVersion
 	}
 }
 
 // Attestations returns the attestations of the beacon block.
 func (v *VersionedBlockRequest) Attestations() ([]spec.VersionedAttestation, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil ||
-			v.Capella.Message == nil ||
-			v.Capella.Message.Body == nil {
+	case spec.DataVersionZond:
+		if v.Zond == nil ||
+			v.Zond.Message == nil ||
+			v.Zond.Message.Body == nil {
 			return nil, ErrDataMissing
 		}
 
-		versionedAttestations := make([]spec.VersionedAttestation, len(v.Capella.Message.Body.Attestations))
-		for i, attestation := range v.Capella.Message.Body.Attestations {
+		versionedAttestations := make([]spec.VersionedAttestation, len(v.Zond.Message.Body.Attestations))
+		for i, attestation := range v.Zond.Message.Body.Attestations {
 			versionedAttestations[i] = spec.VersionedAttestation{
-				Version: spec.DataVersionCapella,
-				Capella: attestation,
+				Version: spec.DataVersionZond,
+				Zond:    attestation,
 			}
 		}
 
@@ -81,81 +80,81 @@ func (v *VersionedBlockRequest) Attestations() ([]spec.VersionedAttestation, err
 }
 
 // Root returns the root of the beacon block.
-func (v *VersionedBlockRequest) Root() (capella.Root, error) {
+func (v *VersionedBlockRequest) Root() (zond.Root, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil ||
-			v.Capella.Message == nil {
-			return capella.Root{}, ErrDataMissing
+	case spec.DataVersionZond:
+		if v.Zond == nil ||
+			v.Zond.Message == nil {
+			return zond.Root{}, ErrDataMissing
 		}
 
-		return v.Capella.Message.HashTreeRoot()
+		return v.Zond.Message.HashTreeRoot()
 	default:
-		return capella.Root{}, ErrUnsupportedVersion
+		return zond.Root{}, ErrUnsupportedVersion
 	}
 }
 
 // BodyRoot returns the body root of the beacon block.
-func (v *VersionedBlockRequest) BodyRoot() (capella.Root, error) {
+func (v *VersionedBlockRequest) BodyRoot() (zond.Root, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil ||
-			v.Capella.Message == nil ||
-			v.Capella.Message.Body == nil {
-			return capella.Root{}, ErrDataMissing
+	case spec.DataVersionZond:
+		if v.Zond == nil ||
+			v.Zond.Message == nil ||
+			v.Zond.Message.Body == nil {
+			return zond.Root{}, ErrDataMissing
 		}
 
-		return v.Capella.Message.Body.HashTreeRoot()
+		return v.Zond.Message.Body.HashTreeRoot()
 	default:
-		return capella.Root{}, ErrUnsupportedVersion
+		return zond.Root{}, ErrUnsupportedVersion
 	}
 }
 
 // ParentRoot returns the parent root of the beacon block.
-func (v *VersionedBlockRequest) ParentRoot() (capella.Root, error) {
+func (v *VersionedBlockRequest) ParentRoot() (zond.Root, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil ||
-			v.Capella.Message == nil {
-			return capella.Root{}, ErrDataMissing
+	case spec.DataVersionZond:
+		if v.Zond == nil ||
+			v.Zond.Message == nil {
+			return zond.Root{}, ErrDataMissing
 		}
 
-		return v.Capella.Message.ParentRoot, nil
+		return v.Zond.Message.ParentRoot, nil
 	default:
-		return capella.Root{}, ErrUnsupportedVersion
+		return zond.Root{}, ErrUnsupportedVersion
 	}
 }
 
 // StateRoot returns the state root of the beacon block.
-func (v *VersionedBlockRequest) StateRoot() (capella.Root, error) {
+func (v *VersionedBlockRequest) StateRoot() (zond.Root, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil ||
-			v.Capella.Message == nil {
-			return capella.Root{}, ErrDataMissing
+	case spec.DataVersionZond:
+		if v.Zond == nil ||
+			v.Zond.Message == nil {
+			return zond.Root{}, ErrDataMissing
 		}
 
-		return v.Capella.Message.StateRoot, nil
+		return v.Zond.Message.StateRoot, nil
 	default:
-		return capella.Root{}, ErrUnsupportedVersion
+		return zond.Root{}, ErrUnsupportedVersion
 	}
 }
 
 // AttesterSlashings returns the attester slashings of the beacon block.
 func (v *VersionedBlockRequest) AttesterSlashings() ([]spec.VersionedAttesterSlashing, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil ||
-			v.Capella.Message == nil ||
-			v.Capella.Message.Body == nil {
+	case spec.DataVersionZond:
+		if v.Zond == nil ||
+			v.Zond.Message == nil ||
+			v.Zond.Message.Body == nil {
 			return nil, ErrDataMissing
 		}
 
-		versionedAttesterSlashings := make([]spec.VersionedAttesterSlashing, len(v.Capella.Message.Body.AttesterSlashings))
-		for i, attesterSlashing := range v.Capella.Message.Body.AttesterSlashings {
+		versionedAttesterSlashings := make([]spec.VersionedAttesterSlashing, len(v.Zond.Message.Body.AttesterSlashings))
+		for i, attesterSlashing := range v.Zond.Message.Body.AttesterSlashings {
 			versionedAttesterSlashings[i] = spec.VersionedAttesterSlashing{
-				Version: spec.DataVersionCapella,
-				Capella: attesterSlashing,
+				Version: spec.DataVersionZond,
+				Zond:    attesterSlashing,
 			}
 		}
 
@@ -166,32 +165,32 @@ func (v *VersionedBlockRequest) AttesterSlashings() ([]spec.VersionedAttesterSla
 }
 
 // ProposerSlashings returns the proposer slashings of the beacon block.
-func (v *VersionedBlockRequest) ProposerSlashings() ([]*capella.ProposerSlashing, error) {
+func (v *VersionedBlockRequest) ProposerSlashings() ([]*zond.ProposerSlashing, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil ||
-			v.Capella.Message == nil ||
-			v.Capella.Message.Body == nil {
+	case spec.DataVersionZond:
+		if v.Zond == nil ||
+			v.Zond.Message == nil ||
+			v.Zond.Message.Body == nil {
 			return nil, ErrDataMissing
 		}
 
-		return v.Capella.Message.Body.ProposerSlashings, nil
+		return v.Zond.Message.Body.ProposerSlashings, nil
 	default:
 		return nil, ErrUnsupportedVersion
 	}
 }
 
 // SyncAggregate returns the sync aggregate of the beacon block.
-func (v *VersionedBlockRequest) SyncAggregate() (*capella.SyncAggregate, error) {
+func (v *VersionedBlockRequest) SyncAggregate() (*zond.SyncAggregate, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil ||
-			v.Capella.Message == nil ||
-			v.Capella.Message.Body == nil {
+	case spec.DataVersionZond:
+		if v.Zond == nil ||
+			v.Zond.Message == nil ||
+			v.Zond.Message.Body == nil {
 			return nil, ErrDataMissing
 		}
 
-		return v.Capella.Message.Body.SyncAggregate, nil
+		return v.Zond.Message.Body.SyncAggregate, nil
 	default:
 		return nil, ErrUnsupportedVersion
 	}
@@ -200,12 +199,12 @@ func (v *VersionedBlockRequest) SyncAggregate() (*capella.SyncAggregate, error) 
 // String returns a string version of the structure.
 func (v *VersionedBlockRequest) String() string {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil {
+	case spec.DataVersionZond:
+		if v.Zond == nil {
 			return ""
 		}
 
-		return v.Capella.String()
+		return v.Zond.String()
 	default:
 		return "unsupported version"
 	}

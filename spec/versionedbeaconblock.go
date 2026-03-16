@@ -16,157 +16,157 @@ package spec
 import (
 	"errors"
 
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // VersionedBeaconBlock contains a versioned beacon block.
 type VersionedBeaconBlock struct {
 	Version DataVersion
-	Capella *capella.BeaconBlock
+	Zond    *zond.BeaconBlock
 }
 
 // IsEmpty returns true if there is no block.
 func (v *VersionedBeaconBlock) IsEmpty() bool {
-	return v.Capella == nil
+	return v.Zond == nil
 }
 
 // Slot returns the slot of the beacon block.
-func (v *VersionedBeaconBlock) Slot() (capella.Slot, error) {
+func (v *VersionedBeaconBlock) Slot() (zond.Slot, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return 0, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return 0, errors.New("no zond block")
 		}
 
-		return v.Capella.Slot, nil
+		return v.Zond.Slot, nil
 	default:
 		return 0, errors.New("unknown version")
 	}
 }
 
 // RandaoReveal returns the RANDAO reveal of the beacon block.
-func (v *VersionedBeaconBlock) RandaoReveal() (capella.MLDSA87Signature, error) {
+func (v *VersionedBeaconBlock) RandaoReveal() (zond.MLDSA87Signature, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return capella.MLDSA87Signature{}, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return zond.MLDSA87Signature{}, errors.New("no zond block")
 		}
 
-		if v.Capella.Body == nil {
-			return capella.MLDSA87Signature{}, errors.New("no capella block body")
+		if v.Zond.Body == nil {
+			return zond.MLDSA87Signature{}, errors.New("no zond block body")
 		}
 
-		return v.Capella.Body.RANDAOReveal, nil
+		return v.Zond.Body.RANDAOReveal, nil
 	default:
-		return capella.MLDSA87Signature{}, errors.New("unknown version")
+		return zond.MLDSA87Signature{}, errors.New("unknown version")
 	}
 }
 
 // Graffiti returns the graffiti of the beacon block.
 func (v *VersionedBeaconBlock) Graffiti() ([32]byte, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return [32]byte{}, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return [32]byte{}, errors.New("no zond block")
 		}
 
-		if v.Capella.Body == nil {
-			return [32]byte{}, errors.New("no capella block body")
+		if v.Zond.Body == nil {
+			return [32]byte{}, errors.New("no zond block body")
 		}
 
-		return v.Capella.Body.Graffiti, nil
+		return v.Zond.Body.Graffiti, nil
 	default:
 		return [32]byte{}, errors.New("unknown version")
 	}
 }
 
 // ProposerIndex returns the proposer index of the beacon block.
-func (v *VersionedBeaconBlock) ProposerIndex() (capella.ValidatorIndex, error) {
+func (v *VersionedBeaconBlock) ProposerIndex() (zond.ValidatorIndex, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return 0, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return 0, errors.New("no zond block")
 		}
 
-		return v.Capella.ProposerIndex, nil
+		return v.Zond.ProposerIndex, nil
 	default:
 		return 0, errors.New("unknown version")
 	}
 }
 
 // Root returns the root of the beacon block.
-func (v *VersionedBeaconBlock) Root() (capella.Root, error) {
+func (v *VersionedBeaconBlock) Root() (zond.Root, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return capella.Root{}, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return zond.Root{}, errors.New("no zond block")
 		}
 
-		return v.Capella.HashTreeRoot()
+		return v.Zond.HashTreeRoot()
 	default:
-		return capella.Root{}, errors.New("unknown version")
+		return zond.Root{}, errors.New("unknown version")
 	}
 }
 
 // BodyRoot returns the body root of the beacon block.
-func (v *VersionedBeaconBlock) BodyRoot() (capella.Root, error) {
+func (v *VersionedBeaconBlock) BodyRoot() (zond.Root, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return capella.Root{}, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return zond.Root{}, errors.New("no zond block")
 		}
 
-		if v.Capella.Body == nil {
-			return capella.Root{}, errors.New("no capella block body")
+		if v.Zond.Body == nil {
+			return zond.Root{}, errors.New("no zond block body")
 		}
 
-		return v.Capella.Body.HashTreeRoot()
+		return v.Zond.Body.HashTreeRoot()
 	default:
-		return capella.Root{}, errors.New("unknown version")
+		return zond.Root{}, errors.New("unknown version")
 	}
 }
 
 // ParentRoot returns the parent root of the beacon block.
-func (v *VersionedBeaconBlock) ParentRoot() (capella.Root, error) {
+func (v *VersionedBeaconBlock) ParentRoot() (zond.Root, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return capella.Root{}, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return zond.Root{}, errors.New("no zond block")
 		}
 
-		return v.Capella.ParentRoot, nil
+		return v.Zond.ParentRoot, nil
 	default:
-		return capella.Root{}, errors.New("unknown version")
+		return zond.Root{}, errors.New("unknown version")
 	}
 }
 
 // StateRoot returns the state root of the beacon block.
-func (v *VersionedBeaconBlock) StateRoot() (capella.Root, error) {
+func (v *VersionedBeaconBlock) StateRoot() (zond.Root, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return capella.Root{}, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return zond.Root{}, errors.New("no zond block")
 		}
 
-		return v.Capella.StateRoot, nil
+		return v.Zond.StateRoot, nil
 	default:
-		return capella.Root{}, errors.New("unknown version")
+		return zond.Root{}, errors.New("unknown version")
 	}
 }
 
 // Attestations returns the attestations of the beacon block.
 func (v *VersionedBeaconBlock) Attestations() ([]VersionedAttestation, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil || v.Capella.Body == nil {
-			return nil, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil || v.Zond.Body == nil {
+			return nil, errors.New("no zond block")
 		}
 
-		versionedAttestations := make([]VersionedAttestation, len(v.Capella.Body.Attestations))
-		for i, attestation := range v.Capella.Body.Attestations {
+		versionedAttestations := make([]VersionedAttestation, len(v.Zond.Body.Attestations))
+		for i, attestation := range v.Zond.Body.Attestations {
 			versionedAttestations[i] = VersionedAttestation{
-				Version: DataVersionCapella,
-				Capella: attestation,
+				Version: DataVersionZond,
+				Zond:    attestation,
 			}
 		}
 
@@ -179,16 +179,16 @@ func (v *VersionedBeaconBlock) Attestations() ([]VersionedAttestation, error) {
 // AttesterSlashings returns the attester slashings of the beacon block.
 func (v *VersionedBeaconBlock) AttesterSlashings() ([]VersionedAttesterSlashing, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil || v.Capella.Body == nil {
-			return nil, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil || v.Zond.Body == nil {
+			return nil, errors.New("no zond block")
 		}
 
-		versionedAttesterSlashings := make([]VersionedAttesterSlashing, len(v.Capella.Body.AttesterSlashings))
-		for i, attesterSlashing := range v.Capella.Body.AttesterSlashings {
+		versionedAttesterSlashings := make([]VersionedAttesterSlashing, len(v.Zond.Body.AttesterSlashings))
+		for i, attesterSlashing := range v.Zond.Body.AttesterSlashings {
 			versionedAttesterSlashings[i] = VersionedAttesterSlashing{
-				Version: DataVersionCapella,
-				Capella: attesterSlashing,
+				Version: DataVersionZond,
+				Zond:    attesterSlashing,
 			}
 		}
 
@@ -199,14 +199,14 @@ func (v *VersionedBeaconBlock) AttesterSlashings() ([]VersionedAttesterSlashing,
 }
 
 // ProposerSlashings returns the proposer slashings of the beacon block.
-func (v *VersionedBeaconBlock) ProposerSlashings() ([]*capella.ProposerSlashing, error) {
+func (v *VersionedBeaconBlock) ProposerSlashings() ([]*zond.ProposerSlashing, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil || v.Capella.Body == nil {
-			return nil, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil || v.Zond.Body == nil {
+			return nil, errors.New("no zond block")
 		}
 
-		return v.Capella.Body.ProposerSlashings, nil
+		return v.Zond.Body.ProposerSlashings, nil
 	default:
 		return nil, errors.New("unknown version")
 	}
@@ -219,12 +219,12 @@ func (v *VersionedBeaconBlock) ExecutionPayload() (*VersionedExecutionPayload, e
 	}
 
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil || v.Capella.Body == nil {
-			return nil, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil || v.Zond.Body == nil {
+			return nil, errors.New("no zond block")
 		}
 
-		versionedExecutionPayload.Capella = v.Capella.Body.ExecutionPayload
+		versionedExecutionPayload.Zond = v.Zond.Body.ExecutionPayload
 	default:
 		return nil, errors.New("unknown version")
 	}
@@ -235,12 +235,12 @@ func (v *VersionedBeaconBlock) ExecutionPayload() (*VersionedExecutionPayload, e
 // String returns a string version of the structure.
 func (v *VersionedBeaconBlock) String() string {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
+	case DataVersionZond:
+		if v.Zond == nil {
 			return ""
 		}
 
-		return v.Capella.String()
+		return v.Zond.String()
 	default:
 		return "unknown version"
 	}

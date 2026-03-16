@@ -20,24 +20,24 @@ import (
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // BeaconBlockHeader is the data providing information about beacon blocks.
 type BeaconBlockHeader struct {
 	// Root is the root of the beacon block.
-	Root capella.Root
+	Root zond.Root
 	// Canonical is true if the block is considered canonical.
 	Canonical bool
 	// Header is the beacon block header.
-	Header *capella.SignedBeaconBlockHeader
+	Header *zond.SignedBeaconBlockHeader
 }
 
 // beaconBlockHeaderJSON is the spec representation of the struct.
 type beaconBlockHeaderJSON struct {
-	Root      string                           `json:"root"`
-	Canonical bool                             `json:"canonical"`
-	Header    *capella.SignedBeaconBlockHeader `json:"header"`
+	Root      string                        `json:"root"`
+	Canonical bool                          `json:"canonical"`
+	Header    *zond.SignedBeaconBlockHeader `json:"header"`
 }
 
 // MarshalJSON implements json.Marshaler.

@@ -16,35 +16,35 @@ package mock
 import (
 	"context"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // ForkSchedule provides details of past and future changes in the chain's fork version.
 func (s *Service) ForkSchedule(ctx context.Context,
 	opts *api.ForkScheduleOpts,
 ) (
-	*api.Response[[]*capella.Fork],
+	*api.Response[[]*zond.Fork],
 	error,
 ) {
 	if s.ForkScheduleFunc != nil {
 		return s.ForkScheduleFunc(ctx, opts)
 	}
 
-	data := []*capella.Fork{
+	data := []*zond.Fork{
 		{
-			PreviousVersion: capella.Version{0x01, 0x02, 0x03, 0x04},
-			CurrentVersion:  capella.Version{0x01, 0x02, 0x03, 0x04},
+			PreviousVersion: zond.Version{0x01, 0x02, 0x03, 0x04},
+			CurrentVersion:  zond.Version{0x01, 0x02, 0x03, 0x04},
 			Epoch:           0,
 		},
 		{
-			PreviousVersion: capella.Version{0x01, 0x02, 0x03, 0x04},
-			CurrentVersion:  capella.Version{0x11, 0x12, 0x13, 0x14},
+			PreviousVersion: zond.Version{0x01, 0x02, 0x03, 0x04},
+			CurrentVersion:  zond.Version{0x11, 0x12, 0x13, 0x14},
 			Epoch:           1024,
 		},
 	}
 
-	return &api.Response[[]*capella.Fork]{
+	return &api.Response[[]*zond.Fork]{
 		Data:     data,
 		Metadata: make(map[string]any),
 	}, nil

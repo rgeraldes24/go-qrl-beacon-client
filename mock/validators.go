@@ -18,22 +18,22 @@ import (
 
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // Validators provides the validators, with their balance and status, for a given state.
 func (s *Service) Validators(ctx context.Context,
 	opts *api.ValidatorsOpts,
 ) (
-	*api.Response[map[capella.ValidatorIndex]*apiv1.Validator],
+	*api.Response[map[zond.ValidatorIndex]*apiv1.Validator],
 	error,
 ) {
 	if s.ValidatorsFunc != nil {
 		return s.ValidatorsFunc(ctx, opts)
 	}
 
-	return &api.Response[map[capella.ValidatorIndex]*apiv1.Validator]{
-		Data:     map[capella.ValidatorIndex]*apiv1.Validator{},
+	return &api.Response[map[zond.ValidatorIndex]*apiv1.Validator]{
+		Data:     map[zond.ValidatorIndex]*apiv1.Validator{},
 		Metadata: make(map[string]any),
 	}, nil
 }

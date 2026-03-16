@@ -19,16 +19,16 @@ import (
 	"errors"
 	"fmt"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // Fork fetches fork information for the given options.
 func (s *Service) Fork(ctx context.Context,
 	opts *api.ForkOpts,
 ) (
-	*api.Response[*capella.Fork],
+	*api.Response[*zond.Fork],
 	error,
 ) {
 	if err := s.assertIsActive(ctx); err != nil {
@@ -50,12 +50,12 @@ func (s *Service) Fork(ctx context.Context,
 		return nil, err
 	}
 
-	data, metadata, err := decodeJSONResponse(bytes.NewReader(httpResponse.body), capella.Fork{})
+	data, metadata, err := decodeJSONResponse(bytes.NewReader(httpResponse.body), zond.Fork{})
 	if err != nil {
 		return nil, err
 	}
 
-	return &api.Response[*capella.Fork]{
+	return &api.Response[*zond.Fork]{
 		Metadata: metadata,
 		Data:     &data,
 	}, nil

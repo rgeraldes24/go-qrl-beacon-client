@@ -16,15 +16,15 @@ package mock
 import (
 	"context"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // Fork fetches fork information for the given state.
 func (s *Service) Fork(ctx context.Context,
 	opts *api.ForkOpts,
 ) (
-	*api.Response[*capella.Fork],
+	*api.Response[*zond.Fork],
 	error,
 ) {
 	if s.ForkFunc != nil {
@@ -36,7 +36,7 @@ func (s *Service) Fork(ctx context.Context,
 		return nil, err
 	}
 
-	return &api.Response[*capella.Fork]{
+	return &api.Response[*zond.Fork]{
 		Data:     fork,
 		Metadata: make(map[string]any),
 	}, nil

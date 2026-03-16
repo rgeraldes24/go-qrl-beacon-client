@@ -16,9 +16,9 @@ package mock
 import (
 	"context"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // BeaconBlockHeader provides the block header of a given block ID.
@@ -34,8 +34,8 @@ func (s *Service) BeaconBlockHeader(ctx context.Context,
 
 	return &api.Response[*apiv1.BeaconBlockHeader]{
 		Data: &apiv1.BeaconBlockHeader{
-			Header: &capella.SignedBeaconBlockHeader{
-				Message: &capella.BeaconBlockHeader{},
+			Header: &zond.SignedBeaconBlockHeader{
+				Message: &zond.BeaconBlockHeader{},
 			},
 		},
 		Metadata: make(map[string]any),

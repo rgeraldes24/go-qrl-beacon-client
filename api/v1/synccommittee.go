@@ -19,15 +19,15 @@ import (
 	"strconv"
 
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // SyncCommittee is the data providing validator membership of sync committees.
 type SyncCommittee struct {
 	// Validators is the list of validator indices in the committee.
-	Validators []capella.ValidatorIndex
+	Validators []zond.ValidatorIndex
 	// ValidatorAggregates are the lists of validators in each aggregate.
-	ValidatorAggregates [][]capella.ValidatorIndex
+	ValidatorAggregates [][]zond.ValidatorIndex
 }
 
 // syncCommitteeJSON is the spec representation of the struct.
@@ -74,14 +74,14 @@ func (s *SyncCommittee) UnmarshalJSON(input []byte) error {
 		return errors.New("validators length cannot be 0")
 	}
 
-	s.Validators = make([]capella.ValidatorIndex, len(syncCommitteeJSON.Validators))
+	s.Validators = make([]zond.ValidatorIndex, len(syncCommitteeJSON.Validators))
 	for i := range syncCommitteeJSON.Validators {
 		validator, err := strconv.ParseUint(syncCommitteeJSON.Validators[i], 10, 64)
 		if err != nil {
 			return errors.Wrap(err, "invalid value for validator")
 		}
 
-		s.Validators[i] = capella.ValidatorIndex(validator)
+		s.Validators[i] = zond.ValidatorIndex(validator)
 	}
 
 	if syncCommitteeJSON.ValidatorAggregates == nil {
@@ -92,20 +92,20 @@ func (s *SyncCommittee) UnmarshalJSON(input []byte) error {
 		return errors.New("validator aggregates length cannot be 0")
 	}
 
-	s.ValidatorAggregates = make([][]capella.ValidatorIndex, len(syncCommitteeJSON.ValidatorAggregates))
+	s.ValidatorAggregates = make([][]zond.ValidatorIndex, len(syncCommitteeJSON.ValidatorAggregates))
 	for i := range syncCommitteeJSON.ValidatorAggregates {
 		if len(syncCommitteeJSON.ValidatorAggregates[i]) == 0 {
 			return errors.New("validator aggregate length cannot be 0")
 		}
 
-		s.ValidatorAggregates[i] = make([]capella.ValidatorIndex, len(syncCommitteeJSON.ValidatorAggregates[i]))
+		s.ValidatorAggregates[i] = make([]zond.ValidatorIndex, len(syncCommitteeJSON.ValidatorAggregates[i]))
 		for j := range syncCommitteeJSON.ValidatorAggregates[i] {
 			validator, err := strconv.ParseUint(syncCommitteeJSON.ValidatorAggregates[i][j], 10, 64)
 			if err != nil {
 				return errors.Wrap(err, "invalid value for validator aggregate")
 			}
 
-			s.ValidatorAggregates[i][j] = capella.ValidatorIndex(validator)
+			s.ValidatorAggregates[i][j] = zond.ValidatorIndex(validator)
 		}
 	}
 

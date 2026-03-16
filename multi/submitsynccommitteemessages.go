@@ -17,12 +17,12 @@ import (
 	"context"
 
 	consensusclient "github.com/theQRL/go-qrl-beacon-client"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/qrysm/v4/proto/zond/v2"
 )
 
 // SubmitSyncCommitteeMessages submits sync committee messages.
 func (s *Service) SubmitSyncCommitteeMessages(ctx context.Context,
-	messages []*capella.SyncCommitteeMessage,
+	messages []*zond.SyncCommitteeMessage,
 ) error {
 	_, err := s.doCall(ctx, func(ctx context.Context, client consensusclient.Service) (any, error) {
 		err := client.(consensusclient.SyncCommitteeMessagesSubmitter).SubmitSyncCommitteeMessages(ctx, messages)

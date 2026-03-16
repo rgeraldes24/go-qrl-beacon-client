@@ -16,89 +16,89 @@ package spec
 import (
 	"errors"
 
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // VersionedSignedBeaconBlock contains a versioned signed beacon block.
 type VersionedSignedBeaconBlock struct {
 	Version DataVersion
-	Capella *capella.SignedBeaconBlock
+	Zond    *zond.SignedBeaconBlock
 }
 
 // Slot returns the slot of the signed beacon block.
-func (v *VersionedSignedBeaconBlock) Slot() (capella.Slot, error) {
+func (v *VersionedSignedBeaconBlock) Slot() (zond.Slot, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil || v.Capella.Message == nil {
-			return 0, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil || v.Zond.Message == nil {
+			return 0, errors.New("no zond block")
 		}
 
-		return v.Capella.Message.Slot, nil
+		return v.Zond.Message.Slot, nil
 	default:
 		return 0, errors.New("unknown version")
 	}
 }
 
 // ProposerIndex returns the proposer index of the beacon block.
-func (v *VersionedSignedBeaconBlock) ProposerIndex() (capella.ValidatorIndex, error) {
+func (v *VersionedSignedBeaconBlock) ProposerIndex() (zond.ValidatorIndex, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil || v.Capella.Message == nil {
-			return 0, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil || v.Zond.Message == nil {
+			return 0, errors.New("no zond block")
 		}
 
-		return v.Capella.Message.ProposerIndex, nil
+		return v.Zond.Message.ProposerIndex, nil
 	default:
 		return 0, errors.New("unknown version")
 	}
 }
 
 // ExecutionBlockHash returns the block hash of the beacon block.
-func (v *VersionedSignedBeaconBlock) ExecutionBlockHash() (capella.Hash32, error) {
+func (v *VersionedSignedBeaconBlock) ExecutionBlockHash() (zond.Hash32, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil ||
-			v.Capella.Message == nil ||
-			v.Capella.Message.Body == nil ||
-			v.Capella.Message.Body.ExecutionPayload == nil {
-			return capella.Hash32{}, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil ||
+			v.Zond.Message == nil ||
+			v.Zond.Message.Body == nil ||
+			v.Zond.Message.Body.ExecutionPayload == nil {
+			return zond.Hash32{}, errors.New("no zond block")
 		}
 
-		return v.Capella.Message.Body.ExecutionPayload.BlockHash, nil
+		return v.Zond.Message.Body.ExecutionPayload.BlockHash, nil
 	default:
-		return capella.Hash32{}, errors.New("unknown version")
+		return zond.Hash32{}, errors.New("unknown version")
 	}
 }
 
 // ExecutionBlockNumber returns the block number of the beacon block.
 func (v *VersionedSignedBeaconBlock) ExecutionBlockNumber() (uint64, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil ||
-			v.Capella.Message == nil ||
-			v.Capella.Message.Body == nil ||
-			v.Capella.Message.Body.ExecutionPayload == nil {
-			return 0, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil ||
+			v.Zond.Message == nil ||
+			v.Zond.Message.Body == nil ||
+			v.Zond.Message.Body.ExecutionPayload == nil {
+			return 0, errors.New("no zond block")
 		}
 
-		return v.Capella.Message.Body.ExecutionPayload.BlockNumber, nil
+		return v.Zond.Message.Body.ExecutionPayload.BlockNumber, nil
 	default:
 		return 0, errors.New("unknown version")
 	}
 }
 
 // ExecutionTransactions returns the execution payload transactions for the block.
-func (v *VersionedSignedBeaconBlock) ExecutionTransactions() ([]capella.Transaction, error) {
+func (v *VersionedSignedBeaconBlock) ExecutionTransactions() ([]zond.Transaction, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil ||
-			v.Capella.Message == nil ||
-			v.Capella.Message.Body == nil ||
-			v.Capella.Message.Body.ExecutionPayload == nil {
-			return nil, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil ||
+			v.Zond.Message == nil ||
+			v.Zond.Message.Body == nil ||
+			v.Zond.Message.Body.ExecutionPayload == nil {
+			return nil, errors.New("no zond block")
 		}
 
-		return v.Capella.Message.Body.ExecutionPayload.Transactions, nil
+		return v.Zond.Message.Body.ExecutionPayload.Transactions, nil
 	default:
 		return nil, errors.New("unknown version")
 	}
@@ -107,12 +107,12 @@ func (v *VersionedSignedBeaconBlock) ExecutionTransactions() ([]capella.Transact
 // Graffiti returns the graffiti for the block.
 func (v *VersionedSignedBeaconBlock) Graffiti() ([32]byte, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil || v.Capella.Message == nil || v.Capella.Message.Body == nil {
-			return [32]byte{}, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil || v.Zond.Message == nil || v.Zond.Message.Body == nil {
+			return [32]byte{}, errors.New("no zond block")
 		}
 
-		return v.Capella.Message.Body.Graffiti, nil
+		return v.Zond.Message.Body.Graffiti, nil
 	default:
 		return [32]byte{}, errors.New("unknown version")
 	}
@@ -123,16 +123,16 @@ func (v *VersionedSignedBeaconBlock) Graffiti() ([32]byte, error) {
 //nolint:gocyclo
 func (v *VersionedSignedBeaconBlock) Attestations() ([]*VersionedAttestation, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil || v.Capella.Message == nil || v.Capella.Message.Body == nil {
-			return nil, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil || v.Zond.Message == nil || v.Zond.Message.Body == nil {
+			return nil, errors.New("no zond block")
 		}
 
-		versionedAttestations := make([]*VersionedAttestation, len(v.Capella.Message.Body.Attestations))
-		for i, attestation := range v.Capella.Message.Body.Attestations {
+		versionedAttestations := make([]*VersionedAttestation, len(v.Zond.Message.Body.Attestations))
+		for i, attestation := range v.Zond.Message.Body.Attestations {
 			versionedAttestations[i] = &VersionedAttestation{
-				Version: DataVersionCapella,
-				Capella: attestation,
+				Version: DataVersionZond,
+				Zond:    attestation,
 			}
 		}
 
@@ -143,112 +143,112 @@ func (v *VersionedSignedBeaconBlock) Attestations() ([]*VersionedAttestation, er
 }
 
 // Root returns the root of the beacon block.
-func (v *VersionedSignedBeaconBlock) Root() (capella.Root, error) {
+func (v *VersionedSignedBeaconBlock) Root() (zond.Root, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil || v.Capella.Message == nil {
-			return capella.Root{}, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil || v.Zond.Message == nil {
+			return zond.Root{}, errors.New("no zond block")
 		}
 
-		return v.Capella.Message.HashTreeRoot()
+		return v.Zond.Message.HashTreeRoot()
 	default:
-		return capella.Root{}, errors.New("unknown version")
+		return zond.Root{}, errors.New("unknown version")
 	}
 }
 
 // BodyRoot returns the body root of the beacon block.
-func (v *VersionedSignedBeaconBlock) BodyRoot() (capella.Root, error) {
+func (v *VersionedSignedBeaconBlock) BodyRoot() (zond.Root, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil || v.Capella.Message == nil || v.Capella.Message.Body == nil {
-			return capella.Root{}, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil || v.Zond.Message == nil || v.Zond.Message.Body == nil {
+			return zond.Root{}, errors.New("no zond block")
 		}
 
-		return v.Capella.Message.Body.HashTreeRoot()
+		return v.Zond.Message.Body.HashTreeRoot()
 	default:
-		return capella.Root{}, errors.New("unknown version")
+		return zond.Root{}, errors.New("unknown version")
 	}
 }
 
 // ParentRoot returns the parent root of the beacon block.
-func (v *VersionedSignedBeaconBlock) ParentRoot() (capella.Root, error) {
+func (v *VersionedSignedBeaconBlock) ParentRoot() (zond.Root, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil || v.Capella.Message == nil {
-			return capella.Root{}, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil || v.Zond.Message == nil {
+			return zond.Root{}, errors.New("no zond block")
 		}
 
-		return v.Capella.Message.ParentRoot, nil
+		return v.Zond.Message.ParentRoot, nil
 	default:
-		return capella.Root{}, errors.New("unknown version")
+		return zond.Root{}, errors.New("unknown version")
 	}
 }
 
 // StateRoot returns the state root of the beacon block.
-func (v *VersionedSignedBeaconBlock) StateRoot() (capella.Root, error) {
+func (v *VersionedSignedBeaconBlock) StateRoot() (zond.Root, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil || v.Capella.Message == nil {
-			return capella.Root{}, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil || v.Zond.Message == nil {
+			return zond.Root{}, errors.New("no zond block")
 		}
 
-		return v.Capella.Message.StateRoot, nil
+		return v.Zond.Message.StateRoot, nil
 	default:
-		return capella.Root{}, errors.New("unknown version")
+		return zond.Root{}, errors.New("unknown version")
 	}
 }
 
 // RandaoReveal returns the randao reveal of the beacon block.
-func (v *VersionedSignedBeaconBlock) RandaoReveal() (capella.MLDSA87Signature, error) {
+func (v *VersionedSignedBeaconBlock) RandaoReveal() (zond.MLDSA87Signature, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil || v.Capella.Message == nil || v.Capella.Message.Body == nil {
-			return capella.MLDSA87Signature{}, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil || v.Zond.Message == nil || v.Zond.Message.Body == nil {
+			return zond.MLDSA87Signature{}, errors.New("no zond block")
 		}
 
-		return v.Capella.Message.Body.RANDAOReveal, nil
+		return v.Zond.Message.Body.RANDAOReveal, nil
 	default:
-		return capella.MLDSA87Signature{}, errors.New("unknown version")
+		return zond.MLDSA87Signature{}, errors.New("unknown version")
 	}
 }
 
 // ExecutionData returns the execution data of the beacon block.
-func (v *VersionedSignedBeaconBlock) ExecutionData() (*capella.ExecutionData, error) {
+func (v *VersionedSignedBeaconBlock) ExecutionData() (*zond.ExecutionData, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil || v.Capella.Message == nil || v.Capella.Message.Body == nil {
-			return nil, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil || v.Zond.Message == nil || v.Zond.Message.Body == nil {
+			return nil, errors.New("no zond block")
 		}
 
-		return v.Capella.Message.Body.ExecutionData, nil
+		return v.Zond.Message.Body.ExecutionData, nil
 	default:
 		return nil, errors.New("unknown version")
 	}
 }
 
 // Deposits returns the deposits of the beacon block.
-func (v *VersionedSignedBeaconBlock) Deposits() ([]*capella.Deposit, error) {
+func (v *VersionedSignedBeaconBlock) Deposits() ([]*zond.Deposit, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil || v.Capella.Message == nil || v.Capella.Message.Body == nil {
-			return nil, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil || v.Zond.Message == nil || v.Zond.Message.Body == nil {
+			return nil, errors.New("no zond block")
 		}
 
-		return v.Capella.Message.Body.Deposits, nil
+		return v.Zond.Message.Body.Deposits, nil
 	default:
 		return nil, errors.New("unknown version")
 	}
 }
 
 // VoluntaryExits returns the voluntary exits of the beacon block.
-func (v *VersionedSignedBeaconBlock) VoluntaryExits() ([]*capella.SignedVoluntaryExit, error) {
+func (v *VersionedSignedBeaconBlock) VoluntaryExits() ([]*zond.SignedVoluntaryExit, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil || v.Capella.Message == nil || v.Capella.Message.Body == nil {
-			return nil, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil || v.Zond.Message == nil || v.Zond.Message.Body == nil {
+			return nil, errors.New("no zond block")
 		}
 
-		return v.Capella.Message.Body.VoluntaryExits, nil
+		return v.Zond.Message.Body.VoluntaryExits, nil
 	default:
 		return nil, errors.New("unknown version")
 	}
@@ -259,16 +259,16 @@ func (v *VersionedSignedBeaconBlock) VoluntaryExits() ([]*capella.SignedVoluntar
 //nolint:gocyclo
 func (v *VersionedSignedBeaconBlock) AttesterSlashings() ([]VersionedAttesterSlashing, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil || v.Capella.Message == nil || v.Capella.Message.Body == nil {
-			return nil, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil || v.Zond.Message == nil || v.Zond.Message.Body == nil {
+			return nil, errors.New("no zond block")
 		}
 
-		versionedAttesterSlashings := make([]VersionedAttesterSlashing, len(v.Capella.Message.Body.AttesterSlashings))
-		for i, attesterSlashing := range v.Capella.Message.Body.AttesterSlashings {
+		versionedAttesterSlashings := make([]VersionedAttesterSlashing, len(v.Zond.Message.Body.AttesterSlashings))
+		for i, attesterSlashing := range v.Zond.Message.Body.AttesterSlashings {
 			versionedAttesterSlashings[i] = VersionedAttesterSlashing{
-				Version: DataVersionCapella,
-				Capella: attesterSlashing,
+				Version: DataVersionZond,
+				Zond:    attesterSlashing,
 			}
 		}
 
@@ -279,45 +279,45 @@ func (v *VersionedSignedBeaconBlock) AttesterSlashings() ([]VersionedAttesterSla
 }
 
 // ProposerSlashings returns the proposer slashings of the beacon block.
-func (v *VersionedSignedBeaconBlock) ProposerSlashings() ([]*capella.ProposerSlashing, error) {
+func (v *VersionedSignedBeaconBlock) ProposerSlashings() ([]*zond.ProposerSlashing, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil || v.Capella.Message == nil || v.Capella.Message.Body == nil {
-			return nil, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil || v.Zond.Message == nil || v.Zond.Message.Body == nil {
+			return nil, errors.New("no zond block")
 		}
 
-		return v.Capella.Message.Body.ProposerSlashings, nil
+		return v.Zond.Message.Body.ProposerSlashings, nil
 	default:
 		return nil, errors.New("unknown version")
 	}
 }
 
 // SyncAggregate returns the sync aggregate of the beacon block.
-func (v *VersionedSignedBeaconBlock) SyncAggregate() (*capella.SyncAggregate, error) {
+func (v *VersionedSignedBeaconBlock) SyncAggregate() (*zond.SyncAggregate, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil || v.Capella.Message == nil || v.Capella.Message.Body == nil {
-			return nil, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil || v.Zond.Message == nil || v.Zond.Message.Body == nil {
+			return nil, errors.New("no zond block")
 		}
 
-		return v.Capella.Message.Body.SyncAggregate, nil
+		return v.Zond.Message.Body.SyncAggregate, nil
 	default:
 		return nil, errors.New("unknown version")
 	}
 }
 
 // Withdrawals returns the withdrawals of the beacon block.
-func (v *VersionedSignedBeaconBlock) Withdrawals() ([]*capella.Withdrawal, error) {
+func (v *VersionedSignedBeaconBlock) Withdrawals() ([]*zond.Withdrawal, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil ||
-			v.Capella.Message == nil ||
-			v.Capella.Message.Body == nil ||
-			v.Capella.Message.Body.ExecutionPayload == nil {
-			return nil, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil ||
+			v.Zond.Message == nil ||
+			v.Zond.Message.Body == nil ||
+			v.Zond.Message.Body.ExecutionPayload == nil {
+			return nil, errors.New("no zond block")
 		}
 
-		return v.Capella.Message.Body.ExecutionPayload.Withdrawals, nil
+		return v.Zond.Message.Body.ExecutionPayload.Withdrawals, nil
 	default:
 		return nil, errors.New("unknown version")
 	}
@@ -330,12 +330,12 @@ func (v *VersionedSignedBeaconBlock) ExecutionPayload() (*VersionedExecutionPayl
 	}
 
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil || v.Capella.Message == nil || v.Capella.Message.Body == nil {
-			return nil, errors.New("no capella block")
+	case DataVersionZond:
+		if v.Zond == nil || v.Zond.Message == nil || v.Zond.Message.Body == nil {
+			return nil, errors.New("no zond block")
 		}
 
-		versionedExecutionPayload.Capella = v.Capella.Message.Body.ExecutionPayload
+		versionedExecutionPayload.Zond = v.Zond.Message.Body.ExecutionPayload
 	default:
 		return nil, errors.New("unknown version")
 	}
@@ -346,12 +346,12 @@ func (v *VersionedSignedBeaconBlock) ExecutionPayload() (*VersionedExecutionPayl
 // String returns a string version of the structure.
 func (v *VersionedSignedBeaconBlock) String() string {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
+	case DataVersionZond:
+		if v.Zond == nil {
 			return ""
 		}
 
-		return v.Capella.String()
+		return v.Zond.String()
 	default:
 		return "unknown version"
 	}

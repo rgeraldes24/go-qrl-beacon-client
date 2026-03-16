@@ -21,13 +21,13 @@ import (
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // BlockEvent is the data for the block event.
 type BlockEvent struct {
-	Slot                capella.Slot
-	Block               capella.Root
+	Slot                zond.Slot
+	Block               zond.Root
 	ExecutionOptimistic bool
 }
 
@@ -65,7 +65,7 @@ func (e *BlockEvent) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for slot")
 	}
 
-	e.Slot = capella.Slot(slot)
+	e.Slot = zond.Slot(slot)
 
 	if blockEventJSON.Block == "" {
 		return errors.New("block missing")

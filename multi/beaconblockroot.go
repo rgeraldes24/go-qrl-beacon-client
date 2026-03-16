@@ -18,14 +18,14 @@ import (
 
 	consensusclient "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // BeaconBlockRoot fetches a block's root given a block ID.
 func (s *Service) BeaconBlockRoot(ctx context.Context,
 	opts *api.BeaconBlockRootOpts,
 ) (
-	*api.Response[*capella.Root],
+	*api.Response[*zond.Root],
 	error,
 ) {
 	res, err := s.doCall(ctx, func(ctx context.Context, client consensusclient.Service) (any, error) {
@@ -40,7 +40,7 @@ func (s *Service) BeaconBlockRoot(ctx context.Context,
 		return nil, err
 	}
 
-	response, isResponse := res.(*api.Response[*capella.Root])
+	response, isResponse := res.(*api.Response[*zond.Root])
 	if !isResponse {
 		return nil, ErrIncorrectType
 	}

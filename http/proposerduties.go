@@ -22,7 +22,6 @@ import (
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // ProposerDuties obtains proposer duties for the given options.
@@ -58,9 +57,9 @@ func (s *Service) ProposerDuties(ctx context.Context,
 		return nil, errors.Join(errors.New("failed to obtain slots per epoch"), err)
 	}
 
-	startSlot := capella.Slot(uint64(opts.Epoch) * slotsPerEpoch)
+	startSlot := zond.Slot(uint64(opts.Epoch) * slotsPerEpoch)
 
-	endSlot := capella.Slot(uint64(opts.Epoch)*slotsPerEpoch + slotsPerEpoch - 1)
+	endSlot := zond.Slot(uint64(opts.Epoch)*slotsPerEpoch + slotsPerEpoch - 1)
 	for _, duty := range data {
 		if duty.Slot < startSlot || duty.Slot > endSlot {
 			return nil, fmt.Errorf("received proposer duty for slot %d outside of range [%d,%d]", duty.Slot, startSlot, endSlot)
@@ -69,7 +68,7 @@ func (s *Service) ProposerDuties(ctx context.Context,
 
 	if len(opts.Indices) > 0 {
 		// Filter duties based on supplied validators.
-		validatorIndexMap := make(map[capella.ValidatorIndex]bool, len(opts.Indices))
+		validatorIndexMap := make(map[zond.ValidatorIndex]bool, len(opts.Indices))
 		for _, index := range opts.Indices {
 			validatorIndexMap[index] = true
 		}

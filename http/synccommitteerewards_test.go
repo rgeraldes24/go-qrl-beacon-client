@@ -24,7 +24,6 @@ import (
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/http"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 func TestSyncCommitteeRewards(t *testing.T) {
@@ -46,10 +45,10 @@ func TestSyncCommitteeRewards(t *testing.T) {
 			name: "MixedIndicesAndPubKeys",
 			opts: &api.SyncCommitteeRewardsOpts{
 				Block: "10760058",
-				Indices: []capella.ValidatorIndex{
+				Indices: []zond.ValidatorIndex{
 					286437,
 				},
-				PubKeys: []capella.MLDSA87PubKey{
+				PubKeys: []zond.MLDSA87PubKey{
 					*mustParsePubKey("0xb7dd1c63cfe60163ffcb889d502b0af3b8ab41cb0dc95edb46eccfeb79e984886fe54f800e813ae09d48e98087010a10"),
 				},
 			},
@@ -59,7 +58,7 @@ func TestSyncCommitteeRewards(t *testing.T) {
 			name: "NegativeRewards",
 			opts: &api.SyncCommitteeRewardsOpts{
 				Block: "10760058",
-				Indices: []capella.ValidatorIndex{
+				Indices: []zond.ValidatorIndex{
 					1055307,
 				},
 			},

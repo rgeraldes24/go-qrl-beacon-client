@@ -18,14 +18,14 @@ import (
 
 	consensusclient "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // ValidatorBalances provides the validator balances for a given state.
 func (s *Service) ValidatorBalances(ctx context.Context,
 	opts *api.ValidatorBalancesOpts,
 ) (
-	*api.Response[map[capella.ValidatorIndex]capella.Gwei],
+	*api.Response[map[zond.ValidatorIndex]zond.Gwei],
 	error,
 ) {
 	res, err := s.doCall(ctx, func(ctx context.Context, client consensusclient.Service) (any, error) {
@@ -40,7 +40,7 @@ func (s *Service) ValidatorBalances(ctx context.Context,
 		return nil, err
 	}
 
-	response, isResponse := res.(*api.Response[map[capella.ValidatorIndex]capella.Gwei])
+	response, isResponse := res.(*api.Response[map[zond.ValidatorIndex]zond.Gwei])
 	if !isResponse {
 		return nil, ErrIncorrectType
 	}

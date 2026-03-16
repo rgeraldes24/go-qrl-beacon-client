@@ -16,9 +16,9 @@ package mock
 import (
 	"context"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // AttestationPool fetches the attestation pool for the given slot.
@@ -31,11 +31,11 @@ func (*Service) AttestationPool(_ context.Context,
 	data := make([]*spec.VersionedAttestation, 5)
 	for i := range 5 {
 		data[i] = &spec.VersionedAttestation{
-			Version: spec.DataVersionCapella,
-			Capella: &capella.Attestation{
-				Data: &capella.AttestationData{
-					Source: &capella.Checkpoint{},
-					Target: &capella.Checkpoint{},
+			Version: spec.DataVersionZond,
+			Zond: &zond.Attestation{
+				Data: &zond.AttestationData{
+					Source: &zond.Checkpoint{},
+					Target: &zond.Checkpoint{},
 				},
 			},
 		}

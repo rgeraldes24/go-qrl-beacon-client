@@ -17,16 +17,16 @@ import (
 	"bytes"
 	"context"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // ForkSchedule provides details of past and future changes in the chain's fork version.
 func (s *Service) ForkSchedule(ctx context.Context,
 	opts *api.ForkScheduleOpts,
 ) (
-	*api.Response[[]*capella.Fork],
+	*api.Response[[]*zond.Fork],
 	error,
 ) {
 	if err := s.assertIsActive(ctx); err != nil {
@@ -42,7 +42,7 @@ func (s *Service) ForkSchedule(ctx context.Context,
 	if s.forkSchedule != nil {
 		defer s.forkScheduleMutex.RUnlock()
 
-		return &api.Response[[]*capella.Fork]{
+		return &api.Response[[]*zond.Fork]{
 			Data:     s.forkSchedule,
 			Metadata: make(map[string]any),
 		}, nil
@@ -55,7 +55,7 @@ func (s *Service) ForkSchedule(ctx context.Context,
 
 	if s.forkSchedule != nil {
 		// Someone else fetched this whilst we were waiting for the lock.
-		return &api.Response[[]*capella.Fork]{
+		return &api.Response[[]*zond.Fork]{
 			Data:     s.forkSchedule,
 			Metadata: make(map[string]any),
 		}, nil
@@ -69,14 +69,14 @@ func (s *Service) ForkSchedule(ctx context.Context,
 		return nil, err
 	}
 
-	data, metadata, err := decodeJSONResponse(bytes.NewReader(httpResponse.body), []*capella.Fork{})
+	data, metadata, err := decodeJSONResponse(bytes.NewReader(httpResponse.body), []*zond.Fork{})
 	if err != nil {
 		return nil, err
 	}
 
 	s.forkSchedule = data
 
-	return &api.Response[[]*capella.Fork]{
+	return &api.Response[[]*zond.Fork]{
 		Data:     s.forkSchedule,
 		Metadata: metadata,
 	}, nil

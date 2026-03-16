@@ -23,14 +23,14 @@ import (
 
 func TestError(t *testing.T) {
 	v1 := &api.VersionedBlindedProposal{
-		Version: spec.DataVersionCapella,
+		Version: spec.DataVersionZond,
 	}
 
 	_, err := v1.Slot()
 	require.ErrorIs(t, err, api.ErrUnsupportedVersion)
 
 	v2 := &api.VersionedBlindedProposal{
-		Version: spec.DataVersionCapella,
+		Version: spec.DataVersionZond,
 	}
 
 	_, err = v2.Slot()

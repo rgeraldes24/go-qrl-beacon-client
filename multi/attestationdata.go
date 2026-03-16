@@ -16,16 +16,16 @@ package multi
 import (
 	"context"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	consensusclient "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // AttestationData fetches the attestation data for the given slot and committee index.
 func (s *Service) AttestationData(ctx context.Context,
 	opts *api.AttestationDataOpts,
 ) (
-	*api.Response[*capella.AttestationData],
+	*api.Response[*zond.AttestationData],
 	error,
 ) {
 	res, err := s.doCall(ctx, func(ctx context.Context, client consensusclient.Service) (any, error) {
@@ -40,7 +40,7 @@ func (s *Service) AttestationData(ctx context.Context,
 		return nil, err
 	}
 
-	response, isResponse := res.(*api.Response[*capella.AttestationData])
+	response, isResponse := res.(*api.Response[*zond.AttestationData])
 	if !isResponse {
 		return nil, ErrIncorrectType
 	}

@@ -16,10 +16,10 @@ package mock
 import (
 	"context"
 
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 )
 
 // SubmitAttesterSlashing submits a proposal slashing.
-func (*Service) SubmitAttesterSlashing(_ context.Context, _ *capella.AttesterSlashing) error {
+func (*Service) SubmitAttesterSlashing(_ context.Context, _ *zond.AttesterSlashing) error {
 	return nil
 }

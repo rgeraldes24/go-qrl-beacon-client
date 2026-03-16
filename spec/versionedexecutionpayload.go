@@ -17,85 +17,85 @@ import (
 	"errors"
 
 	"github.com/holiman/uint256"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // VersionedExecutionPayload contains a versioned execution payload.
 type VersionedExecutionPayload struct {
 	Version DataVersion
-	Capella *capella.ExecutionPayload
+	Zond    *zond.ExecutionPayload
 }
 
 // IsEmpty returns true if there is no block.
 func (v *VersionedExecutionPayload) IsEmpty() bool {
-	return v.Capella == nil
+	return v.Zond == nil
 }
 
 // ParentHash returns the parent hash of the execution payload.
-func (v *VersionedExecutionPayload) ParentHash() (capella.Hash32, error) {
+func (v *VersionedExecutionPayload) ParentHash() (zond.Hash32, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return capella.Hash32{}, errors.New("no capella execution payload")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return zond.Hash32{}, errors.New("no zond execution payload")
 		}
 
-		return v.Capella.ParentHash, nil
+		return v.Zond.ParentHash, nil
 	default:
-		return capella.Hash32{}, errors.New("unknown version")
+		return zond.Hash32{}, errors.New("unknown version")
 	}
 }
 
 // FeeRecipient returns the fee recipient of the execution payload.
-func (v *VersionedExecutionPayload) FeeRecipient() (capella.ExecutionAddress, error) {
+func (v *VersionedExecutionPayload) FeeRecipient() (zond.ExecutionAddress, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return capella.ExecutionAddress{}, errors.New("no capella execution payload")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return zond.ExecutionAddress{}, errors.New("no zond execution payload")
 		}
 
-		return v.Capella.FeeRecipient, nil
+		return v.Zond.FeeRecipient, nil
 	default:
-		return capella.ExecutionAddress{}, errors.New("unknown version")
+		return zond.ExecutionAddress{}, errors.New("unknown version")
 	}
 }
 
 // StateRoot returns the state root of the execution payload.
-func (v *VersionedExecutionPayload) StateRoot() (capella.Root, error) {
+func (v *VersionedExecutionPayload) StateRoot() (zond.Root, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return capella.Root{}, errors.New("no capella execution payload")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return zond.Root{}, errors.New("no zond execution payload")
 		}
 
-		return v.Capella.StateRoot, nil
+		return v.Zond.StateRoot, nil
 	default:
-		return capella.Root{}, errors.New("unknown version")
+		return zond.Root{}, errors.New("unknown version")
 	}
 }
 
 // ReceiptsRoot returns the receipts root of the execution payload.
-func (v *VersionedExecutionPayload) ReceiptsRoot() (capella.Root, error) {
+func (v *VersionedExecutionPayload) ReceiptsRoot() (zond.Root, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return capella.Root{}, errors.New("no capella execution payload")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return zond.Root{}, errors.New("no zond execution payload")
 		}
 
-		return v.Capella.ReceiptsRoot, nil
+		return v.Zond.ReceiptsRoot, nil
 	default:
-		return capella.Root{}, errors.New("unknown version")
+		return zond.Root{}, errors.New("unknown version")
 	}
 }
 
 // LogsBloom returns the logs bloom of the execution payload.
 func (v *VersionedExecutionPayload) LogsBloom() ([256]byte, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return [256]byte{}, errors.New("no capella execution payload")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return [256]byte{}, errors.New("no zond execution payload")
 		}
 
-		return v.Capella.LogsBloom, nil
+		return v.Zond.LogsBloom, nil
 	default:
 		return [256]byte{}, errors.New("unknown version")
 	}
@@ -104,12 +104,12 @@ func (v *VersionedExecutionPayload) LogsBloom() ([256]byte, error) {
 // PrevRandao returns the prev randao of the execution payload.
 func (v *VersionedExecutionPayload) PrevRandao() ([32]byte, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return [32]byte{}, errors.New("no capella execution payload")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return [32]byte{}, errors.New("no zond execution payload")
 		}
 
-		return v.Capella.PrevRandao, nil
+		return v.Zond.PrevRandao, nil
 	default:
 		return [32]byte{}, errors.New("unknown version")
 	}
@@ -118,12 +118,12 @@ func (v *VersionedExecutionPayload) PrevRandao() ([32]byte, error) {
 // BlockNumber returns the block number of the execution payload.
 func (v *VersionedExecutionPayload) BlockNumber() (uint64, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return 0, errors.New("no capella execution payload")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return 0, errors.New("no zond execution payload")
 		}
 
-		return v.Capella.BlockNumber, nil
+		return v.Zond.BlockNumber, nil
 	default:
 		return 0, errors.New("unknown version")
 	}
@@ -132,12 +132,12 @@ func (v *VersionedExecutionPayload) BlockNumber() (uint64, error) {
 // GasLimit returns the gas limit of the execution payload.
 func (v *VersionedExecutionPayload) GasLimit() (uint64, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return 0, errors.New("no capella execution payload")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return 0, errors.New("no zond execution payload")
 		}
 
-		return v.Capella.GasLimit, nil
+		return v.Zond.GasLimit, nil
 	default:
 		return 0, errors.New("unknown version")
 	}
@@ -146,12 +146,12 @@ func (v *VersionedExecutionPayload) GasLimit() (uint64, error) {
 // GasUsed returns the gas used of the execution payload.
 func (v *VersionedExecutionPayload) GasUsed() (uint64, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return 0, errors.New("no capella execution payload")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return 0, errors.New("no zond execution payload")
 		}
 
-		return v.Capella.GasUsed, nil
+		return v.Zond.GasUsed, nil
 	default:
 		return 0, errors.New("unknown version")
 	}
@@ -160,12 +160,12 @@ func (v *VersionedExecutionPayload) GasUsed() (uint64, error) {
 // Timestamp returns the timestamp of the execution payload.
 func (v *VersionedExecutionPayload) Timestamp() (uint64, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return 0, errors.New("no capella execution payload")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return 0, errors.New("no zond execution payload")
 		}
 
-		return v.Capella.Timestamp, nil
+		return v.Zond.Timestamp, nil
 	default:
 		return 0, errors.New("unknown version")
 	}
@@ -174,12 +174,12 @@ func (v *VersionedExecutionPayload) Timestamp() (uint64, error) {
 // ExtraData returns the extra data of the execution payload.
 func (v *VersionedExecutionPayload) ExtraData() ([]byte, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return nil, errors.New("no capella execution payload")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return nil, errors.New("no zond execution payload")
 		}
 
-		return v.Capella.ExtraData, nil
+		return v.Zond.ExtraData, nil
 	default:
 		return nil, errors.New("unknown version")
 	}
@@ -188,54 +188,54 @@ func (v *VersionedExecutionPayload) ExtraData() ([]byte, error) {
 // BaseFeePerGas returns the base fee per gas of the execution payload.
 func (v *VersionedExecutionPayload) BaseFeePerGas() (*uint256.Int, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return nil, errors.New("no capella execution payload")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return nil, errors.New("no zond execution payload")
 		}
 
-		return uint256.NewInt(0).SetBytes(v.Capella.BaseFeePerGas[:]), nil
+		return uint256.NewInt(0).SetBytes(v.Zond.BaseFeePerGas[:]), nil
 	default:
 		return nil, errors.New("unknown version")
 	}
 }
 
 // BlockHash returns the block hash of the execution payload.
-func (v *VersionedExecutionPayload) BlockHash() (capella.Hash32, error) {
+func (v *VersionedExecutionPayload) BlockHash() (zond.Hash32, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return capella.Hash32{}, errors.New("no capella execution payload")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return zond.Hash32{}, errors.New("no zond execution payload")
 		}
 
-		return v.Capella.BlockHash, nil
+		return v.Zond.BlockHash, nil
 	default:
-		return capella.Hash32{}, errors.New("unknown version")
+		return zond.Hash32{}, errors.New("unknown version")
 	}
 }
 
 // Transactions returns the transactions of the execution payload.
-func (v *VersionedExecutionPayload) Transactions() ([]capella.Transaction, error) {
+func (v *VersionedExecutionPayload) Transactions() ([]zond.Transaction, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return nil, errors.New("no capella execution payload")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return nil, errors.New("no zond execution payload")
 		}
 
-		return v.Capella.Transactions, nil
+		return v.Zond.Transactions, nil
 	default:
 		return nil, errors.New("unknown version")
 	}
 }
 
 // Withdrawals returns the withdrawals of the execution payload.
-func (v *VersionedExecutionPayload) Withdrawals() ([]*capella.Withdrawal, error) {
+func (v *VersionedExecutionPayload) Withdrawals() ([]*zond.Withdrawal, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return nil, errors.New("no capella execution payload")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return nil, errors.New("no zond execution payload")
 		}
 
-		return v.Capella.Withdrawals, nil
+		return v.Zond.Withdrawals, nil
 	default:
 		return nil, errors.New("unknown version")
 	}
@@ -244,12 +244,12 @@ func (v *VersionedExecutionPayload) Withdrawals() ([]*capella.Withdrawal, error)
 // String returns a string version of the structure.
 func (v *VersionedExecutionPayload) String() string {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
+	case DataVersionZond:
+		if v.Zond == nil {
 			return ""
 		}
 
-		return v.Capella.String()
+		return v.Zond.String()
 	default:
 		return "unknown version"
 	}

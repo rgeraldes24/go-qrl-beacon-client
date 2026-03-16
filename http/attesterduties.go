@@ -22,7 +22,7 @@ import (
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // AttesterDuties obtains attester duties.
@@ -91,9 +91,9 @@ func (s *Service) AttesterDuties(ctx context.Context,
 		return nil, errors.Join(errors.New("failed to obtain slots per epoch"), err)
 	}
 
-	startSlot := capella.Slot(uint64(opts.Epoch) * slotsPerEpoch)
+	startSlot := zond.Slot(uint64(opts.Epoch) * slotsPerEpoch)
 
-	endSlot := capella.Slot(uint64(opts.Epoch)*slotsPerEpoch + slotsPerEpoch - 1)
+	endSlot := zond.Slot(uint64(opts.Epoch)*slotsPerEpoch + slotsPerEpoch - 1)
 	for _, duty := range data {
 		if duty.Slot < startSlot || duty.Slot > endSlot {
 			return nil, fmt.Errorf("received attester duty for slot %d outside of range [%d,%d]", duty.Slot, startSlot, endSlot)

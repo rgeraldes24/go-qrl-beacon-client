@@ -18,31 +18,31 @@ import (
 
 	bitfield "github.com/theQRL/go-bitfield"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // SyncCommitteeContribution provides a sync committee contribution.
 func (s *Service) SyncCommitteeContribution(ctx context.Context,
 	opts *api.SyncCommitteeContributionOpts,
 ) (
-	*api.Response[*capella.SyncCommitteeContribution],
+	*api.Response[*zond.SyncCommitteeContribution],
 	error,
 ) {
 	if s.SyncCommitteeContributionFunc != nil {
 		return s.SyncCommitteeContributionFunc(ctx, opts)
 	}
 
-	return &api.Response[*capella.SyncCommitteeContribution]{
-		Data: &capella.SyncCommitteeContribution{
+	return &api.Response[*zond.SyncCommitteeContribution]{
+		Data: &zond.SyncCommitteeContribution{
 			Slot: 5,
-			BeaconBlockRoot: capella.Root([32]byte{
+			BeaconBlockRoot: zond.Root([32]byte{
 				0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
 				0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
 			}),
 			SubcommitteeIndex: 0,
 			AggregationBits:   bitfield.NewBitvector128(),
-			Signatures: []capella.MLDSA87Signature{
-				capella.MLDSA87Signature([4627]byte{
+			Signatures: []zond.MLDSA87Signature{
+				zond.MLDSA87Signature([4627]byte{
 					0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
 					0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
 					0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2a, 0x2b, 0x2c, 0x2d, 0x2e, 0x2f,

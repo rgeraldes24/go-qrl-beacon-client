@@ -24,7 +24,7 @@ import (
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/http"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/qrysm/v4/proto/zond/v2"
 )
 
 func TestBeaconState(t *testing.T) {
@@ -34,7 +34,7 @@ func TestBeaconState(t *testing.T) {
 	tests := []struct {
 		name     string
 		opts     *api.BeaconStateOpts
-		expected *capella.BeaconState
+		expected *zond.BeaconState
 		err      string
 		errCode  int
 	}{
@@ -60,7 +60,7 @@ func TestBeaconState(t *testing.T) {
 			opts: &api.BeaconStateOpts{State: "4636672"},
 		},
 		{
-			name: "Capella",
+			name: "Zond",
 			opts: &api.BeaconStateOpts{State: "6209536"},
 		},
 		{

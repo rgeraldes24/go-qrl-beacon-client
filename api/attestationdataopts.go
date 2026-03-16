@@ -13,14 +13,14 @@
 
 package api
 
-import "github.com/theQRL/go-qrl-beacon-client/spec/capella"
+import "github.com/theQRL/go-qrl-beacon-client/spec/zond"
 
 // AttestationDataOpts are the options for obtaining attestation data.
 type AttestationDataOpts struct {
 	Common CommonOpts
 
 	// Slot is the slot for which the data is obtained.
-	Slot capella.Slot
+	Slot zond.Slot
 	// CommitteeIndex is the committee index for which the data is obtained.
-	CommitteeIndex capella.CommitteeIndex
+	CommitteeIndex zond.CommitteeIndex
 }

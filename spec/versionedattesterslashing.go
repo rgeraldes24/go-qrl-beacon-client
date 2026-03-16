@@ -16,31 +16,31 @@ package spec
 import (
 	"errors"
 
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 )
 
 // VersionedAttesterSlashing contains a versioned attestation.
 type VersionedAttesterSlashing struct {
 	Version DataVersion
-	Capella *capella.AttesterSlashing
+	Zond    *zond.AttesterSlashing
 }
 
 // IsEmpty returns true if there is no block.
 func (v *VersionedAttesterSlashing) IsEmpty() bool {
-	return v.Capella == nil
+	return v.Zond == nil
 }
 
 // Attestation1 returns the first indexed attestation.
 func (v *VersionedAttesterSlashing) Attestation1() (*VersionedIndexedAttestation, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return nil, errors.New("no Capella indexed attestation")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return nil, errors.New("no Zond indexed attestation")
 		}
 
 		versionedIndexedAttestation := VersionedIndexedAttestation{
-			Version: DataVersionCapella,
-			Capella: v.Capella.Attestation1,
+			Version: DataVersionZond,
+			Zond:    v.Zond.Attestation1,
 		}
 
 		return &versionedIndexedAttestation, nil
@@ -52,14 +52,14 @@ func (v *VersionedAttesterSlashing) Attestation1() (*VersionedIndexedAttestation
 // Attestation2 returns the second indexed attestation.
 func (v *VersionedAttesterSlashing) Attestation2() (*VersionedIndexedAttestation, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return nil, errors.New("no Capella indexed attestation")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return nil, errors.New("no Zond indexed attestation")
 		}
 
 		versionedIndexedAttestation := VersionedIndexedAttestation{
-			Version: DataVersionCapella,
-			Capella: v.Capella.Attestation2,
+			Version: DataVersionZond,
+			Zond:    v.Zond.Attestation2,
 		}
 
 		return &versionedIndexedAttestation, nil
@@ -71,12 +71,12 @@ func (v *VersionedAttesterSlashing) Attestation2() (*VersionedIndexedAttestation
 // String returns a string version of the structure.
 func (v *VersionedAttesterSlashing) String() string {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
+	case DataVersionZond:
+		if v.Zond == nil {
 			return ""
 		}
 
-		return v.Capella.String()
+		return v.Zond.String()
 	default:
 		return "unknown version"
 	}

@@ -16,57 +16,57 @@ package spec
 import (
 	"errors"
 
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // VersionedIndexedAttestation contains a versioned indexed attestation.
 type VersionedIndexedAttestation struct {
 	Version DataVersion
-	Capella *capella.IndexedAttestation
+	Zond    *zond.IndexedAttestation
 }
 
 // IsEmpty returns true if there is no block.
 func (v *VersionedIndexedAttestation) IsEmpty() bool {
-	return v.Capella == nil
+	return v.Zond == nil
 }
 
 // AttestingIndices returns the attesting indices of the indexed attestation.
 func (v *VersionedIndexedAttestation) AttestingIndices() ([]uint64, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return nil, errors.New("no Capella indexed attestation")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return nil, errors.New("no Zond indexed attestation")
 		}
 
-		return v.Capella.AttestingIndices, nil
+		return v.Zond.AttestingIndices, nil
 	default:
 		return nil, errors.New("unknown version")
 	}
 }
 
 // Data returns the data of the indexed attestation.
-func (v *VersionedIndexedAttestation) Data() (*capella.AttestationData, error) {
+func (v *VersionedIndexedAttestation) Data() (*zond.AttestationData, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return nil, errors.New("no Capella indexed attestation")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return nil, errors.New("no Zond indexed attestation")
 		}
 
-		return v.Capella.Data, nil
+		return v.Zond.Data, nil
 	default:
 		return nil, errors.New("unknown version")
 	}
 }
 
 // Signatures returns the signatures of the indexed attestation.
-func (v *VersionedIndexedAttestation) Signatures() ([]capella.MLDSA87Signature, error) {
+func (v *VersionedIndexedAttestation) Signatures() ([]zond.MLDSA87Signature, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return nil, errors.New("no Capella indexed attestation")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return nil, errors.New("no Zond indexed attestation")
 		}
 
-		return v.Capella.Signatures, nil
+		return v.Zond.Signatures, nil
 	default:
 		return nil, errors.New("unknown version")
 	}
@@ -75,12 +75,12 @@ func (v *VersionedIndexedAttestation) Signatures() ([]capella.MLDSA87Signature, 
 // String returns a string version of the structure.
 func (v *VersionedIndexedAttestation) String() string {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
+	case DataVersionZond:
+		if v.Zond == nil {
 			return ""
 		}
 
-		return v.Capella.String()
+		return v.Zond.String()
 	default:
 		return "unknown version"
 	}

@@ -26,7 +26,6 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/theQRL/go-qrl-beacon-client/http"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 func TestSpecConformance(t *testing.T) {
@@ -40,14 +39,14 @@ func TestSpecConformance(t *testing.T) {
 		"DEPOSIT_CHAIN_ID":                      uint64(0),
 		"DEPOSIT_CONTRACT_ADDRESS":              []byte{},
 		"DEPOSIT_NETWORK_ID":                    uint64(0),
-		"DOMAIN_AGGREGATE_AND_PROOF":            capella.DomainType{},
-		"DOMAIN_BEACON_ATTESTER":                capella.DomainType{},
-		"DOMAIN_BEACON_PROPOSER":                capella.DomainType{},
-		"DOMAIN_DEPOSIT":                        capella.DomainType{},
-		"DOMAIN_RANDAO":                         capella.DomainType{},
-		"DOMAIN_SELECTION_PROOF":                capella.DomainType{},
-		"DOMAIN_VOLUNTARY_EXIT":                 capella.DomainType{},
-		"DOMAIN_APPLICATION_BUILDER":            capella.DomainType{},
+		"DOMAIN_AGGREGATE_AND_PROOF":            zond.DomainType{},
+		"DOMAIN_BEACON_ATTESTER":                zond.DomainType{},
+		"DOMAIN_BEACON_PROPOSER":                zond.DomainType{},
+		"DOMAIN_DEPOSIT":                        zond.DomainType{},
+		"DOMAIN_RANDAO":                         zond.DomainType{},
+		"DOMAIN_SELECTION_PROOF":                zond.DomainType{},
+		"DOMAIN_VOLUNTARY_EXIT":                 zond.DomainType{},
+		"DOMAIN_APPLICATION_BUILDER":            zond.DomainType{},
 		"EFFECTIVE_BALANCE_INCREMENT":           uint64(0),
 		"EJECTION_BALANCE":                      uint64(0),
 		"EPOCHS_PER_EXECUTION_VOTING_PERIOD":    uint64(0),
@@ -56,7 +55,7 @@ func TestSpecConformance(t *testing.T) {
 		"EPOCHS_PER_SLASHINGS_VECTOR":           uint64(0),
 		"EXECUTION_FOLLOW_DISTANCE":             uint64(0),
 		"GENESIS_DELAY":                         time.Duration(0),
-		"GENESIS_FORK_VERSION":                  capella.Version{},
+		"GENESIS_FORK_VERSION":                  zond.Version{},
 		"HISTORICAL_ROOTS_LIMIT":                uint64(0),
 		"HYSTERESIS_DOWNWARD_MULTIPLIER":        uint64(0),
 		"HYSTERESIS_QUOTIENT":                   uint64(0),

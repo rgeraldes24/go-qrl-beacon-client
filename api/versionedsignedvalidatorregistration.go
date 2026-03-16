@@ -18,7 +18,6 @@ import (
 
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // VersionedSignedValidatorRegistration contains a versioned SignedValidatorRegistrationV1.
@@ -28,16 +27,16 @@ type VersionedSignedValidatorRegistration struct {
 }
 
 // FeeRecipient returns the fee recipient of the signed validator registration.
-func (v *VersionedSignedValidatorRegistration) FeeRecipient() (capella.ExecutionAddress, error) {
+func (v *VersionedSignedValidatorRegistration) FeeRecipient() (zond.ExecutionAddress, error) {
 	switch v.Version {
 	case spec.BuilderVersionV1:
 		if v.V1 == nil {
-			return capella.ExecutionAddress{}, ErrDataMissing
+			return zond.ExecutionAddress{}, ErrDataMissing
 		}
 
 		return v.V1.Message.FeeRecipient, nil
 	default:
-		return capella.ExecutionAddress{}, ErrUnsupportedVersion
+		return zond.ExecutionAddress{}, ErrUnsupportedVersion
 	}
 }
 
@@ -70,29 +69,29 @@ func (v *VersionedSignedValidatorRegistration) Timestamp() (time.Time, error) {
 }
 
 // PubKey returns the public key of the signed validator registration.
-func (v *VersionedSignedValidatorRegistration) PubKey() (capella.MLDSA87PubKey, error) {
+func (v *VersionedSignedValidatorRegistration) PubKey() (zond.MLDSA87PubKey, error) {
 	switch v.Version {
 	case spec.BuilderVersionV1:
 		if v.V1 == nil {
-			return capella.MLDSA87PubKey{}, ErrDataMissing
+			return zond.MLDSA87PubKey{}, ErrDataMissing
 		}
 
 		return v.V1.Message.Pubkey, nil
 	default:
-		return capella.MLDSA87PubKey{}, ErrUnsupportedVersion
+		return zond.MLDSA87PubKey{}, ErrUnsupportedVersion
 	}
 }
 
 // Root returns the root of the validator registration.
-func (v *VersionedSignedValidatorRegistration) Root() (capella.Root, error) {
+func (v *VersionedSignedValidatorRegistration) Root() (zond.Root, error) {
 	switch v.Version {
 	case spec.BuilderVersionV1:
 		if v.V1 == nil {
-			return capella.Root{}, ErrDataMissing
+			return zond.Root{}, ErrDataMissing
 		}
 
 		return v.V1.Message.HashTreeRoot()
 	default:
-		return capella.Root{}, ErrUnsupportedVersion
+		return zond.Root{}, ErrUnsupportedVersion
 	}
 }

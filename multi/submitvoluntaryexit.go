@@ -16,12 +16,12 @@ package multi
 import (
 	"context"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	consensusclient "github.com/theQRL/go-qrl-beacon-client"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // SubmitVoluntaryExit submits a voluntary exit.
-func (s *Service) SubmitVoluntaryExit(ctx context.Context, voluntaryExit *capella.SignedVoluntaryExit) error {
+func (s *Service) SubmitVoluntaryExit(ctx context.Context, voluntaryExit *zond.SignedVoluntaryExit) error {
 	_, err := s.doCall(ctx, func(ctx context.Context, client consensusclient.Service) (any, error) {
 		err := client.(consensusclient.VoluntaryExitSubmitter).SubmitVoluntaryExit(ctx, voluntaryExit)
 		if err != nil {

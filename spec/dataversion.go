@@ -24,17 +24,17 @@ type DataVersion uint64
 const (
 	// DataVersionUnknown is an unknown data version.
 	DataVersionUnknown DataVersion = iota
-	// DataVersionCapella is data applicable for the Capella release of the beacon chain.
-	DataVersionCapella
+	// DataVersionZond is data applicable for the Zond release of the beacon chain.
+	DataVersionZond
 )
 
 var dataVersionStrings = [...]string{
 	"unknown",
-	"capella",
+	"zond",
 }
 
 var dataVersionMap = map[string]DataVersion{
-	`"capella"`: DataVersionCapella,
+	`"zond"`: DataVersionZond,
 }
 
 // MarshalJSON implements json.Marshaler.

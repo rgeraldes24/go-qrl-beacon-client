@@ -21,15 +21,15 @@ import (
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // ProposalPreparation is the data required for proposal preparation.
 type ProposalPreparation struct {
 	// ValidatorIndex is the index of the validator making the proposal request.
-	ValidatorIndex capella.ValidatorIndex
+	ValidatorIndex zond.ValidatorIndex
 	// FeeRecipient is the execution address to be used with preparing blocks.
-	FeeRecipient capella.ExecutionAddress `ssz-size:"20"`
+	FeeRecipient zond.ExecutionAddress `ssz-size:"20"`
 }
 
 // proposalPreparationJSON is the spec representation of the struct.
@@ -64,7 +64,7 @@ func (p *ProposalPreparation) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for validator index")
 	}
 
-	p.ValidatorIndex = capella.ValidatorIndex(validatorIndex)
+	p.ValidatorIndex = zond.ValidatorIndex(validatorIndex)
 
 	if data.FeeRecipient == "" {
 		return errors.New("fee recipient is missing")

@@ -13,18 +13,18 @@
 
 package api
 
-import "github.com/theQRL/go-qrl-beacon-client/spec/capella"
+import "github.com/theQRL/go-qrl-beacon-client/spec/zond"
 
 // AttestationRewardsOpts are the options for obtaining attestation rewards.
 type AttestationRewardsOpts struct {
 	Common CommonOpts
 
 	// Epoch is the epoch for which the data is obtained.
-	Epoch capella.Epoch
+	Epoch zond.Epoch
 	// Indices is a list of validator indices to restrict the returned values.
 	// If no indices are supplied then no filter will be applied.
-	Indices []capella.ValidatorIndex
+	Indices []zond.ValidatorIndex
 	// PubKeys is a list of validator public keys to restrict the returned values.
 	// If no public keys are supplied then no filter will be applied.
-	PubKeys []capella.MLDSA87PubKey
+	PubKeys []zond.MLDSA87PubKey
 }

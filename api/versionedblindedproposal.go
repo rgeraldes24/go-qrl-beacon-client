@@ -14,75 +14,73 @@
 package api
 
 import (
-	apiv1capella "github.com/theQRL/go-qrl-beacon-client/api/v1/capella"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // VersionedBlindedProposal contains a versioned blinded proposal.
 type VersionedBlindedProposal struct {
 	Version spec.DataVersion
-	Capella *apiv1capella.BlindedBeaconBlock
+	Zond    *apiv1zond.BlindedBeaconBlock
 }
 
 // IsEmpty returns true if there is no proposal.
 func (v *VersionedBlindedProposal) IsEmpty() bool {
-	return v.Capella == nil
+	return v.Zond == nil
 }
 
 // Slot returns the slot of the blinded proposal.
-func (v *VersionedBlindedProposal) Slot() (capella.Slot, error) {
+func (v *VersionedBlindedProposal) Slot() (zond.Slot, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil {
+	case spec.DataVersionZond:
+		if v.Zond == nil {
 			return 0, ErrDataMissing
 		}
 
-		return v.Capella.Slot, nil
+		return v.Zond.Slot, nil
 	default:
 		return 0, ErrUnsupportedVersion
 	}
 }
 
 // ProposerIndex returns the proposer index of the blinded proposal.
-func (v *VersionedBlindedProposal) ProposerIndex() (capella.ValidatorIndex, error) {
+func (v *VersionedBlindedProposal) ProposerIndex() (zond.ValidatorIndex, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil {
+	case spec.DataVersionZond:
+		if v.Zond == nil {
 			return 0, ErrDataMissing
 		}
 
-		return v.Capella.ProposerIndex, nil
+		return v.Zond.ProposerIndex, nil
 	default:
 		return 0, ErrUnsupportedVersion
 	}
 }
 
 // RandaoReveal returns the RANDAO reveal of the blinded proposal.
-func (v *VersionedBlindedProposal) RandaoReveal() (capella.MLDSA87Signature, error) {
+func (v *VersionedBlindedProposal) RandaoReveal() (zond.MLDSA87Signature, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil ||
-			v.Capella.Body == nil {
-			return capella.MLDSA87Signature{}, ErrDataMissing
+	case spec.DataVersionZond:
+		if v.Zond == nil ||
+			v.Zond.Body == nil {
+			return zond.MLDSA87Signature{}, ErrDataMissing
 		}
 
-		return v.Capella.Body.RANDAOReveal, nil
+		return v.Zond.Body.RANDAOReveal, nil
 	default:
-		return capella.MLDSA87Signature{}, ErrUnsupportedVersion
+		return zond.MLDSA87Signature{}, ErrUnsupportedVersion
 	}
 }
 
 // Graffiti returns the graffiti of the blinded proposal.
 func (v *VersionedBlindedProposal) Graffiti() ([32]byte, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil ||
-			v.Capella.Body == nil {
+	case spec.DataVersionZond:
+		if v.Zond == nil ||
+			v.Zond.Body == nil {
 			return [32]byte{}, ErrDataMissing
 		}
 
-		return v.Capella.Body.Graffiti, nil
+		return v.Zond.Body.Graffiti, nil
 	default:
 		return [32]byte{}, ErrUnsupportedVersion
 	}
@@ -91,16 +89,16 @@ func (v *VersionedBlindedProposal) Graffiti() ([32]byte, error) {
 // Attestations returns the attestations of the blinded proposal.
 func (v *VersionedBlindedProposal) Attestations() ([]spec.VersionedAttestation, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil || v.Capella.Body == nil {
+	case spec.DataVersionZond:
+		if v.Zond == nil || v.Zond.Body == nil {
 			return nil, ErrDataMissing
 		}
 
-		versionedAttestations := make([]spec.VersionedAttestation, len(v.Capella.Body.Attestations))
-		for i, attestation := range v.Capella.Body.Attestations {
+		versionedAttestations := make([]spec.VersionedAttestation, len(v.Zond.Body.Attestations))
+		for i, attestation := range v.Zond.Body.Attestations {
 			versionedAttestations[i] = spec.VersionedAttestation{
-				Version: spec.DataVersionCapella,
-				Capella: attestation,
+				Version: spec.DataVersionZond,
+				Zond:    attestation,
 			}
 		}
 
@@ -111,105 +109,105 @@ func (v *VersionedBlindedProposal) Attestations() ([]spec.VersionedAttestation, 
 }
 
 // Root returns the root of the blinded proposal.
-func (v *VersionedBlindedProposal) Root() (capella.Root, error) {
+func (v *VersionedBlindedProposal) Root() (zond.Root, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil {
-			return capella.Root{}, ErrDataMissing
+	case spec.DataVersionZond:
+		if v.Zond == nil {
+			return zond.Root{}, ErrDataMissing
 		}
 
-		return v.Capella.HashTreeRoot()
+		return v.Zond.HashTreeRoot()
 	default:
-		return capella.Root{}, ErrUnsupportedVersion
+		return zond.Root{}, ErrUnsupportedVersion
 	}
 }
 
 // BodyRoot returns the body root of the blinded proposal.
-func (v *VersionedBlindedProposal) BodyRoot() (capella.Root, error) {
+func (v *VersionedBlindedProposal) BodyRoot() (zond.Root, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil ||
-			v.Capella.Body == nil {
-			return capella.Root{}, ErrDataMissing
+	case spec.DataVersionZond:
+		if v.Zond == nil ||
+			v.Zond.Body == nil {
+			return zond.Root{}, ErrDataMissing
 		}
 
-		return v.Capella.Body.HashTreeRoot()
+		return v.Zond.Body.HashTreeRoot()
 	default:
-		return capella.Root{}, ErrUnsupportedVersion
+		return zond.Root{}, ErrUnsupportedVersion
 	}
 }
 
 // ParentRoot returns the parent root of the blinded proposal.
-func (v *VersionedBlindedProposal) ParentRoot() (capella.Root, error) {
+func (v *VersionedBlindedProposal) ParentRoot() (zond.Root, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil {
-			return capella.Root{}, ErrDataMissing
+	case spec.DataVersionZond:
+		if v.Zond == nil {
+			return zond.Root{}, ErrDataMissing
 		}
 
-		return v.Capella.ParentRoot, nil
+		return v.Zond.ParentRoot, nil
 	default:
-		return capella.Root{}, ErrUnsupportedVersion
+		return zond.Root{}, ErrUnsupportedVersion
 	}
 }
 
 // StateRoot returns the state root of the blinded proposal.
-func (v *VersionedBlindedProposal) StateRoot() (capella.Root, error) {
+func (v *VersionedBlindedProposal) StateRoot() (zond.Root, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil {
-			return capella.Root{}, ErrDataMissing
+	case spec.DataVersionZond:
+		if v.Zond == nil {
+			return zond.Root{}, ErrDataMissing
 		}
 
-		return v.Capella.StateRoot, nil
+		return v.Zond.StateRoot, nil
 	default:
-		return capella.Root{}, ErrUnsupportedVersion
+		return zond.Root{}, ErrUnsupportedVersion
 	}
 }
 
 // TransactionsRoot returns the transactions root of the blinded proposal.
-func (v *VersionedBlindedProposal) TransactionsRoot() (capella.Root, error) {
+func (v *VersionedBlindedProposal) TransactionsRoot() (zond.Root, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil ||
-			v.Capella.Body == nil ||
-			v.Capella.Body.ExecutionPayloadHeader == nil {
-			return capella.Root{}, ErrDataMissing
+	case spec.DataVersionZond:
+		if v.Zond == nil ||
+			v.Zond.Body == nil ||
+			v.Zond.Body.ExecutionPayloadHeader == nil {
+			return zond.Root{}, ErrDataMissing
 		}
 
-		return v.Capella.Body.ExecutionPayloadHeader.TransactionsRoot, nil
+		return v.Zond.Body.ExecutionPayloadHeader.TransactionsRoot, nil
 	default:
-		return capella.Root{}, ErrUnsupportedVersion
+		return zond.Root{}, ErrUnsupportedVersion
 	}
 }
 
 // FeeRecipient returns the fee recipient of the blinded proposal.
-func (v *VersionedBlindedProposal) FeeRecipient() (capella.ExecutionAddress, error) {
+func (v *VersionedBlindedProposal) FeeRecipient() (zond.ExecutionAddress, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil ||
-			v.Capella.Body == nil ||
-			v.Capella.Body.ExecutionPayloadHeader == nil {
-			return capella.ExecutionAddress{}, ErrDataMissing
+	case spec.DataVersionZond:
+		if v.Zond == nil ||
+			v.Zond.Body == nil ||
+			v.Zond.Body.ExecutionPayloadHeader == nil {
+			return zond.ExecutionAddress{}, ErrDataMissing
 		}
 
-		return v.Capella.Body.ExecutionPayloadHeader.FeeRecipient, nil
+		return v.Zond.Body.ExecutionPayloadHeader.FeeRecipient, nil
 	default:
-		return capella.ExecutionAddress{}, ErrUnsupportedVersion
+		return zond.ExecutionAddress{}, ErrUnsupportedVersion
 	}
 }
 
 // Timestamp returns the timestamp of the blinded proposal.
 func (v *VersionedBlindedProposal) Timestamp() (uint64, error) {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil ||
-			v.Capella.Body == nil ||
-			v.Capella.Body.ExecutionPayloadHeader == nil {
+	case spec.DataVersionZond:
+		if v.Zond == nil ||
+			v.Zond.Body == nil ||
+			v.Zond.Body.ExecutionPayloadHeader == nil {
 			return 0, ErrDataMissing
 		}
 
-		return v.Capella.Body.ExecutionPayloadHeader.Timestamp, nil
+		return v.Zond.Body.ExecutionPayloadHeader.Timestamp, nil
 	default:
 		return 0, ErrUnsupportedVersion
 	}
@@ -218,12 +216,12 @@ func (v *VersionedBlindedProposal) Timestamp() (uint64, error) {
 // String returns a string version of the structure.
 func (v *VersionedBlindedProposal) String() string {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil {
+	case spec.DataVersionZond:
+		if v.Zond == nil {
 			return ""
 		}
 
-		return v.Capella.String()
+		return v.Zond.String()
 	default:
 		return "unknown version"
 	}

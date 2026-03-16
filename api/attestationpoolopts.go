@@ -13,7 +13,7 @@
 
 package api
 
-import "github.com/theQRL/go-qrl-beacon-client/spec/capella"
+import "github.com/theQRL/go-qrl-beacon-client/spec/zond"
 
 // AttestationPoolOpts are the options for obtaining the attestation pool.
 type AttestationPoolOpts struct {
@@ -21,9 +21,9 @@ type AttestationPoolOpts struct {
 
 	// Slot is the slot for which the data is obtained.  If not present then
 	// data for all slots will be obtained.
-	Slot *capella.Slot
+	Slot *zond.Slot
 
 	// CommitteeIndex is the committee index for which the data is obtained.
 	// If not present then data for all committee indices will be obtained.
-	CommitteeIndex *capella.CommitteeIndex
+	CommitteeIndex *zond.CommitteeIndex
 }

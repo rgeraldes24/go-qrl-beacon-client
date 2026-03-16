@@ -80,7 +80,7 @@ func TestBeaconBlockHeaderJSON(t *testing.T) {
 		{
 			name:  "HeaderWrongType",
 			input: []byte(`{"root":"0xbc354f1a5f27f8d096eee9e6b6139e1b730385f9752513832a57c9849a149df7","canonical":true,"header":true}`),
-			err:   "invalid JSON: invalid JSON: json: cannot unmarshal bool into Go value of type capella.signedBeaconBlockHeaderJSON",
+			err:   "invalid JSON: invalid JSON: json: cannot unmarshal bool into Go value of type zond.signedBeaconBlockHeaderJSON",
 		},
 		{
 			name:  "HeaderInvalid",

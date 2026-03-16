@@ -16,16 +16,16 @@ package multi
 import (
 	"context"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	consensusclient "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // ForkSchedule provides details of past and future changes in the chain's fork version.
 func (s *Service) ForkSchedule(ctx context.Context,
 	opts *api.ForkScheduleOpts,
 ) (
-	*api.Response[[]*capella.Fork],
+	*api.Response[[]*zond.Fork],
 	error,
 ) {
 	res, err := s.doCall(ctx, func(ctx context.Context, client consensusclient.Service) (any, error) {
@@ -40,7 +40,7 @@ func (s *Service) ForkSchedule(ctx context.Context,
 		return nil, err
 	}
 
-	response, isResponse := res.(*api.Response[[]*capella.Fork])
+	response, isResponse := res.(*api.Response[[]*zond.Fork])
 	if !isResponse {
 		return nil, ErrIncorrectType
 	}

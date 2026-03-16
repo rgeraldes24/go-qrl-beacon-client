@@ -16,7 +16,7 @@ package mock
 import (
 	"context"
 
-	spec "github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	spec "github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // SelectionProofDomain provides the selection proof domain.

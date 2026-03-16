@@ -22,17 +22,17 @@ import (
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // HeadEvent is the data for the head event.
 type HeadEvent struct {
-	Slot                      capella.Slot
-	Block                     capella.Root
-	State                     capella.Root
+	Slot                      zond.Slot
+	Block                     zond.Root
+	State                     zond.Root
 	EpochTransition           bool
-	CurrentDutyDependentRoot  capella.Root
-	PreviousDutyDependentRoot capella.Root
+	CurrentDutyDependentRoot  zond.Root
+	PreviousDutyDependentRoot zond.Root
 }
 
 // headEventJSON is the spec representation of the struct.
@@ -54,7 +54,7 @@ func (e *HeadEvent) MarshalJSON() ([]byte, error) {
 		EpochTransition: e.EpochTransition,
 	}
 	// Optional fields (for now).
-	var zeroRoot capella.Root
+	var zeroRoot zond.Root
 	if !bytes.Equal(zeroRoot[:], e.CurrentDutyDependentRoot[:]) {
 		data.CurrentDutyDependentRoot = fmt.Sprintf("%#x", e.CurrentDutyDependentRoot)
 	}
@@ -84,7 +84,7 @@ func (e *HeadEvent) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for slot")
 	}
 
-	e.Slot = capella.Slot(slot)
+	e.Slot = zond.Slot(slot)
 
 	if headEventJSON.Block == "" {
 		return errors.New("block missing")

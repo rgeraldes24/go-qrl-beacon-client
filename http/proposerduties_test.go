@@ -24,7 +24,6 @@ import (
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/http"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 func TestProposerDuties(t *testing.T) {
@@ -49,7 +48,7 @@ func TestProposerDuties(t *testing.T) {
 	tests := []struct {
 		name             string
 		opts             *api.ProposerDutiesOpts
-		validatorIndices []capella.ValidatorIndex
+		validatorIndices []zond.ValidatorIndex
 		expected         int
 		err              string
 	}{
@@ -60,7 +59,7 @@ func TestProposerDuties(t *testing.T) {
 		},
 		{
 			name:     "Current",
-			opts:     &api.ProposerDutiesOpts{Epoch: capella.Epoch(uint64(time.Since(genesisResponse.Data.GenesisTime).Seconds()) / (uint64(slotDuration.Seconds()) * slotsPerEpoch))},
+			opts:     &api.ProposerDutiesOpts{Epoch: zond.Epoch(uint64(time.Since(genesisResponse.Data.GenesisTime).Seconds()) / (uint64(slotDuration.Seconds()) * slotsPerEpoch))},
 			expected: int(slotsPerEpoch),
 		},
 	}

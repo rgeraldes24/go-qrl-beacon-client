@@ -13,16 +13,14 @@
 
 package api
 
-import "github.com/theQRL/go-qrl-beacon-client/spec/capella"
-
 // SyncCommitteeContributionOpts are the options for obtaining sync committee contributions.
 type SyncCommitteeContributionOpts struct {
 	Common CommonOpts
 
 	// Slot is the slot for which the data is obtained.
-	Slot capella.Slot
+	Slot zond.Slot
 	// SubcommitteeIndex is the index of the sync subcommittee for which the data is obtained.
 	SubcommitteeIndex uint64
 	// BeaconBlockRoot is the root of the beacon block for which the data is obtained.
-	BeaconBlockRoot capella.Root
+	BeaconBlockRoot zond.Root
 }

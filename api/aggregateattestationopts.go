@@ -13,18 +13,16 @@
 
 package api
 
-import (
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
-)
+import "github.com/theQRL/go-qrl-beacon-client/spec/zond"
 
 // AggregateAttestationOpts are the options for obtaining aggregate attestations.
 type AggregateAttestationOpts struct {
 	Common CommonOpts
 
 	// Slot is the slot for which the data is obtained.
-	Slot capella.Slot
+	Slot zond.Slot
 	// AttestationDataRoot is the root for which the data is obtained.
-	AttestationDataRoot capella.Root
+	AttestationDataRoot zond.Root
 	// CommitteeIndex is the committee index the attestation data belongs to.
-	CommitteeIndex capella.CommitteeIndex
+	CommitteeIndex zond.CommitteeIndex
 }

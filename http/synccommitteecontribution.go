@@ -21,14 +21,14 @@ import (
 
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/qrysm/v4/proto/zond/v2"
 )
 
 // SyncCommitteeContribution provides a sync committee contribution.
 func (s *Service) SyncCommitteeContribution(ctx context.Context,
 	opts *api.SyncCommitteeContributionOpts,
 ) (
-	*api.Response[*capella.SyncCommitteeContribution],
+	*api.Response[*zond.SyncCommitteeContribution],
 	error,
 ) {
 	if err := s.assertIsActive(ctx); err != nil {
@@ -55,7 +55,7 @@ func (s *Service) SyncCommitteeContribution(ctx context.Context,
 		return nil, err
 	}
 
-	data, metadata, err := decodeJSONResponse(bytes.NewReader(httpResponse.body), capella.SyncCommitteeContribution{})
+	data, metadata, err := decodeJSONResponse(bytes.NewReader(httpResponse.body), zond.SyncCommitteeContribution{})
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +79,7 @@ func (s *Service) SyncCommitteeContribution(ctx context.Context,
 		)
 	}
 
-	return &api.Response[*capella.SyncCommitteeContribution]{
+	return &api.Response[*zond.SyncCommitteeContribution]{
 		Metadata: metadata,
 		Data:     &data,
 	}, nil

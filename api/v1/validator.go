@@ -20,23 +20,23 @@ import (
 	"strconv"
 
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // Validator contains the spec validator plus additional fields.
 type Validator struct {
-	Index     capella.ValidatorIndex
-	Balance   capella.Gwei
+	Index     zond.ValidatorIndex
+	Balance   zond.Gwei
 	Status    ValidatorState
-	Validator *capella.Validator
+	Validator *zond.Validator
 }
 
 // validatorJSON is the spec representation of the struct.
 type validatorJSON struct {
-	Index     string             `json:"index"`
-	Balance   string             `json:"balance"`
-	Status    ValidatorState     `json:"status"`
-	Validator *capella.Validator `json:"validator"`
+	Index     string          `json:"index"`
+	Balance   string          `json:"balance"`
+	Status    ValidatorState  `json:"status"`
+	Validator *zond.Validator `json:"validator"`
 }
 
 // MarshalJSON implements json.Marshaler.
@@ -67,7 +67,7 @@ func (v *Validator) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for index")
 	}
 
-	v.Index = capella.ValidatorIndex(index)
+	v.Index = zond.ValidatorIndex(index)
 
 	if validatorJSON.Balance == "" {
 		return errors.New("balance missing")
@@ -78,7 +78,7 @@ func (v *Validator) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for balance")
 	}
 
-	v.Balance = capella.Gwei(balance)
+	v.Balance = zond.Gwei(balance)
 
 	v.Status = validatorJSON.Status
 	if validatorJSON.Validator == nil {
@@ -101,6 +101,6 @@ func (v *Validator) String() string {
 }
 
 // PubKey implements ValidatorPubKeyProvider.
-func (v *Validator) PubKey(_ context.Context) (capella.MLDSA87PubKey, error) {
+func (v *Validator) PubKey(_ context.Context) (zond.MLDSA87PubKey, error) {
 	return v.Validator.PublicKey, nil
 }

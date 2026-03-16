@@ -22,7 +22,6 @@ import (
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/http"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 func TestSpec(t *testing.T) {
@@ -50,7 +49,7 @@ func TestSpec(t *testing.T) {
 			// Check an integer type.
 			require.IsType(t, response.Data["BASE_REWARD_FACTOR"], uint64(0))
 			// Check a byte array type.
-			require.IsType(t, response.Data["DOMAIN_DEPOSIT"], capella.DomainType{})
+			require.IsType(t, response.Data["DOMAIN_DEPOSIT"], zond.DomainType{})
 		})
 	}
 }

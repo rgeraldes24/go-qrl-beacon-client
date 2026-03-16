@@ -21,7 +21,6 @@ import (
 	"time"
 
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 
 	"github.com/stretchr/testify/require"
 	bitfield "github.com/theQRL/go-bitfield"
@@ -55,7 +54,7 @@ func TestSubmitAttestations(t *testing.T) {
 		{
 			name: "Good",
 			opts: &api.AttestationDataOpts{
-				Slot: capella.Slot(uint64(time.Since(genesisResponse.Data.GenesisTime).Seconds()) / uint64(slotDuration.Seconds())),
+				Slot: zond.Slot(uint64(time.Since(genesisResponse.Data.GenesisTime).Seconds()) / uint64(slotDuration.Seconds())),
 			},
 		},
 	}
@@ -68,10 +67,10 @@ func TestSubmitAttestations(t *testing.T) {
 
 			aggregationBits := bitfield.NewBitlist(160)
 			aggregationBits.SetBitAt(1, true)
-			attestation := &capella.Attestation{
+			attestation := &zond.Attestation{
 				AggregationBits: aggregationBits,
 				Data:            attestationDataResponse.Data,
-				Signatures: []capella.MLDSA87Signature{
+				Signatures: []zond.MLDSA87Signature{
 					{
 						0xb1, 0x3c, 0xa7, 0x7f, 0xda, 0xb9, 0x0f, 0xce, 0xdf, 0x0c, 0xda, 0x74, 0xe9, 0xe9, 0xda, 0x1e,
 						0xdb, 0xe4, 0x32, 0x91, 0x09, 0x48, 0xca, 0xad, 0xca, 0x64, 0xbb, 0xfb, 0x93, 0x34, 0x26, 0x44,
@@ -84,7 +83,7 @@ func TestSubmitAttestations(t *testing.T) {
 			}
 
 			versionedAttestations := []*spec.VersionedAttestation{
-				{Version: spec.DataVersionCapella, Capella: attestation},
+				{Version: spec.DataVersionZond, Zond: attestation},
 			}
 			opts := &api.SubmitAttestationsOpts{
 				Attestations: versionedAttestations,

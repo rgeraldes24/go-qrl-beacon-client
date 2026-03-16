@@ -23,7 +23,7 @@ import (
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/http"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 func TestBeaconStateRandao(t *testing.T) {
@@ -33,7 +33,7 @@ func TestBeaconStateRandao(t *testing.T) {
 	tests := []struct {
 		name     string
 		opts     *api.BeaconStateRandaoOpts
-		expected *capella.Root
+		expected *zond.Root
 		err      string
 		errCode  int
 	}{

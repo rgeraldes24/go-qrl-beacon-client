@@ -23,7 +23,7 @@ import (
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	zond "github.com/theQRL/qrysm/v4/proto/prysm/v1alpha1"
 )
 
 // SignedBeaconBlock fetches a signed beacon block given a block ID.
@@ -97,16 +97,16 @@ func (s *Service) signedBeaconBlockFromSSZ(ctx context.Context,
 	var err error
 
 	switch res.consensusVersion {
-	case spec.DataVersionCapella:
-		response.Data.Capella = &capella.SignedBeaconBlock{}
+	case spec.DataVersionZond:
+		response.Data.Zond = &zond.SignedBeaconBlock{}
 		if s.customSpecSupport {
-			err = dynSSZ.UnmarshalSSZ(response.Data.Capella, res.body)
+			err = dynSSZ.UnmarshalSSZ(response.Data.Zond, res.body)
 		} else {
-			err = response.Data.Capella.UnmarshalSSZ(res.body)
+			err = response.Data.Zond.UnmarshalSSZ(res.body)
 		}
 
 		if err != nil {
-			return nil, errors.Join(errors.New("failed to decode capella signed beacon block"), err)
+			return nil, errors.Join(errors.New("failed to decode zond signed beacon block"), err)
 		}
 	default:
 		return nil, fmt.Errorf("unhandled block version %s", res.consensusVersion)
@@ -125,9 +125,9 @@ func (*Service) signedBeaconBlockFromJSON(res *httpResponse) (*api.Response[*spe
 	var err error
 
 	switch res.consensusVersion {
-	case spec.DataVersionCapella:
-		response.Data.Capella, response.Metadata, err = decodeJSONResponse(bytes.NewReader(res.body),
-			&capella.SignedBeaconBlock{},
+	case spec.DataVersionZond:
+		response.Data.Zond, response.Metadata, err = decodeJSONResponse(bytes.NewReader(res.body),
+			&zond.SignedBeaconBlock{},
 		)
 	default:
 		return nil, fmt.Errorf("unhandled version %s", res.consensusVersion)

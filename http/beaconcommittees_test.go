@@ -23,19 +23,19 @@ import (
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/http"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 func TestBeaconCommittees(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	epoch := capella.Epoch(0)
+	epoch := zond.Epoch(0)
 
 	tests := []struct {
 		name     string
 		opts     *api.BeaconCommitteesOpts
-		expected *capella.Attestation
+		expected *zond.Attestation
 		err      string
 		errCode  int
 	}{

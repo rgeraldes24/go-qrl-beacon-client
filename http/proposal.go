@@ -24,9 +24,8 @@ import (
 	dynssz "github.com/pk910/dynamic-ssz"
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	apiv1capella "github.com/theQRL/go-qrl-beacon-client/api/v1/capella"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	zond "github.com/theQRL/qrysm/v4/proto/prysm/v1alpha1"
 	"go.opentelemetry.io/otel"
 )
 
@@ -158,20 +157,20 @@ func (s *Service) beaconBlockProposalFromSSZ(ctx context.Context,
 	var err error
 
 	switch res.consensusVersion {
-	case spec.DataVersionCapella:
+	case spec.DataVersionZond:
 		if response.Data.Blinded {
-			response.Data.CapellaBlinded = &apiv1capella.BlindedBeaconBlock{}
+			response.Data.ZondBlinded = &apiv1zond.BlindedBeaconBlock{}
 			if s.customSpecSupport {
-				err = dynSSZ.UnmarshalSSZ(response.Data.CapellaBlinded, res.body)
+				err = dynSSZ.UnmarshalSSZ(response.Data.ZondBlinded, res.body)
 			} else {
-				err = response.Data.CapellaBlinded.UnmarshalSSZ(res.body)
+				err = response.Data.ZondBlinded.UnmarshalSSZ(res.body)
 			}
 		} else {
-			response.Data.Capella = &capella.BeaconBlock{}
+			response.Data.Zond = &zond.BeaconBlock{}
 			if s.customSpecSupport {
-				err = dynSSZ.UnmarshalSSZ(response.Data.Capella, res.body)
+				err = dynSSZ.UnmarshalSSZ(response.Data.Zond, res.body)
 			} else {
-				err = response.Data.Capella.UnmarshalSSZ(res.body)
+				err = response.Data.Zond.UnmarshalSSZ(res.body)
 			}
 		}
 	default:
@@ -205,16 +204,16 @@ func (s *Service) beaconBlockProposalFromJSON(res *httpResponse) (*api.Response[
 	var err error
 
 	switch res.consensusVersion {
-	case spec.DataVersionCapella:
+	case spec.DataVersionZond:
 		if response.Data.Blinded {
-			response.Data.CapellaBlinded, response.Metadata, err = decodeJSONResponse(
+			response.Data.ZondBlinded, response.Metadata, err = decodeJSONResponse(
 				bytes.NewReader(res.body),
-				&apiv1capella.BlindedBeaconBlock{},
+				&apiv1zond.BlindedBeaconBlock{},
 			)
 		} else {
-			response.Data.Capella, response.Metadata, err = decodeJSONResponse(
+			response.Data.Zond, response.Metadata, err = decodeJSONResponse(
 				bytes.NewReader(res.body),
-				&capella.BeaconBlock{},
+				&zond.BeaconBlock{},
 			)
 		}
 	default:

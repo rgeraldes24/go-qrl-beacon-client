@@ -17,9 +17,8 @@ import (
 	"errors"
 	"math/big"
 
-	apiv1capella "github.com/theQRL/go-qrl-beacon-client/api/v1/capella"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // VersionedSignedProposal contains a versioned signed beacon node proposal.
@@ -28,21 +27,21 @@ type VersionedSignedProposal struct {
 	Blinded        bool
 	ConsensusValue *big.Int
 	ExecutionValue *big.Int
-	Capella        *capella.SignedBeaconBlock
-	CapellaBlinded *apiv1capella.SignedBlindedBeaconBlock
+	Zond           *zond.SignedBeaconBlock
+	ZondBlinded    *apiv1zond.SignedBlindedBeaconBlock
 }
 
 // AssertPresent throws an error if the expected proposal
 // given the version and blinded fields is not present.
 func (v *VersionedSignedProposal) AssertPresent() error {
 	switch v.Version {
-	case spec.DataVersionCapella:
-		if v.Capella == nil && !v.Blinded {
-			return errors.New("capella proposal not present")
+	case spec.DataVersionZond:
+		if v.Zond == nil && !v.Blinded {
+			return errors.New("zond proposal not present")
 		}
 
-		if v.CapellaBlinded == nil && v.Blinded {
-			return errors.New("blinded capella proposal not present")
+		if v.ZondBlinded == nil && v.Blinded {
+			return errors.New("blinded zond proposal not present")
 		}
 	default:
 		return errors.New("unsupported version")
@@ -52,77 +51,77 @@ func (v *VersionedSignedProposal) AssertPresent() error {
 }
 
 // Slot returns the slot of the signed proposal.
-func (v *VersionedSignedProposal) Slot() (capella.Slot, error) {
+func (v *VersionedSignedProposal) Slot() (zond.Slot, error) {
 	err := v.assertMessagePresent()
 	if err != nil {
 		return 0, err
 	}
 
 	switch v.Version {
-	case spec.DataVersionCapella:
+	case spec.DataVersionZond:
 		if v.Blinded {
-			return v.CapellaBlinded.Message.Slot, nil
+			return v.ZondBlinded.Message.Slot, nil
 		}
 
-		return v.Capella.Message.Slot, nil
+		return v.Zond.Message.Slot, nil
 	default:
 		return 0, ErrUnsupportedVersion
 	}
 }
 
 // ProposerIndex returns the proposer index of the signed proposal.
-func (v *VersionedSignedProposal) ProposerIndex() (capella.ValidatorIndex, error) {
+func (v *VersionedSignedProposal) ProposerIndex() (zond.ValidatorIndex, error) {
 	if err := v.assertMessagePresent(); err != nil {
 		return 0, err
 	}
 
 	switch v.Version {
-	case spec.DataVersionCapella:
+	case spec.DataVersionZond:
 		if v.Blinded {
-			return v.CapellaBlinded.Message.ProposerIndex, nil
+			return v.ZondBlinded.Message.ProposerIndex, nil
 		}
 
-		return v.Capella.Message.ProposerIndex, nil
+		return v.Zond.Message.ProposerIndex, nil
 	default:
 		return 0, ErrUnsupportedVersion
 	}
 }
 
 // ExecutionBlockHash returns the hash of the execution payload.
-func (v *VersionedSignedProposal) ExecutionBlockHash() (capella.Hash32, error) {
+func (v *VersionedSignedProposal) ExecutionBlockHash() (zond.Hash32, error) {
 	if err := v.assertExecutionPayloadPresent(); err != nil {
-		return capella.Hash32{}, err
+		return zond.Hash32{}, err
 	}
 
 	switch v.Version {
-	case spec.DataVersionCapella:
+	case spec.DataVersionZond:
 		if v.Blinded {
-			return v.CapellaBlinded.Message.Body.ExecutionPayloadHeader.BlockHash, nil
+			return v.ZondBlinded.Message.Body.ExecutionPayloadHeader.BlockHash, nil
 		}
 
-		return v.Capella.Message.Body.ExecutionPayload.BlockHash, nil
+		return v.Zond.Message.Body.ExecutionPayload.BlockHash, nil
 	default:
-		return capella.Hash32{}, ErrUnsupportedVersion
+		return zond.Hash32{}, ErrUnsupportedVersion
 	}
 }
 
 // String returns a string version of the structure.
 func (v *VersionedSignedProposal) String() string {
 	switch v.Version {
-	case spec.DataVersionCapella:
+	case spec.DataVersionZond:
 		if v.Blinded {
-			if v.CapellaBlinded == nil {
+			if v.ZondBlinded == nil {
 				return ""
 			}
 
-			return v.CapellaBlinded.String()
+			return v.ZondBlinded.String()
 		}
 
-		if v.Capella == nil {
+		if v.Zond == nil {
 			return ""
 		}
 
-		return v.Capella.String()
+		return v.Zond.String()
 	default:
 		return "unsupported version"
 	}
@@ -134,15 +133,15 @@ func (v *VersionedSignedProposal) String() string {
 //nolint:gocyclo // ignore
 func (v *VersionedSignedProposal) assertMessagePresent() error {
 	switch v.Version {
-	case spec.DataVersionCapella:
+	case spec.DataVersionZond:
 		if v.Blinded {
-			if v.CapellaBlinded == nil ||
-				v.CapellaBlinded.Message == nil {
+			if v.ZondBlinded == nil ||
+				v.ZondBlinded.Message == nil {
 				return ErrDataMissing
 			}
 		} else {
-			if v.Capella == nil ||
-				v.Capella.Message == nil {
+			if v.Zond == nil ||
+				v.Zond.Message == nil {
 				return ErrDataMissing
 			}
 		}
@@ -159,19 +158,19 @@ func (v *VersionedSignedProposal) assertMessagePresent() error {
 //nolint:gocyclo
 func (v *VersionedSignedProposal) assertExecutionPayloadPresent() error {
 	switch v.Version {
-	case spec.DataVersionCapella:
+	case spec.DataVersionZond:
 		if v.Blinded {
-			if v.CapellaBlinded == nil ||
-				v.CapellaBlinded.Message == nil ||
-				v.CapellaBlinded.Message.Body == nil ||
-				v.CapellaBlinded.Message.Body.ExecutionPayloadHeader == nil {
+			if v.ZondBlinded == nil ||
+				v.ZondBlinded.Message == nil ||
+				v.ZondBlinded.Message.Body == nil ||
+				v.ZondBlinded.Message.Body.ExecutionPayloadHeader == nil {
 				return ErrDataMissing
 			}
 		} else {
-			if v.Capella == nil ||
-				v.Capella.Message == nil ||
-				v.Capella.Message.Body == nil ||
-				v.Capella.Message.Body.ExecutionPayload == nil {
+			if v.Zond == nil ||
+				v.Zond.Message == nil ||
+				v.Zond.Message.Body == nil ||
+				v.Zond.Message.Body.ExecutionPayload == nil {
 				return ErrDataMissing
 			}
 		}

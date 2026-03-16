@@ -26,7 +26,6 @@ import (
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
 	"github.com/theQRL/go-qrl-beacon-client/http"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 func TestValidatorLiveness(t *testing.T) {
@@ -61,16 +60,16 @@ func TestValidatorLiveness(t *testing.T) {
 		{
 			name: "NoValidatorIndices",
 			opts: &api.ValidatorLivenessOpts{
-				Epoch:   capella.Epoch(time.Since(genesisResponse.Data.GenesisTime).Seconds()) / capella.Epoch(slotDuration.Seconds()) / capella.Epoch(slotsPerEpoch),
-				Indices: []capella.ValidatorIndex{},
+				Epoch:   zond.Epoch(time.Since(genesisResponse.Data.GenesisTime).Seconds()) / zond.Epoch(slotDuration.Seconds()) / zond.Epoch(slotsPerEpoch),
+				Indices: []zond.ValidatorIndex{},
 			},
 			err: "no validator indices specified",
 		},
 		{
 			name: "Good",
 			opts: &api.ValidatorLivenessOpts{
-				Epoch:   capella.Epoch(time.Since(genesisResponse.Data.GenesisTime).Seconds()) / capella.Epoch(slotDuration.Seconds()) / capella.Epoch(slotsPerEpoch),
-				Indices: []capella.ValidatorIndex{0, 1},
+				Epoch:   zond.Epoch(time.Since(genesisResponse.Data.GenesisTime).Seconds()) / zond.Epoch(slotDuration.Seconds()) / zond.Epoch(slotsPerEpoch),
+				Indices: []zond.ValidatorIndex{0, 1},
 			},
 		},
 	}

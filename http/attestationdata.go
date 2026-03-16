@@ -21,14 +21,13 @@ import (
 
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // AttestationData obtains attestation data given the options.
 func (s *Service) AttestationData(ctx context.Context,
 	opts *api.AttestationDataOpts,
 ) (
-	*api.Response[*capella.AttestationData],
+	*api.Response[*zond.AttestationData],
 	error,
 ) {
 	if err := s.assertIsSynced(ctx); err != nil {
@@ -59,10 +58,10 @@ func (s *Service) attestationDataFromJSON(ctx context.Context,
 	opts *api.AttestationDataOpts,
 	httpResponse *httpResponse,
 ) (
-	*api.Response[*capella.AttestationData],
+	*api.Response[*zond.AttestationData],
 	error,
 ) {
-	data, metadata, err := decodeJSONResponse(bytes.NewReader(httpResponse.body), capella.AttestationData{})
+	data, metadata, err := decodeJSONResponse(bytes.NewReader(httpResponse.body), zond.AttestationData{})
 	if err != nil {
 		return nil, err
 	}
@@ -71,13 +70,13 @@ func (s *Service) attestationDataFromJSON(ctx context.Context,
 		return nil, err
 	}
 
-	return &api.Response[*capella.AttestationData]{
+	return &api.Response[*zond.AttestationData]{
 		Metadata: metadata,
 		Data:     &data,
 	}, nil
 }
 
-func (s *Service) verifyAttestationData(ctx context.Context, opts *api.AttestationDataOpts, data *capella.AttestationData) error {
+func (s *Service) verifyAttestationData(ctx context.Context, opts *api.AttestationDataOpts, data *zond.AttestationData) error {
 	if data.Slot != opts.Slot {
 		return errors.Join(
 			fmt.Errorf("attestation data for slot %d; expected %d", data.Slot, opts.Slot),
@@ -106,7 +105,7 @@ func (s *Service) verifyAttestationData(ctx context.Context, opts *api.Attestati
 	return nil
 }
 
-func (s *Service) calculateElectraSlot(ctx context.Context) (capella.Slot, error) {
+func (s *Service) calculateElectraSlot(ctx context.Context) (zond.Slot, error) {
 	response, err := s.Spec(ctx, &api.SpecOpts{})
 	if err != nil {
 		return 0, err
@@ -122,7 +121,7 @@ func (s *Service) calculateElectraSlot(ctx context.Context) (capella.Slot, error
 		return 0, ErrIncorrectType
 	}
 
-	electraSlot := capella.Slot(slotsPerEpoch * electraEpoch)
+	electraSlot := zond.Slot(slotsPerEpoch * electraEpoch)
 
 	return electraSlot, nil
 }

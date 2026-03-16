@@ -16,24 +16,24 @@ package spec
 import (
 	"errors"
 
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // VersionedAggregateAndProof contains a versioned aggregate and proof.
 type VersionedAggregateAndProof struct {
 	Version DataVersion
-	Capella *capella.AggregateAndProof
+	Zond    *zond.AggregateAndProof
 }
 
 // AggregatorIndex returns the aggregator index of the aggregate.
-func (v *VersionedAggregateAndProof) AggregatorIndex() (capella.ValidatorIndex, error) {
+func (v *VersionedAggregateAndProof) AggregatorIndex() (zond.ValidatorIndex, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return 0, errors.New("no capella aggregate and proof")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return 0, errors.New("no zond aggregate and proof")
 		}
 
-		return v.Capella.AggregatorIndex, nil
+		return v.Zond.AggregatorIndex, nil
 	default:
 		return 0, errors.New("unknown version for aggregate and proof")
 	}
@@ -42,12 +42,12 @@ func (v *VersionedAggregateAndProof) AggregatorIndex() (capella.ValidatorIndex, 
 // HashTreeRoot returns the hash tree root of the aggregate and proof.
 func (v *VersionedAggregateAndProof) HashTreeRoot() ([32]byte, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return [32]byte{}, errors.New("no capella aggregate and proof")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return [32]byte{}, errors.New("no zond aggregate and proof")
 		}
 
-		return v.Capella.HashTreeRoot()
+		return v.Zond.HashTreeRoot()
 	default:
 		return [32]byte{}, errors.New("unknown version")
 	}
@@ -55,33 +55,33 @@ func (v *VersionedAggregateAndProof) HashTreeRoot() ([32]byte, error) {
 
 // IsEmpty returns true if there is no aggregate and proof.
 func (v *VersionedAggregateAndProof) IsEmpty() bool {
-	return v.Capella == nil
+	return v.Zond == nil
 }
 
 // String returns a string version of the structure.
 func (v *VersionedAggregateAndProof) String() string {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
+	case DataVersionZond:
+		if v.Zond == nil {
 			return ""
 		}
 
-		return v.Capella.String()
+		return v.Zond.String()
 	default:
 		return "unknown version"
 	}
 }
 
 // SelectionProof returns the selection proof of the aggregate.
-func (v *VersionedAggregateAndProof) SelectionProof() (capella.MLDSA87Signature, error) {
+func (v *VersionedAggregateAndProof) SelectionProof() (zond.MLDSA87Signature, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return capella.MLDSA87Signature{}, errors.New("no capella aggregate and proof")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return zond.MLDSA87Signature{}, errors.New("no zond aggregate and proof")
 		}
 
-		return v.Capella.SelectionProof, nil
+		return v.Zond.SelectionProof, nil
 	default:
-		return capella.MLDSA87Signature{}, errors.New("unknown version")
+		return zond.MLDSA87Signature{}, errors.New("unknown version")
 	}
 }

@@ -16,10 +16,10 @@ package mock
 import (
 	"context"
 
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/qrysm/v4/proto/zond/v2"
 )
 
 // SubmitSyncCommitteeContributions submits sync committee contributions.
-func (*Service) SubmitSyncCommitteeContributions(_ context.Context, _ []*capella.SignedContributionAndProof) error {
+func (*Service) SubmitSyncCommitteeContributions(_ context.Context, _ []*zond.SignedContributionAndProof) error {
 	return nil
 }

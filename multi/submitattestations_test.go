@@ -17,9 +17,9 @@ import (
 	"context"
 	"testing"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 
 	"github.com/rs/zerolog"
 	"github.com/stretchr/testify/require"
@@ -54,7 +54,7 @@ func TestSubmitAttestations(t *testing.T) {
 	require.NoError(t, err)
 
 	versionedAttestations := []*spec.VersionedAttestation{
-		{Version: spec.DataVersionCapella, Capella: &capella.Attestation{}},
+		{Version: spec.DataVersionZond, Zond: &zond.Attestation{}},
 	}
 	opts := &api.SubmitAttestationsOpts{
 		Attestations: versionedAttestations,

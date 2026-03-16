@@ -21,14 +21,14 @@ import (
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // ProposerDuty represents a duty of a validator to propose a slot.
 type ProposerDuty struct {
-	PubKey         capella.MLDSA87PubKey
-	Slot           capella.Slot
-	ValidatorIndex capella.ValidatorIndex
+	PubKey         zond.MLDSA87PubKey
+	Slot           zond.Slot
+	ValidatorIndex zond.ValidatorIndex
 }
 
 // proposerDutyJSON is the standard API representation of the struct.
@@ -80,7 +80,7 @@ func (p *ProposerDuty) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for slot")
 	}
 
-	p.Slot = capella.Slot(slot)
+	p.Slot = zond.Slot(slot)
 
 	if proposerDutyJSON.ValidatorIndex == "" {
 		return errors.New("validator index missing")
@@ -91,7 +91,7 @@ func (p *ProposerDuty) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for validator index")
 	}
 
-	p.ValidatorIndex = capella.ValidatorIndex(validatorIndex)
+	p.ValidatorIndex = zond.ValidatorIndex(validatorIndex)
 
 	return nil
 }

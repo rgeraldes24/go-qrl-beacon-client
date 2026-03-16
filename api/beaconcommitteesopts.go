@@ -13,7 +13,7 @@
 
 package api
 
-import "github.com/theQRL/go-qrl-beacon-client/spec/capella"
+import "github.com/theQRL/go-qrl-beacon-client/spec/zond"
 
 // BeaconCommitteesOpts are the options for obtaining proposer duties.
 type BeaconCommitteesOpts struct {
@@ -24,5 +24,5 @@ type BeaconCommitteesOpts struct {
 	State string
 	// Epoch is the epoch for which the data is obtained.
 	// This is optional; if not supplied it will obtain the data at the epoch relating to the state.
-	Epoch *capella.Epoch
+	Epoch *zond.Epoch
 }

@@ -18,7 +18,7 @@ import (
 
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // SignedBeaconBlock fetches a signed beacon block given a block ID.
@@ -34,11 +34,11 @@ func (s *Service) SignedBeaconBlock(ctx context.Context,
 
 	return &api.Response[*spec.VersionedSignedBeaconBlock]{
 		Data: &spec.VersionedSignedBeaconBlock{
-			Version: spec.DataVersionCapella,
-			Capella: &capella.SignedBeaconBlock{
-				Message: &capella.BeaconBlock{
-					Body: &capella.BeaconBlockBody{
-						ExecutionData: &capella.ExecutionData{},
+			Version: spec.DataVersionZond,
+			Zond: &zond.SignedBeaconBlock{
+				Message: &zond.BeaconBlock{
+					Body: &zond.BeaconBlockBody{
+						ExecutionData: &zond.ExecutionData{},
 					},
 				},
 			},

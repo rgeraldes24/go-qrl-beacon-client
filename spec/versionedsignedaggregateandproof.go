@@ -16,24 +16,24 @@ package spec
 import (
 	"errors"
 
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // VersionedSignedAggregateAndProof contains a versioned signed aggregate and proof.
 type VersionedSignedAggregateAndProof struct {
 	Version DataVersion
-	Capella *capella.SignedAggregateAndProof
+	Zond    *zond.SignedAggregateAndProof
 }
 
 // AggregatorIndex returns the aggregator index of the aggregate.
-func (v *VersionedSignedAggregateAndProof) AggregatorIndex() (capella.ValidatorIndex, error) {
+func (v *VersionedSignedAggregateAndProof) AggregatorIndex() (zond.ValidatorIndex, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return 0, errors.New("no capella signed aggregate and proof")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return 0, errors.New("no zond signed aggregate and proof")
 		}
 
-		return v.Capella.Message.AggregatorIndex, nil
+		return v.Zond.Message.AggregatorIndex, nil
 	default:
 		return 0, errors.New("unknown version for signed aggregate and proof")
 	}
@@ -41,46 +41,46 @@ func (v *VersionedSignedAggregateAndProof) AggregatorIndex() (capella.ValidatorI
 
 // IsEmpty returns true if there is no aggregate and proof.
 func (v *VersionedSignedAggregateAndProof) IsEmpty() bool {
-	return v.Capella == nil
+	return v.Zond == nil
 }
 
 // SelectionProof returns the selection proof of the signed aggregate.
-func (v *VersionedSignedAggregateAndProof) SelectionProof() (capella.MLDSA87Signature, error) {
+func (v *VersionedSignedAggregateAndProof) SelectionProof() (zond.MLDSA87Signature, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return capella.MLDSA87Signature{}, errors.New("no capella signed aggregate and proof")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return zond.MLDSA87Signature{}, errors.New("no zond signed aggregate and proof")
 		}
 
-		return v.Capella.Message.SelectionProof, nil
+		return v.Zond.Message.SelectionProof, nil
 	default:
-		return capella.MLDSA87Signature{}, errors.New("unknown version")
+		return zond.MLDSA87Signature{}, errors.New("unknown version")
 	}
 }
 
 // Signature returns the signature of the signed aggregate and proof.
-func (v *VersionedSignedAggregateAndProof) Signature() (capella.MLDSA87Signature, error) {
+func (v *VersionedSignedAggregateAndProof) Signature() (zond.MLDSA87Signature, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return capella.MLDSA87Signature{}, errors.New("no capella signed aggregate and proof")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return zond.MLDSA87Signature{}, errors.New("no zond signed aggregate and proof")
 		}
 
-		return v.Capella.Signature, nil
+		return v.Zond.Signature, nil
 	default:
-		return capella.MLDSA87Signature{}, errors.New("unknown version")
+		return zond.MLDSA87Signature{}, errors.New("unknown version")
 	}
 }
 
 // Slot returns the slot of the signed aggregate and proof.
-func (v *VersionedSignedAggregateAndProof) Slot() (capella.Slot, error) {
+func (v *VersionedSignedAggregateAndProof) Slot() (zond.Slot, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return 0, errors.New("no capella signed aggregate and proof")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return 0, errors.New("no zond signed aggregate and proof")
 		}
 
-		return v.Capella.Message.Aggregate.Data.Slot, nil
+		return v.Zond.Message.Aggregate.Data.Slot, nil
 	default:
 		return 0, errors.New("unknown version")
 	}
@@ -89,12 +89,12 @@ func (v *VersionedSignedAggregateAndProof) Slot() (capella.Slot, error) {
 // String returns a string version of the structure.
 func (v *VersionedSignedAggregateAndProof) String() string {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
+	case DataVersionZond:
+		if v.Zond == nil {
 			return ""
 		}
 
-		return v.Capella.String()
+		return v.Zond.String()
 	default:
 		return "unknown version"
 	}

@@ -19,10 +19,10 @@ import (
 	"errors"
 	"fmt"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // AggregateAttestation fetches the aggregate attestation for the given options.
@@ -102,10 +102,10 @@ func decodeAggregateAttestation(httpResponse *httpResponse) (*spec.VersionedAtte
 		Version: httpResponse.consensusVersion,
 	}
 	switch httpResponse.consensusVersion {
-	case spec.DataVersionCapella:
-		phase0Data, phase0Metadata, decodeErr := decodeJSONResponse(bytes.NewReader(httpResponse.body), &capella.Attestation{})
+	case spec.DataVersionZond:
+		phase0Data, phase0Metadata, decodeErr := decodeJSONResponse(bytes.NewReader(httpResponse.body), &zond.Attestation{})
 		metadata = phase0Metadata
-		data.Capella = phase0Data
+		data.Zond = phase0Data
 
 		if decodeErr != nil {
 			return &spec.VersionedAttestation{}, nil, decodeErr

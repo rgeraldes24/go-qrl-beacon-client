@@ -19,12 +19,12 @@ import (
 	"strconv"
 
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // SyncCommitteeReward is the rewards for a validator in a sync committee.
 type SyncCommitteeReward struct {
-	ValidatorIndex capella.ValidatorIndex
+	ValidatorIndex zond.ValidatorIndex
 	// Reward can be negative, so it is an int64 (but still a Gwei value).
 	Reward int64
 }
@@ -61,7 +61,7 @@ func (s *SyncCommitteeReward) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for validator index")
 	}
 
-	s.ValidatorIndex = capella.ValidatorIndex(validatorIndex)
+	s.ValidatorIndex = zond.ValidatorIndex(validatorIndex)
 
 	if data.Reward == "" {
 		return errors.New("reward missing")

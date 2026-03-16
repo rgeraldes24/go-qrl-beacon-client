@@ -16,9 +16,9 @@ package api
 import (
 	"context"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // EventsOpts are the options for obtaining events.
@@ -70,7 +70,7 @@ type BlockGossipEventHandlerFunc func(context.Context, *apiv1.BlockGossipEvent)
 type ChainReorgEventHandlerFunc func(context.Context, *apiv1.ChainReorgEvent)
 
 // ContributionAndProofEventHandlerFunc is the handler for contribution_and_proof events.
-type ContributionAndProofEventHandlerFunc func(context.Context, *capella.SignedContributionAndProof)
+type ContributionAndProofEventHandlerFunc func(context.Context, *zond.SignedContributionAndProof)
 
 // FinalizedCheckpointEventHandlerFunc is the handler for finalized_checkpoint events.
 type FinalizedCheckpointEventHandlerFunc func(context.Context, *apiv1.FinalizedCheckpointEvent)
@@ -82,7 +82,7 @@ type HeadEventHandlerFunc func(context.Context, *apiv1.HeadEvent)
 type PayloadAttributesEventHandlerFunc func(context.Context, *apiv1.PayloadAttributesEvent)
 
 // ProposerSlashingEventHandlerFunc is the handler for proposer_slashing events.
-type ProposerSlashingEventHandlerFunc func(context.Context, *capella.ProposerSlashing)
+type ProposerSlashingEventHandlerFunc func(context.Context, *zond.ProposerSlashing)
 
 // VoluntaryExitEventHandlerFunc is the handler for voluntary_exit events.
-type VoluntaryExitEventHandlerFunc func(context.Context, *capella.SignedVoluntaryExit)
+type VoluntaryExitEventHandlerFunc func(context.Context, *zond.SignedVoluntaryExit)

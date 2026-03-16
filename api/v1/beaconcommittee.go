@@ -19,17 +19,17 @@ import (
 	"strconv"
 
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // BeaconCommittee is the data providing information validator membership of committees.
 type BeaconCommittee struct {
 	// Slot is the slot in which the committee attests.
-	Slot capella.Slot
+	Slot zond.Slot
 	// Index is the index of the committee.
-	Index capella.CommitteeIndex
+	Index zond.CommitteeIndex
 	// Validators is the list of validator indices in the committee.
-	Validators []capella.ValidatorIndex
+	Validators []zond.ValidatorIndex
 }
 
 // beaconCommitteeJSON is the spec representation of the struct.
@@ -71,7 +71,7 @@ func (b *BeaconCommittee) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for slot")
 	}
 
-	b.Slot = capella.Slot(slot)
+	b.Slot = zond.Slot(slot)
 
 	if beaconCommitteeJSON.Index == "" {
 		return errors.New("index missing")
@@ -82,7 +82,7 @@ func (b *BeaconCommittee) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for index")
 	}
 
-	b.Index = capella.CommitteeIndex(index)
+	b.Index = zond.CommitteeIndex(index)
 
 	if beaconCommitteeJSON.Validators == nil {
 		return errors.New("validators missing")
@@ -92,14 +92,14 @@ func (b *BeaconCommittee) UnmarshalJSON(input []byte) error {
 		return errors.New("validators length cannot be 0")
 	}
 
-	b.Validators = make([]capella.ValidatorIndex, len(beaconCommitteeJSON.Validators))
+	b.Validators = make([]zond.ValidatorIndex, len(beaconCommitteeJSON.Validators))
 	for i := range beaconCommitteeJSON.Validators {
 		validator, err := strconv.ParseUint(beaconCommitteeJSON.Validators[i], 10, 64)
 		if err != nil {
 			return errors.Wrap(err, "invalid value for validator")
 		}
 
-		b.Validators[i] = capella.ValidatorIndex(validator)
+		b.Validators[i] = zond.ValidatorIndex(validator)
 	}
 
 	return nil

@@ -25,13 +25,13 @@ import (
 	"strings"
 	"time"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/r3labs/sse/v2"
 	"github.com/rs/zerolog"
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // Events feeds requested events with the given topics to the supplied handler.
@@ -309,7 +309,7 @@ func (*Service) handleContributionAndProofEvent(ctx context.Context,
 	opts *api.EventsOpts,
 ) {
 	log := zerolog.Ctx(ctx)
-	data := &capella.SignedContributionAndProof{}
+	data := &zond.SignedContributionAndProof{}
 
 	err := json.Unmarshal(msg.Data, data)
 	if err != nil {
@@ -417,7 +417,7 @@ func (*Service) handleProposerSlashingEvent(ctx context.Context,
 	opts *api.EventsOpts,
 ) {
 	log := zerolog.Ctx(ctx)
-	data := &capella.ProposerSlashing{}
+	data := &zond.ProposerSlashing{}
 
 	err := json.Unmarshal(msg.Data, data)
 	if err != nil {
@@ -444,7 +444,7 @@ func (*Service) handleVoluntaryExitEvent(ctx context.Context,
 	opts *api.EventsOpts,
 ) {
 	log := zerolog.Ctx(ctx)
-	data := &capella.SignedVoluntaryExit{}
+	data := &zond.SignedVoluntaryExit{}
 
 	err := json.Unmarshal(msg.Data, data)
 	if err != nil {

@@ -38,7 +38,7 @@ func TestForkChoiceJSON(t *testing.T) {
 		{
 			name:  "JustifiedCheckpointInvalid",
 			input: []byte(`{"finalized_checkpoint":{"epoch":"1","root":"0x0000000000000000000000000000000000000000000000000000000000000000"},"justified_checkpoint":-1,"fork_choice_nodes":[]}`),
-			err:   "invalid JSON: invalid JSON: json: cannot unmarshal number into Go value of type capella.checkpointJSON",
+			err:   "invalid JSON: invalid JSON: json: cannot unmarshal number into Go value of type zond.checkpointJSON",
 		},
 		{
 			name:  "FinalizedCheckpointMissing",
@@ -48,7 +48,7 @@ func TestForkChoiceJSON(t *testing.T) {
 		{
 			name:  "FinalizedCheckpointInvalid",
 			input: []byte(`{"justified_checkpoint":{"epoch":"1","root":"0x0000000000000000000000000000000000000000000000000000000000000000"},"finalized_checkpoint":-1,"fork_choice_nodes":[]}`),
-			err:   "invalid JSON: invalid JSON: json: cannot unmarshal number into Go value of type capella.checkpointJSON",
+			err:   "invalid JSON: invalid JSON: json: cannot unmarshal number into Go value of type zond.checkpointJSON",
 		},
 		{
 			name:     "ForkChoiceNodesInvalid",

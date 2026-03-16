@@ -17,26 +17,26 @@ import (
 	"context"
 
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // BeaconBlockRoot fetches a block's root given a block ID.
 func (s *Service) BeaconBlockRoot(ctx context.Context,
 	opts *api.BeaconBlockRootOpts,
 ) (
-	*api.Response[*capella.Root],
+	*api.Response[*zond.Root],
 	error,
 ) {
 	if s.BeaconBlockRootFunc != nil {
 		return s.BeaconBlockRootFunc(ctx, opts)
 	}
 
-	root := capella.Root([32]byte{
+	root := zond.Root([32]byte{
 		0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
 		0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
 	})
 
-	return &api.Response[*capella.Root]{
+	return &api.Response[*zond.Root]{
 		Data:     &root,
 		Metadata: make(map[string]any),
 	}, nil

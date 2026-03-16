@@ -13,14 +13,14 @@
 
 package api
 
-import "github.com/theQRL/go-qrl-beacon-client/spec/capella"
+import "github.com/theQRL/go-qrl-beacon-client/spec/zond"
 
 // AttesterDutiesOpts are the options for obtaining proposer duties.
 type AttesterDutiesOpts struct {
 	Common CommonOpts
 
 	// Epoch is the epoch for which the data is obtained.
-	Epoch capella.Epoch
+	Epoch zond.Epoch
 	// Indices is a list of validators for which to obtain the duties.
-	Indices []capella.ValidatorIndex
+	Indices []zond.ValidatorIndex
 }

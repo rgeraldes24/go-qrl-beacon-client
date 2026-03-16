@@ -16,25 +16,25 @@ package mock
 import (
 	"context"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // AttestationData fetches the attestation data for the given slot and committee index.
 func (s *Service) AttestationData(ctx context.Context,
 	opts *api.AttestationDataOpts,
 ) (
-	*api.Response[*capella.AttestationData],
+	*api.Response[*zond.AttestationData],
 	error,
 ) {
 	if s.AttestationDataFunc != nil {
 		return s.AttestationDataFunc(ctx, opts)
 	}
 
-	return &api.Response[*capella.AttestationData]{
-		Data: &capella.AttestationData{
-			Source: &capella.Checkpoint{},
-			Target: &capella.Checkpoint{},
+	return &api.Response[*zond.AttestationData]{
+		Data: &zond.AttestationData{
+			Source: &zond.Checkpoint{},
+			Target: &zond.Checkpoint{},
 		},
 		Metadata: make(map[string]any),
 	}, nil

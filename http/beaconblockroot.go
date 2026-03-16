@@ -21,18 +21,18 @@ import (
 
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 type beaconBlockRootJSON struct {
-	Root capella.Root `json:"root"`
+	Root zond.Root `json:"root"`
 }
 
 // BeaconBlockRoot fetches a block's root given a set of options.
 func (s *Service) BeaconBlockRoot(ctx context.Context,
 	opts *api.BeaconBlockRootOpts,
 ) (
-	*api.Response[*capella.Root],
+	*api.Response[*zond.Root],
 	error,
 ) {
 	if err := s.assertIsActive(ctx); err != nil {
@@ -59,7 +59,7 @@ func (s *Service) BeaconBlockRoot(ctx context.Context,
 		return nil, err
 	}
 
-	return &api.Response[*capella.Root]{
+	return &api.Response[*zond.Root]{
 		Data:     &data.Root,
 		Metadata: metadata,
 	}, nil

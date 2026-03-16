@@ -24,15 +24,15 @@ import (
 
 	"github.com/goccy/go-yaml"
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // ValidatorRegistration represents a ValidatorRegistrationV1.
 type ValidatorRegistration struct {
-	FeeRecipient capella.ExecutionAddress `ssz-size:"20"`
+	FeeRecipient zond.ExecutionAddress `ssz-size:"20"`
 	GasLimit     uint64
 	Timestamp    time.Time
-	Pubkey       capella.MLDSA87PubKey `ssz-size:"2592"`
+	Pubkey       zond.MLDSA87PubKey `ssz-size:"2592"`
 }
 
 // validatorRegistrationJSON is the spec representation of the struct.

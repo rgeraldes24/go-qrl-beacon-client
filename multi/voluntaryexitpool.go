@@ -16,16 +16,16 @@ package multi
 import (
 	"context"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	consensusclient "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // VoluntaryExitPool obtains the voluntary exit pool.
 func (s *Service) VoluntaryExitPool(ctx context.Context,
 	opts *api.VoluntaryExitPoolOpts,
 ) (
-	*api.Response[[]*capella.SignedVoluntaryExit],
+	*api.Response[[]*zond.SignedVoluntaryExit],
 	error,
 ) {
 	res, err := s.doCall(ctx, func(ctx context.Context, client consensusclient.Service) (any, error) {
@@ -40,7 +40,7 @@ func (s *Service) VoluntaryExitPool(ctx context.Context,
 		return nil, err
 	}
 
-	response, isResponse := res.(*api.Response[[]*capella.SignedVoluntaryExit])
+	response, isResponse := res.(*api.Response[[]*zond.SignedVoluntaryExit])
 	if !isResponse {
 		return nil, ErrIncorrectType
 	}

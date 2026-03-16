@@ -15,7 +15,6 @@ package api
 
 import (
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 // ValidatorsOpts are the options for obtaining validators.
@@ -27,10 +26,10 @@ type ValidatorsOpts struct {
 	State string
 	// Indices is a list of validator indices to restrict the returned values.
 	// If no indices are supplied then no filter will be applied.
-	Indices []capella.ValidatorIndex
+	Indices []zond.ValidatorIndex
 	// PubKeys is a list of validator public keys to restrict the returned values.
 	// If no public keys are supplied then no filter will be applied.
-	PubKeys []capella.MLDSA87PubKey
+	PubKeys []zond.MLDSA87PubKey
 	// ValidatorStates is a list of validator states to restrict the returned values.
 	// If no validator states are supplied then no filter will be applied.
 	ValidatorStates []apiv1.ValidatorState

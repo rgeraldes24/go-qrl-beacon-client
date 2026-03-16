@@ -19,17 +19,17 @@ import (
 	"strconv"
 
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // SyncCommitteeSubscription is the data required for a sync committee subscription.
 type SyncCommitteeSubscription struct {
 	// ValidatorIndex is the index of the validator making the subscription request.
-	ValidatorIndex capella.ValidatorIndex
+	ValidatorIndex zond.ValidatorIndex
 	// SyncCommitteeIndices are the indices of the sync committees of which the validator is a member.
-	SyncCommitteeIndices []capella.CommitteeIndex
+	SyncCommitteeIndices []zond.CommitteeIndex
 	// UntilEpoch is the epoch at which the subscription no longer applies.
-	UntilEpoch capella.Epoch
+	UntilEpoch zond.Epoch
 }
 
 // syncCommitteeSubscriptionJSON is the spec representation of the struct.
@@ -71,20 +71,20 @@ func (s *SyncCommitteeSubscription) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for validator index")
 	}
 
-	s.ValidatorIndex = capella.ValidatorIndex(validatorIndex)
+	s.ValidatorIndex = zond.ValidatorIndex(validatorIndex)
 
 	if len(syncCommitteeSubscriptionJSON.SyncCommitteeIndices) == 0 {
 		return errors.New("sync committee indices missing")
 	}
 
-	s.SyncCommitteeIndices = make([]capella.CommitteeIndex, len(syncCommitteeSubscriptionJSON.SyncCommitteeIndices))
+	s.SyncCommitteeIndices = make([]zond.CommitteeIndex, len(syncCommitteeSubscriptionJSON.SyncCommitteeIndices))
 	for i, committeeIndex := range syncCommitteeSubscriptionJSON.SyncCommitteeIndices {
 		syncCommitteeIndex, err := strconv.ParseUint(committeeIndex, 10, 64)
 		if err != nil {
 			return errors.Wrap(err, "invalid value for sync committee index")
 		}
 
-		s.SyncCommitteeIndices[i] = capella.CommitteeIndex(syncCommitteeIndex)
+		s.SyncCommitteeIndices[i] = zond.CommitteeIndex(syncCommitteeIndex)
 	}
 
 	if syncCommitteeSubscriptionJSON.UntilEpoch == "" {
@@ -96,7 +96,7 @@ func (s *SyncCommitteeSubscription) UnmarshalJSON(input []byte) error {
 		return errors.Wrap(err, "invalid value for until epoch")
 	}
 
-	s.UntilEpoch = capella.Epoch(untilEpoch)
+	s.UntilEpoch = zond.Epoch(untilEpoch)
 
 	return nil
 }

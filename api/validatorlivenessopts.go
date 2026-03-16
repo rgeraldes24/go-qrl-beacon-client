@@ -13,14 +13,12 @@
 
 package api
 
-import "github.com/theQRL/go-qrl-beacon-client/spec/capella"
-
 // ValidatorLivenessOpts are the options for obtaining validator liveness information.
 type ValidatorLivenessOpts struct {
 	Common CommonOpts
 
 	// Epoch is the epoch for which the data is obtained.
-	Epoch capella.Epoch
+	Epoch zond.Epoch
 	// Indices is a list of validators for which to obtain the duties.
-	Indices []capella.ValidatorIndex
+	Indices []zond.ValidatorIndex
 }

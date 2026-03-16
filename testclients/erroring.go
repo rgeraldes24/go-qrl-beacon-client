@@ -24,7 +24,7 @@ import (
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // Erroring is a QRL beacon client that errors at a given rate.
@@ -94,7 +94,7 @@ func (s *Erroring) maybeError(_ context.Context) error {
 // EpochFromStateID converts a state ID to its epoch.
 //
 // Deprecated: use chaintime.
-func (s *Erroring) EpochFromStateID(ctx context.Context, stateID string) (capella.Epoch, error) {
+func (s *Erroring) EpochFromStateID(ctx context.Context, stateID string) (zond.Epoch, error) {
 	if err := s.maybeError(ctx); err != nil {
 		return 0, err
 	}
@@ -110,7 +110,7 @@ func (s *Erroring) EpochFromStateID(ctx context.Context, stateID string) (capell
 // SlotFromStateID converts a state ID to its slot.
 //
 // Deprecated: use chaintime.
-func (s *Erroring) SlotFromStateID(ctx context.Context, stateID string) (capella.Slot, error) {
+func (s *Erroring) SlotFromStateID(ctx context.Context, stateID string) (zond.Slot, error) {
 	if err := s.maybeError(ctx); err != nil {
 		return 0, err
 	}
@@ -175,7 +175,7 @@ func (s *Erroring) SlotsPerEpoch(ctx context.Context) (uint64, error) {
 }
 
 // FarFutureEpoch provides the far future epoch of the chain.
-func (s *Erroring) FarFutureEpoch(ctx context.Context) (capella.Epoch, error) {
+func (s *Erroring) FarFutureEpoch(ctx context.Context) (zond.Epoch, error) {
 	if err := s.maybeError(ctx); err != nil {
 		return 0, err
 	}
@@ -241,7 +241,7 @@ func (s *Erroring) SubmitAggregateAttestations(ctx context.Context, opts *api.Su
 func (s *Erroring) AttestationData(ctx context.Context,
 	opts *api.AttestationDataOpts,
 ) (
-	*api.Response[*capella.AttestationData],
+	*api.Response[*zond.AttestationData],
 	error,
 ) {
 	if err := s.maybeError(ctx); err != nil {
@@ -305,7 +305,7 @@ func (s *Erroring) SubmitProposalPreparations(ctx context.Context, preparations 
 
 // SubmitSyncCommitteeContributions submits sync committee contributions.
 func (s *Erroring) SubmitSyncCommitteeContributions(ctx context.Context,
-	contributionAndProofs []*capella.SignedContributionAndProof,
+	contributionAndProofs []*zond.SignedContributionAndProof,
 ) error {
 	if err := s.maybeError(ctx); err != nil {
 		return err
@@ -320,7 +320,7 @@ func (s *Erroring) SubmitSyncCommitteeContributions(ctx context.Context,
 }
 
 // SubmitSyncCommitteeMessages submits sync committee messages.
-func (s *Erroring) SubmitSyncCommitteeMessages(ctx context.Context, messages []*capella.SyncCommitteeMessage) error {
+func (s *Erroring) SubmitSyncCommitteeMessages(ctx context.Context, messages []*zond.SyncCommitteeMessage) error {
 	if err := s.maybeError(ctx); err != nil {
 		return err
 	}
@@ -376,7 +376,7 @@ func (s *Erroring) BeaconBlockHeader(ctx context.Context,
 func (s *Erroring) BeaconBlockRoot(ctx context.Context,
 	opts *api.BeaconBlockRootOpts,
 ) (
-	*api.Response[*capella.Root],
+	*api.Response[*zond.Root],
 	error,
 ) {
 	if err := s.maybeError(ctx); err != nil {
@@ -565,7 +565,7 @@ func (s *Erroring) Finality(ctx context.Context,
 func (s *Erroring) Fork(ctx context.Context,
 	opts *api.ForkOpts,
 ) (
-	*api.Response[*capella.Fork],
+	*api.Response[*zond.Fork],
 	error,
 ) {
 	if err := s.maybeError(ctx); err != nil {
@@ -584,7 +584,7 @@ func (s *Erroring) Fork(ctx context.Context,
 func (s *Erroring) ForkSchedule(ctx context.Context,
 	opts *api.ForkScheduleOpts,
 ) (
-	*api.Response[[]*capella.Fork],
+	*api.Response[[]*zond.Fork],
 	error,
 ) {
 	if err := s.maybeError(ctx); err != nil {
@@ -698,7 +698,7 @@ func (s *Erroring) SyncCommittee(ctx context.Context,
 func (s *Erroring) SyncCommitteeContribution(ctx context.Context,
 	opts *api.SyncCommitteeContributionOpts,
 ) (
-	*api.Response[*capella.SyncCommitteeContribution],
+	*api.Response[*zond.SyncCommitteeContribution],
 	error,
 ) {
 	if err := s.maybeError(ctx); err != nil {
@@ -756,7 +756,7 @@ func (s *Erroring) Spec(ctx context.Context,
 func (s *Erroring) ValidatorBalances(ctx context.Context,
 	opts *api.ValidatorBalancesOpts,
 ) (
-	*api.Response[map[capella.ValidatorIndex]capella.Gwei],
+	*api.Response[map[zond.ValidatorIndex]zond.Gwei],
 	error,
 ) {
 	if err := s.maybeError(ctx); err != nil {
@@ -775,7 +775,7 @@ func (s *Erroring) ValidatorBalances(ctx context.Context,
 func (s *Erroring) Validators(ctx context.Context,
 	opts *api.ValidatorsOpts,
 ) (
-	*api.Response[map[capella.ValidatorIndex]*apiv1.Validator],
+	*api.Response[map[zond.ValidatorIndex]*apiv1.Validator],
 	error,
 ) {
 	if err := s.maybeError(ctx); err != nil {
@@ -791,7 +791,7 @@ func (s *Erroring) Validators(ctx context.Context,
 }
 
 // SubmitVoluntaryExit submits a voluntary exit.
-func (s *Erroring) SubmitVoluntaryExit(ctx context.Context, voluntaryExit *capella.SignedVoluntaryExit) error {
+func (s *Erroring) SubmitVoluntaryExit(ctx context.Context, voluntaryExit *zond.SignedVoluntaryExit) error {
 	if err := s.maybeError(ctx); err != nil {
 		return err
 	}
@@ -808,7 +808,7 @@ func (s *Erroring) SubmitVoluntaryExit(ctx context.Context, voluntaryExit *capel
 func (s *Erroring) VoluntaryExitPool(ctx context.Context,
 	opts *api.VoluntaryExitPoolOpts,
 ) (
-	*api.Response[[]*capella.SignedVoluntaryExit],
+	*api.Response[[]*zond.SignedVoluntaryExit],
 	error,
 ) {
 	if err := s.maybeError(ctx); err != nil {
@@ -824,28 +824,28 @@ func (s *Erroring) VoluntaryExitPool(ctx context.Context,
 }
 
 // Domain provides a domain for a given domain type at a given epoch.
-func (s *Erroring) Domain(ctx context.Context, domainType capella.DomainType, epoch capella.Epoch) (capella.Domain, error) {
+func (s *Erroring) Domain(ctx context.Context, domainType zond.DomainType, epoch zond.Epoch) (zond.Domain, error) {
 	if err := s.maybeError(ctx); err != nil {
-		return capella.Domain{}, err
+		return zond.Domain{}, err
 	}
 
 	next, isNext := s.next.(consensusclient.DomainProvider)
 	if !isNext {
-		return capella.Domain{}, fmt.Errorf("%s@%s does not support this call", s.next.Name(), s.next.Address())
+		return zond.Domain{}, fmt.Errorf("%s@%s does not support this call", s.next.Name(), s.next.Address())
 	}
 
 	return next.Domain(ctx, domainType, epoch)
 }
 
 // GenesisDomain provides a domain for a given domain type.
-func (s *Erroring) GenesisDomain(ctx context.Context, domainType capella.DomainType) (capella.Domain, error) {
+func (s *Erroring) GenesisDomain(ctx context.Context, domainType zond.DomainType) (zond.Domain, error) {
 	if err := s.maybeError(ctx); err != nil {
-		return capella.Domain{}, err
+		return zond.Domain{}, err
 	}
 
 	next, isNext := s.next.(consensusclient.DomainProvider)
 	if !isNext {
-		return capella.Domain{}, fmt.Errorf("%s@%s does not support this call", s.next.Name(), s.next.Address())
+		return zond.Domain{}, fmt.Errorf("%s@%s does not support this call", s.next.Name(), s.next.Address())
 	}
 
 	return next.GenesisDomain(ctx, domainType)
@@ -909,7 +909,7 @@ func (s *Erroring) SignedBeaconBlock(ctx context.Context,
 func (s *Erroring) BeaconStateRoot(ctx context.Context,
 	opts *api.BeaconStateRootOpts,
 ) (
-	*api.Response[*capella.Root],
+	*api.Response[*zond.Root],
 	error,
 ) {
 	if err := s.maybeError(ctx); err != nil {

@@ -24,7 +24,7 @@ import (
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // Sleepy is a QRL beacon client that sleeps for a random amount of time within a
@@ -92,7 +92,7 @@ func (s *Sleepy) sleep(_ context.Context) {
 // EpochFromStateID converts a state ID to its epoch.
 //
 // Deprecated: use chaintime.
-func (s *Sleepy) EpochFromStateID(ctx context.Context, stateID string) (capella.Epoch, error) {
+func (s *Sleepy) EpochFromStateID(ctx context.Context, stateID string) (zond.Epoch, error) {
 	s.sleep(ctx)
 
 	next, isNext := s.next.(consensusclient.EpochFromStateIDProvider)
@@ -106,7 +106,7 @@ func (s *Sleepy) EpochFromStateID(ctx context.Context, stateID string) (capella.
 // SlotFromStateID converts a state ID to its slot.
 //
 // Deprecated: use chaintime.
-func (s *Sleepy) SlotFromStateID(ctx context.Context, stateID string) (capella.Slot, error) {
+func (s *Sleepy) SlotFromStateID(ctx context.Context, stateID string) (zond.Slot, error) {
 	s.sleep(ctx)
 
 	next, isNext := s.next.(consensusclient.SlotFromStateIDProvider)
@@ -163,7 +163,7 @@ func (s *Sleepy) SlotsPerEpoch(ctx context.Context) (uint64, error) {
 }
 
 // FarFutureEpoch provides the far future epoch of the chain.
-func (s *Sleepy) FarFutureEpoch(ctx context.Context) (capella.Epoch, error) {
+func (s *Sleepy) FarFutureEpoch(ctx context.Context) (zond.Epoch, error) {
 	s.sleep(ctx)
 
 	next, isNext := s.next.(consensusclient.FarFutureEpochProvider)
@@ -221,7 +221,7 @@ func (s *Sleepy) SubmitAggregateAttestations(ctx context.Context, opts *api.Subm
 func (s *Sleepy) AttestationData(ctx context.Context,
 	opts *api.AttestationDataOpts,
 ) (
-	*api.Response[*capella.AttestationData],
+	*api.Response[*zond.AttestationData],
 	error,
 ) {
 	s.sleep(ctx)
@@ -431,7 +431,7 @@ func (s *Sleepy) Finality(ctx context.Context,
 func (s *Sleepy) Fork(ctx context.Context,
 	opts *api.ForkOpts,
 ) (
-	*api.Response[*capella.Fork],
+	*api.Response[*zond.Fork],
 	error,
 ) {
 	s.sleep(ctx)
@@ -448,7 +448,7 @@ func (s *Sleepy) Fork(ctx context.Context,
 func (s *Sleepy) ForkSchedule(ctx context.Context,
 	opts *api.ForkScheduleOpts,
 ) (
-	*api.Response[[]*capella.Fork],
+	*api.Response[[]*zond.Fork],
 	error,
 ) {
 	s.sleep(ctx)
@@ -550,7 +550,7 @@ func (s *Sleepy) Spec(ctx context.Context,
 func (s *Sleepy) ValidatorBalances(ctx context.Context,
 	opts *api.ValidatorBalancesOpts,
 ) (
-	*api.Response[map[capella.ValidatorIndex]capella.Gwei],
+	*api.Response[map[zond.ValidatorIndex]zond.Gwei],
 	error,
 ) {
 	s.sleep(ctx)
@@ -567,7 +567,7 @@ func (s *Sleepy) ValidatorBalances(ctx context.Context,
 func (s *Sleepy) Validators(ctx context.Context,
 	opts *api.ValidatorsOpts,
 ) (
-	*api.Response[map[capella.ValidatorIndex]*apiv1.Validator],
+	*api.Response[map[zond.ValidatorIndex]*apiv1.Validator],
 	error,
 ) {
 	s.sleep(ctx)
@@ -581,7 +581,7 @@ func (s *Sleepy) Validators(ctx context.Context,
 }
 
 // SubmitVoluntaryExit submits a voluntary exit.
-func (s *Sleepy) SubmitVoluntaryExit(ctx context.Context, voluntaryExit *capella.SignedVoluntaryExit) error {
+func (s *Sleepy) SubmitVoluntaryExit(ctx context.Context, voluntaryExit *zond.SignedVoluntaryExit) error {
 	s.sleep(ctx)
 
 	next, isNext := s.next.(consensusclient.VoluntaryExitSubmitter)
@@ -596,7 +596,7 @@ func (s *Sleepy) SubmitVoluntaryExit(ctx context.Context, voluntaryExit *capella
 func (s *Sleepy) VoluntaryExitPool(ctx context.Context,
 	opts *api.VoluntaryExitPoolOpts,
 ) (
-	*api.Response[[]*capella.SignedVoluntaryExit],
+	*api.Response[[]*zond.SignedVoluntaryExit],
 	error,
 ) {
 	s.sleep(ctx)
@@ -610,24 +610,24 @@ func (s *Sleepy) VoluntaryExitPool(ctx context.Context,
 }
 
 // Domain provides a domain for a given domain type at a given epoch.
-func (s *Sleepy) Domain(ctx context.Context, domainType capella.DomainType, epoch capella.Epoch) (capella.Domain, error) {
+func (s *Sleepy) Domain(ctx context.Context, domainType zond.DomainType, epoch zond.Epoch) (zond.Domain, error) {
 	s.sleep(ctx)
 
 	next, isNext := s.next.(consensusclient.DomainProvider)
 	if !isNext {
-		return capella.Domain{}, errors.New("next does not support this call")
+		return zond.Domain{}, errors.New("next does not support this call")
 	}
 
 	return next.Domain(ctx, domainType, epoch)
 }
 
 // GenesisDomain provides a domain for a given domain type at genesis.
-func (s *Sleepy) GenesisDomain(ctx context.Context, domainType capella.DomainType) (capella.Domain, error) {
+func (s *Sleepy) GenesisDomain(ctx context.Context, domainType zond.DomainType) (zond.Domain, error) {
 	s.sleep(ctx)
 
 	next, isNext := s.next.(consensusclient.DomainProvider)
 	if !isNext {
-		return capella.Domain{}, errors.New("next does not support this call")
+		return zond.Domain{}, errors.New("next does not support this call")
 	}
 
 	return next.GenesisDomain(ctx, domainType)

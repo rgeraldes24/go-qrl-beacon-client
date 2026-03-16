@@ -19,12 +19,12 @@ import (
 	"os"
 	"testing"
 
+	zond "github.com/cyyber/qrysm/proto/qrysm/v1alpha1"
 	"github.com/stretchr/testify/require"
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	apiv1 "github.com/theQRL/go-qrl-beacon-client/api/v1"
 	"github.com/theQRL/go-qrl-beacon-client/http"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 func TestBeaconBlockHeader(t *testing.T) {
@@ -48,8 +48,8 @@ func TestBeaconBlockHeader(t *testing.T) {
 			expected: &apiv1.BeaconBlockHeader{
 				Root:      *mustParseRoot("0x4d611d5b93fdab69013a7f0a2f961caca0c853f87cfe9595fe50038163079360"),
 				Canonical: true,
-				Header: &capella.SignedBeaconBlockHeader{
-					Message: &capella.BeaconBlockHeader{
+				Header: &zond.SignedBeaconBlockHeader{
+					Message: &zond.BeaconBlockHeader{
 						Slot:          0,
 						ProposerIndex: 0,
 						ParentRoot:    *mustParseRoot("0x0000000000000000000000000000000000000000000000000000000000000000"),

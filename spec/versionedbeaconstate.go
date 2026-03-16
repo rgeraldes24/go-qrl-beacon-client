@@ -17,72 +17,72 @@ import (
 	"errors"
 
 	ssz "github.com/ferranbt/fastssz"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 	proofutil "github.com/theQRL/go-qrl-beacon-client/util/proof"
 )
 
 // VersionedBeaconState contains a versioned beacon state.
 type VersionedBeaconState struct {
 	Version DataVersion
-	Capella *capella.BeaconState
+	Zond    *zond.BeaconState
 }
 
 // IsEmpty returns true if there is no block.
 func (v *VersionedBeaconState) IsEmpty() bool {
-	return v.Capella == nil
+	return v.Zond == nil
 }
 
 // Slot returns the slot of the state.
-func (v *VersionedBeaconState) Slot() (capella.Slot, error) {
+func (v *VersionedBeaconState) Slot() (zond.Slot, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return 0, errors.New("no Capella state")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return 0, errors.New("no Zond state")
 		}
 
-		return v.Capella.Slot, nil
+		return v.Zond.Slot, nil
 	default:
 		return 0, errors.New("unknown version")
 	}
 }
 
 // NextWithdrawalValidatorIndex returns the next withdrawal validator index of the state.
-func (v *VersionedBeaconState) NextWithdrawalValidatorIndex() (capella.ValidatorIndex, error) {
+func (v *VersionedBeaconState) NextWithdrawalValidatorIndex() (zond.ValidatorIndex, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return 0, errors.New("no Capella state")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return 0, errors.New("no Zond state")
 		}
 
-		return v.Capella.NextWithdrawalValidatorIndex, nil
+		return v.Zond.NextWithdrawalValidatorIndex, nil
 	default:
 		return 0, errors.New("unknown version")
 	}
 }
 
 // Validators returns the validators of the state.
-func (v *VersionedBeaconState) Validators() ([]*capella.Validator, error) {
+func (v *VersionedBeaconState) Validators() ([]*zond.Validator, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return nil, errors.New("no Capella state")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return nil, errors.New("no Zond state")
 		}
 
-		return v.Capella.Validators, nil
+		return v.Zond.Validators, nil
 	default:
 		return nil, errors.New("unknown version")
 	}
 }
 
 // ValidatorBalances returns the validator balances of the state.
-func (v *VersionedBeaconState) ValidatorBalances() ([]capella.Gwei, error) {
+func (v *VersionedBeaconState) ValidatorBalances() ([]zond.Gwei, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return nil, errors.New("no Capella state")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return nil, errors.New("no Zond state")
 		}
 
-		return v.Capella.Balances, nil
+		return v.Zond.Balances, nil
 	default:
 		return nil, errors.New("unknown version")
 	}
@@ -91,7 +91,7 @@ func (v *VersionedBeaconState) ValidatorBalances() ([]capella.Gwei, error) {
 // DepositRequestsStartIndex returns the deposit requests start index of the state.
 func (v *VersionedBeaconState) DepositRequestsStartIndex() (uint64, error) {
 	switch v.Version {
-	case DataVersionCapella:
+	case DataVersionZond:
 		return 0, errors.New("state does not provide deposit requests start index")
 	default:
 		return 0, errors.New("unknown version")
@@ -99,9 +99,9 @@ func (v *VersionedBeaconState) DepositRequestsStartIndex() (uint64, error) {
 }
 
 // DepositBalanceToConsume returns the deposit balance to consume of the state.
-func (v *VersionedBeaconState) DepositBalanceToConsume() (capella.Gwei, error) {
+func (v *VersionedBeaconState) DepositBalanceToConsume() (zond.Gwei, error) {
 	switch v.Version {
-	case DataVersionCapella:
+	case DataVersionZond:
 		return 0, errors.New("state does not provide deposit balance to consume")
 	default:
 		return 0, errors.New("unknown version")
@@ -109,9 +109,9 @@ func (v *VersionedBeaconState) DepositBalanceToConsume() (capella.Gwei, error) {
 }
 
 // ExitBalanceToConsume returns the deposit balance to consume of the state.
-func (v *VersionedBeaconState) ExitBalanceToConsume() (capella.Gwei, error) {
+func (v *VersionedBeaconState) ExitBalanceToConsume() (zond.Gwei, error) {
 	switch v.Version {
-	case DataVersionCapella:
+	case DataVersionZond:
 		return 0, errors.New("state does not provide exit balance to consume")
 	default:
 		return 0, errors.New("unknown version")
@@ -119,9 +119,9 @@ func (v *VersionedBeaconState) ExitBalanceToConsume() (capella.Gwei, error) {
 }
 
 // EarliestExitEpoch returns the earliest exit epoch of the state.
-func (v *VersionedBeaconState) EarliestExitEpoch() (capella.Epoch, error) {
+func (v *VersionedBeaconState) EarliestExitEpoch() (zond.Epoch, error) {
 	switch v.Version {
-	case DataVersionCapella:
+	case DataVersionZond:
 		return 0, errors.New("state does not provide earliest exit epoch")
 	default:
 		return 0, errors.New("unknown version")
@@ -129,9 +129,9 @@ func (v *VersionedBeaconState) EarliestExitEpoch() (capella.Epoch, error) {
 }
 
 // ConsolidationBalanceToConsume returns the consolidation balance to consume of the state.
-func (v *VersionedBeaconState) ConsolidationBalanceToConsume() (capella.Gwei, error) {
+func (v *VersionedBeaconState) ConsolidationBalanceToConsume() (zond.Gwei, error) {
 	switch v.Version {
-	case DataVersionCapella:
+	case DataVersionZond:
 		return 0, errors.New("state does not provide consolidation balance to consume")
 	default:
 		return 0, errors.New("unknown version")
@@ -139,9 +139,9 @@ func (v *VersionedBeaconState) ConsolidationBalanceToConsume() (capella.Gwei, er
 }
 
 // EarliestConsolidationEpoch returns the earliest consolidation epoch of the state.
-func (v *VersionedBeaconState) EarliestConsolidationEpoch() (capella.Epoch, error) {
+func (v *VersionedBeaconState) EarliestConsolidationEpoch() (zond.Epoch, error) {
 	switch v.Version {
-	case DataVersionCapella:
+	case DataVersionZond:
 		return 0, errors.New("state does not provide earliest consolidation epoch")
 	default:
 		return 0, errors.New("unknown version")
@@ -154,15 +154,15 @@ func (v *VersionedBeaconState) EarliestConsolidationEpoch() (capella.Epoch, erro
 //   - index: The index of the validator to retrieve
 //
 // Returns:
-//   - *capella.Validator: The validator at the given index
+//   - *zond.Validator: The validator at the given index
 //   - error: If the index is invalid or there's an error accessing the validators
-func (v *VersionedBeaconState) ValidatorAtIndex(index capella.ValidatorIndex) (*capella.Validator, error) {
+func (v *VersionedBeaconState) ValidatorAtIndex(index zond.ValidatorIndex) (*zond.Validator, error) {
 	validators, err := v.Validators()
 	if err != nil {
 		return nil, err
 	}
 
-	if index >= capella.ValidatorIndex(len(validators)) {
+	if index >= zond.ValidatorIndex(len(validators)) {
 		return nil, errors.New("validator index out of bounds")
 	}
 
@@ -175,15 +175,15 @@ func (v *VersionedBeaconState) ValidatorAtIndex(index capella.ValidatorIndex) (*
 //   - index: The index of the validator whose balance to retrieve
 //
 // Returns:
-//   - capella.Gwei: The balance in Gwei
+//   - zond.Gwei: The balance in Gwei
 //   - error: If the index is invalid or there's an error accessing the balances
-func (v *VersionedBeaconState) ValidatorBalance(index capella.ValidatorIndex) (capella.Gwei, error) {
+func (v *VersionedBeaconState) ValidatorBalance(index zond.ValidatorIndex) (zond.Gwei, error) {
 	balances, err := v.ValidatorBalances()
 	if err != nil {
 		return 0, err
 	}
 
-	if index >= capella.ValidatorIndex(len(balances)) {
+	if index >= zond.ValidatorIndex(len(balances)) {
 		return 0, errors.New("validator index out of bounds")
 	}
 
@@ -193,28 +193,28 @@ func (v *VersionedBeaconState) ValidatorBalance(index capella.ValidatorIndex) (c
 // GetTree returns the GetTree of the specific beacon state version.
 func (v *VersionedBeaconState) GetTree() (*ssz.Node, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return nil, errors.New("no Capella state")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return nil, errors.New("no Zond state")
 		}
 
-		return v.Capella.GetTree()
+		return v.Zond.GetTree()
 	default:
 		return nil, errors.New("unknown version")
 	}
 }
 
 // HashTreeRoot returns the HashTreeRoot of the specific beacon state version.
-func (v *VersionedBeaconState) HashTreeRoot() (capella.Hash32, error) {
+func (v *VersionedBeaconState) HashTreeRoot() (zond.Hash32, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return capella.Hash32{}, errors.New("no Capella state")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return zond.Hash32{}, errors.New("no Zond state")
 		}
 
-		return v.Capella.HashTreeRoot()
+		return v.Zond.HashTreeRoot()
 	default:
-		return capella.Hash32{}, errors.New("unknown version")
+		return zond.Hash32{}, errors.New("unknown version")
 	}
 }
 
@@ -223,12 +223,12 @@ func (v *VersionedBeaconState) HashTreeRoot() (capella.Hash32, error) {
 // Returns an error if the field doesn't exist or the state is empty.
 func (v *VersionedBeaconState) FieldIndex(name string) (int, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return 0, errors.New("no Capella state")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return 0, errors.New("no Zond state")
 		}
 
-		return proofutil.FieldIndex(v.Capella, name)
+		return proofutil.FieldIndex(v.Zond, name)
 	default:
 		return 0, errors.New("unknown version")
 	}
@@ -240,12 +240,12 @@ func (v *VersionedBeaconState) FieldIndex(name string) (int, error) {
 // Returns an error if the field doesn't exist or the state is empty.
 func (v *VersionedBeaconState) FieldGeneralizedIndex(name string) (int, error) {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
-			return 0, errors.New("no Capella state")
+	case DataVersionZond:
+		if v.Zond == nil {
+			return 0, errors.New("no Zond state")
 		}
 
-		return proofutil.FieldGeneralizedIndex(v.Capella, name)
+		return proofutil.FieldGeneralizedIndex(v.Zond, name)
 	default:
 		return 0, errors.New("unknown version")
 	}
@@ -256,15 +256,15 @@ func (v *VersionedBeaconState) FieldGeneralizedIndex(name string) (int, error) {
 //   - name: The name of the field to get the root for
 //
 // Returns:
-//   - capella.Hash32: The SSZ hash root of the field
+//   - zond.Hash32: The SSZ hash root of the field
 //   - error: If the field doesn't exist, the state is empty, or the field is not hash tree rootable
-func (v *VersionedBeaconState) FieldRoot(name string) (capella.Hash32, error) {
+func (v *VersionedBeaconState) FieldRoot(name string) (zond.Hash32, error) {
 	fieldTree, err := v.FieldTree(name)
 	if err != nil {
-		return capella.Hash32{}, err
+		return zond.Hash32{}, err
 	}
 
-	var root capella.Hash32
+	var root zond.Hash32
 	copy(root[:], fieldTree.Hash())
 
 	return root, nil
@@ -290,9 +290,9 @@ func (v *VersionedBeaconState) FieldTree(name string) (*ssz.Node, error) {
 //   - name: The name of the field to generate a proof for
 //
 // Returns:
-//   - []capella.Hash32: The Merkle proof as a sequence of 32-byte hashes
+//   - []zond.Hash32: The Merkle proof as a sequence of 32-byte hashes
 //   - error: If the field doesn't exist or there's an error generating the proof
-func (v *VersionedBeaconState) ProveField(name string) ([]capella.Hash32, error) {
+func (v *VersionedBeaconState) ProveField(name string) ([]zond.Hash32, error) {
 	stateTree, err := v.GetTree()
 	if err != nil {
 		return nil, err
@@ -308,7 +308,7 @@ func (v *VersionedBeaconState) ProveField(name string) ([]capella.Hash32, error)
 		return nil, err
 	}
 
-	proofBytes := make([]capella.Hash32, len(proof.Hashes))
+	proofBytes := make([]zond.Hash32, len(proof.Hashes))
 	for i, hash := range proof.Hashes {
 		copy(proofBytes[i][:], hash)
 	}
@@ -324,7 +324,7 @@ func (v *VersionedBeaconState) ProveField(name string) ([]capella.Hash32, error)
 // Returns:
 //   - bool: True if the proof is valid, false otherwise
 //   - error: If there's an error during verification
-func (v *VersionedBeaconState) VerifyFieldProof(proof []capella.Hash32, name string) (bool, error) {
+func (v *VersionedBeaconState) VerifyFieldProof(proof []zond.Hash32, name string) (bool, error) {
 	// Get the state root
 	stateRoot, err := v.HashTreeRoot()
 	if err != nil {
@@ -363,12 +363,12 @@ func (v *VersionedBeaconState) VerifyFieldProof(proof []capella.Hash32, name str
 // String returns a string version of the structure.
 func (v *VersionedBeaconState) String() string {
 	switch v.Version {
-	case DataVersionCapella:
-		if v.Capella == nil {
+	case DataVersionZond:
+		if v.Zond == nil {
 			return ""
 		}
 
-		return v.Capella.String()
+		return v.Zond.String()
 	default:
 		return "unknown version"
 	}

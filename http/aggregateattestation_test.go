@@ -24,7 +24,7 @@ import (
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/http"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 func TestAggregateAttestation(t *testing.T) {
@@ -45,7 +45,7 @@ func TestAggregateAttestation(t *testing.T) {
 
 	// Fetch attestation data to generate a root.
 	attestationDataResponse, err := service.(client.AttestationDataProvider).AttestationData(ctx, &api.AttestationDataOpts{
-		Slot:           capella.Slot(time.Since(genesisResponse.Data.GenesisTime).Seconds()) / capella.Slot(slotDuration.Seconds()),
+		Slot:           zond.Slot(time.Since(genesisResponse.Data.GenesisTime).Seconds()) / zond.Slot(slotDuration.Seconds()),
 		CommitteeIndex: 0,
 	})
 	require.NoError(t, err)
@@ -55,7 +55,7 @@ func TestAggregateAttestation(t *testing.T) {
 	tests := []struct {
 		name     string
 		opts     *api.AggregateAttestationOpts
-		expected *capella.Attestation
+		expected *zond.Attestation
 		err      string
 		errCode  int
 	}{
@@ -66,7 +66,7 @@ func TestAggregateAttestation(t *testing.T) {
 		{
 			name: "NilRoot",
 			opts: &api.AggregateAttestationOpts{
-				Slot: capella.Slot(time.Since(genesisResponse.Data.GenesisTime).Seconds()) / capella.Slot(slotDuration.Seconds()),
+				Slot: zond.Slot(time.Since(genesisResponse.Data.GenesisTime).Seconds()) / zond.Slot(slotDuration.Seconds()),
 			},
 			err: "no attestation data root specified",
 		},
@@ -74,7 +74,7 @@ func TestAggregateAttestation(t *testing.T) {
 			// Will generally get "not found" because the beacon node is unlikely to be an aggregator.
 			name: "NotFound",
 			opts: &api.AggregateAttestationOpts{
-				Slot:                capella.Slot(time.Since(genesisResponse.Data.GenesisTime).Seconds()) / capella.Slot(slotDuration.Seconds()),
+				Slot:                zond.Slot(time.Since(genesisResponse.Data.GenesisTime).Seconds()) / zond.Slot(slotDuration.Seconds()),
 				AttestationDataRoot: dataRoot,
 			},
 			errCode: 404,

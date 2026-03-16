@@ -21,7 +21,6 @@ import (
 
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
-	apiv1capella "github.com/theQRL/go-qrl-beacon-client/api/v1/capella"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
 	"go.opentelemetry.io/otel"
 )
@@ -129,10 +128,10 @@ func (*Service) blindedProposalFromSSZ(res *httpResponse) (*api.Response[*api.Ve
 	}
 
 	switch res.consensusVersion {
-	case spec.DataVersionCapella:
-		response.Data.Capella = &apiv1capella.BlindedBeaconBlock{}
-		if err := response.Data.Capella.UnmarshalSSZ(res.body); err != nil {
-			return nil, errors.Join(errors.New("failed to decode capella blinded beacon block proposal"), err)
+	case spec.DataVersionZond:
+		response.Data.Zond = &apiv1zond.BlindedBeaconBlock{}
+		if err := response.Data.Zond.UnmarshalSSZ(res.body); err != nil {
+			return nil, errors.Join(errors.New("failed to decode zond blinded beacon block proposal"), err)
 		}
 	default:
 		return nil, fmt.Errorf("unhandled block proposal version %s", res.consensusVersion)
@@ -151,10 +150,10 @@ func (*Service) blindedProposalFromJSON(res *httpResponse) (*api.Response[*api.V
 	var err error
 
 	switch res.consensusVersion {
-	case spec.DataVersionCapella:
-		response.Data.Capella, response.Metadata, err = decodeJSONResponse(
+	case spec.DataVersionZond:
+		response.Data.Zond, response.Metadata, err = decodeJSONResponse(
 			bytes.NewReader(res.body),
-			&apiv1capella.BlindedBeaconBlock{},
+			&apiv1zond.BlindedBeaconBlock{},
 		)
 	default:
 		return nil, fmt.Errorf("unsupported version %s", res.consensusVersion)

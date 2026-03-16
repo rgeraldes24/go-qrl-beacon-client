@@ -22,7 +22,7 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/theQRL/go-qrl-beacon-client/spec"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // PayloadAttributesEvent represents the data of a payload_attributes event.
@@ -36,15 +36,15 @@ type PayloadAttributesEvent struct {
 // PayloadAttributesData represents the data of a payload_attributes event.
 type PayloadAttributesData struct {
 	// ProposerIndex is the index of the proposer.
-	ProposerIndex capella.ValidatorIndex
+	ProposerIndex zond.ValidatorIndex
 	// ProposalSlot is the slot of the proposal.
-	ProposalSlot capella.Slot
+	ProposalSlot zond.Slot
 	// ParentBlockNumber is the number of the parent block.
 	ParentBlockNumber uint64
 	// ParentBlockRoot is the root of the parent block.
-	ParentBlockRoot capella.Root
+	ParentBlockRoot zond.Root
 	// ParentBlockHash is the hash of the parent block.
-	ParentBlockHash capella.Hash32
+	ParentBlockHash zond.Hash32
 	// V2 is the v2 payload attributes.
 	V2 *PayloadAttributesV2
 }
@@ -56,9 +56,9 @@ type PayloadAttributesV2 struct {
 	// PrevRandao is the previous randao.
 	PrevRandao [32]byte
 	// SuggestedFeeRecipient is the suggested fee recipient.
-	SuggestedFeeRecipient capella.ExecutionAddress
+	SuggestedFeeRecipient zond.ExecutionAddress
 	// Withdrawals is the list of withdrawals.
-	Withdrawals []*capella.Withdrawal
+	Withdrawals []*zond.Withdrawal
 }
 
 // payloadAttributesEventJSON is the spec representation of the event.
@@ -86,10 +86,10 @@ type payloadAttributesV1JSON struct {
 
 // payloadAttributesV2JSON is the spec representation of the payload attributes v2.
 type payloadAttributesV2JSON struct {
-	Timestamp             string                `json:"timestamp"`
-	PrevRandao            string                `json:"prev_randao"`
-	SuggestedFeeRecipient string                `json:"suggested_fee_recipient"`
-	Withdrawals           []*capella.Withdrawal `json:"withdrawals"`
+	Timestamp             string             `json:"timestamp"`
+	PrevRandao            string             `json:"prev_randao"`
+	SuggestedFeeRecipient string             `json:"suggested_fee_recipient"`
+	Withdrawals           []*zond.Withdrawal `json:"withdrawals"`
 }
 
 // UnmarshalJSON implements json.Unmarshaler.
@@ -138,7 +138,7 @@ func (p *PayloadAttributesV2) unpack(data *payloadAttributesV2JSON) error {
 		return errors.Wrap(err, "invalid value for payload attributes suggested fee recipient")
 	}
 
-	if len(feeRecipient) != capella.FeeRecipientLength {
+	if len(feeRecipient) != zond.FeeRecipientLength {
 		return errors.New("incorrect length for payload attributes suggested fee recipient")
 	}
 
@@ -167,7 +167,7 @@ func (e *PayloadAttributesEvent) MarshalJSON() ([]byte, error) {
 	)
 
 	switch e.Version {
-	case spec.DataVersionCapella:
+	case spec.DataVersionZond:
 		if e.Data.V2 == nil {
 			return nil, errors.New("no payload attributes v2 data")
 		}
@@ -238,7 +238,7 @@ func (e *PayloadAttributesEvent) unpack(data *payloadAttributesEventJSON) error 
 		return errors.Wrap(err, "invalid value for proposer index")
 	}
 
-	e.Data.ProposerIndex = capella.ValidatorIndex(proposerIndex)
+	e.Data.ProposerIndex = zond.ValidatorIndex(proposerIndex)
 
 	if data.Data.ProposalSlot == "" {
 		return errors.New("proposal slot missing")
@@ -249,7 +249,7 @@ func (e *PayloadAttributesEvent) unpack(data *payloadAttributesEventJSON) error 
 		return errors.Wrap(err, "invalid value for proposal slot")
 	}
 
-	e.Data.ProposalSlot = capella.Slot(proposalSlot)
+	e.Data.ProposalSlot = zond.Slot(proposalSlot)
 
 	if data.Data.ParentBlockNumber == "" {
 		return errors.New("parent block number missing")
@@ -271,7 +271,7 @@ func (e *PayloadAttributesEvent) unpack(data *payloadAttributesEventJSON) error 
 		return errors.Wrap(err, "invalid value for parent block root")
 	}
 
-	if len(parentBlockRoot) != capella.RootLength {
+	if len(parentBlockRoot) != zond.RootLength {
 		return errors.New("incorrect length for parent block root")
 	}
 
@@ -286,7 +286,7 @@ func (e *PayloadAttributesEvent) unpack(data *payloadAttributesEventJSON) error 
 		return errors.Wrap(err, "invalid value for parent block hash")
 	}
 
-	if len(parentBlockHash) != capella.Hash32Length {
+	if len(parentBlockHash) != zond.Hash32Length {
 		return errors.New("incorrect length for parent block hash")
 	}
 
@@ -297,7 +297,7 @@ func (e *PayloadAttributesEvent) unpack(data *payloadAttributesEventJSON) error 
 	}
 
 	switch data.Version {
-	case spec.DataVersionCapella:
+	case spec.DataVersionZond:
 		var payloadAttributes PayloadAttributesV2
 
 		err = json.Unmarshal(data.Data.PayloadAttributes, &payloadAttributes)

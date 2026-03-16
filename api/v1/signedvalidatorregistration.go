@@ -22,13 +22,13 @@ import (
 
 	"github.com/goccy/go-yaml"
 	"github.com/pkg/errors"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
+	"github.com/theQRL/go-qrl-beacon-client/spec/zond"
 )
 
 // SignedValidatorRegistration is a signed ValidatorRegistrationV1.
 type SignedValidatorRegistration struct {
 	Message   *ValidatorRegistration
-	Signature capella.MLDSA87Signature `ssz-size:"4627"`
+	Signature zond.MLDSA87Signature `ssz-size:"4627"`
 }
 
 // signedValidatorRegistrationJSON is the spec representation of the struct.
@@ -110,7 +110,7 @@ func (s *SignedValidatorRegistration) unpack(data *signedValidatorRegistrationJS
 		return errors.Wrap(err, "invalid value for signature")
 	}
 
-	if len(signature) != capella.SignatureLength {
+	if len(signature) != zond.SignatureLength {
 		return fmt.Errorf("incorrect length %d for signature", len(signature))
 	}
 

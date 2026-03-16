@@ -23,7 +23,6 @@ import (
 	client "github.com/theQRL/go-qrl-beacon-client"
 	"github.com/theQRL/go-qrl-beacon-client/api"
 	"github.com/theQRL/go-qrl-beacon-client/http"
-	"github.com/theQRL/go-qrl-beacon-client/spec/capella"
 )
 
 func TestValidatorBalances(t *testing.T) {
@@ -35,7 +34,7 @@ func TestValidatorBalances(t *testing.T) {
 		opts             *api.ValidatorBalancesOpts
 		err              string
 		errCode          int
-		expected         map[capella.ValidatorIndex]capella.Gwei
+		expected         map[zond.ValidatorIndex]zond.Gwei
 		expectedBalances int
 	}{
 		{
@@ -67,9 +66,9 @@ func TestValidatorBalances(t *testing.T) {
 			name: "SingleGenesisIndex",
 			opts: &api.ValidatorBalancesOpts{
 				State:   "0",
-				Indices: []capella.ValidatorIndex{123},
+				Indices: []zond.ValidatorIndex{123},
 			},
-			expected: map[capella.ValidatorIndex]capella.Gwei{
+			expected: map[zond.ValidatorIndex]zond.Gwei{
 				123: 32000000000,
 			},
 		},
